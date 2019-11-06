@@ -26,8 +26,8 @@
 //#define LCD_FTDI_VM800B35A        // FTDI 3.5" 320x240 with FT800
 //#define LCD_4DSYSTEMS_4DLCD_FT843 // 4D Systems 4.3" 480x272
 //#define LCD_HAOYU_FT800CB         // Haoyu with 4.3" or 5" 480x272
-#define LCD_HAOYU_FT810CB         // Haoyu with 5" 800x480
-//#define LCD_ALEPHOBJECTS_CLCD_UI  // Aleph Objects Color LCD User Interface
+//#define LCD_HAOYU_FT810CB         // Haoyu with 5" 800x480
+#define LCD_ALEPHOBJECTS_CLCD_UI    // Aleph Objects Color LCD User Interface
 
 // Leave the following commented out to use a board's default resolution.
 // If you have changed the LCD panel, you may override the resolution
@@ -44,15 +44,15 @@
 //     1                  - When compiling Marlin, use Marlin pin IDs.
 
 // The pins for CS and MOD_RESET (PD) must be chosen.
-    #define CLCD_MOD_RESET      ARDUINO_DIGITAL_9
-    #define CLCD_SPI_CS         ARDUINO_DIGITAL_10
+#define CLCD_MOD_RESET          AVR_D3 // LCD_PINS_ENABLE, Marlin Logical Pin 18
+#define CLCD_SPI_CS             AVR_D2 // LCD_PINS_D4, Marlin Logical Pin 19
 
 // If using software SPI, specify pins for SCLK, MOSI, MISO
-//#define CLCD_USE_SOFT_SPI
+#define CLCD_USE_SOFT_SPI
 #if defined(CLCD_USE_SOFT_SPI)
-    #define CLCD_SOFT_SPI_SCLK  ARDUINO_DIGITAL_13
-    #define CLCD_SOFT_SPI_MOSI  ARDUINO_DIGITAL_11
-    #define CLCD_SOFT_SPI_MISO  ARDUINO_DIGITAL_12
+    #define CLCD_SOFT_SPI_SCLK  AVR_H6 // BTN_ENC, Marlin Logical Pin 9, H6
+    #define CLCD_SOFT_SPI_MOSI  AVR_G4 // LCD_PINS_D5, Marlin Logical Pin 70, G4
+    #define CLCD_SOFT_SPI_MISO  AVR_H2 // BEEPER_PIN, Marlin Logical Pin 84, H2
 #endif
 
 // Defines how to orient the display. An inverted (i.e. upside-down) display
@@ -63,8 +63,8 @@
 //#define TOUCH_UI_MIRRORED
 
 // Enable this to debug the event framework
-//#define UI_FRAMEWORK_DEBUG
+#define TOUCH_UI_DEBUG
 
 // Sets the SPI speed in Hz
 
-#define SPI_FREQUENCY 8000000
+#define SPI_FREQUENCY 8000000 >> SPI_SPEED

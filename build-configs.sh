@@ -1,8 +1,8 @@
 #!/bin/sh
 
-####
-# Copyright (C) 2019  AlephObjects, Inc.
-#
+# Portions (c) 2019, Cocoa Press.
+# Portions (c) 2019 Aleph Objects, Inc.
+# Portions (c) 2019 Marcio Teixeira
 #
 # The bash script in this page is free software: you can
 # redistribute it and/or modify it under the terms of the GNU Affero
@@ -13,5 +13,5 @@
 # FOR A PARTICULAR PURPOSE.  See the GNU AGPL for more details.
 #
 
-cd config/examples/AlephObjects
+cd config/examples/CocoaPress
 ./build-all-configs.sh

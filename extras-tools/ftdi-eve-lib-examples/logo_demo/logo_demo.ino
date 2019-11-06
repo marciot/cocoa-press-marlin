@@ -23,11 +23,7 @@
 
 #include "src/ftdi_eve_lib/ftdi_eve_lib.h"
 #include "src/ftdi_eve_lib/extras/poly_ui.h"
-#ifdef TOUCH_UI_PORTRAIT
-  #include "src/Octopus_Logo_Portrait.h"
-#else
-  #include "src/Octopus_Logo_Landscape.h"
-#endif
+#include "src/Cocoa_Press_Logo_Landscape.h"
 
 using namespace FTDI;
 
@@ -38,20 +34,23 @@ class LogoScreen : public UIScreen, public UncachedScreen {
 
     static void onRedraw(draw_mode_t what) {
       CommandProcessor cmd;
-      cmd.cmd(CLEAR_COLOR_RGB(0xFFFFFF));
+      cmd.cmd(CLEAR_COLOR_RGB(0xF05A22));
       cmd.cmd(CLEAR(true,true,true));
 
       #define POLY(A) PolyUI::poly_reader_t(A, sizeof(A)/sizeof(A[0]))
 
       PolyUI ui(cmd);
-      cmd.cmd(COLOR_RGB(0xCCCCFF));
-      ui.fill(POLY(logo_fill));
+      cmd.cmd(COLOR_RGB(0xF27121));
+      ui.fill(POLY(surface));
       
-      cmd.cmd(COLOR_RGB(0x000000));
-      ui.fill(POLY(logo_stroke));
+      cmd.cmd(COLOR_RGB(0x6B2C1B));
+      ui.fill(POLY(shadow));
       
-      cmd.cmd(COLOR_RGB(0xFFFFFF));
-      ui.fill(POLY(logo_white));
+      cmd.cmd(COLOR_RGB(0xBC3E26));
+      ui.fill(POLY(highlight));
+      
+      cmd.cmd(COLOR_RGB(0x3C2215));
+      ui.fill(POLY(stroke));
     }
 };
 
@@ -66,6 +65,7 @@ SCREEN_TABLE_POST
 
 void setup() {
   Serial.begin(9600);
+  Serial.println("Starting up");
   EventLoop::setup();
   CLCD::turn_on_backlight();
   SoundPlayer::set_volume(255);
