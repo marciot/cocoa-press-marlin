@@ -79,8 +79,6 @@ def make_config(PRINTER, TOOLHEAD):
     USE_AUTOLEVELING                                     = False
     USE_TOUCH_UI                                         = True
 
-    MOTOR_CURRENT_XY                                     = 0
-
     MARLIN["SDSUPPORT"]                                  = False
 
 ######################## PRINTER MODEL CHARACTERISTICS ########################
@@ -106,13 +104,6 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["SOURCE_CODE_URL"]                            = C_STRING("https://github.com/marcio-cp/cocoa-press-marlin")
     MARLIN["EEPROM_SETTINGS"]                            = True # EW - Enabled
     MARLIN["PRINTCOUNTER"]                               = True # EW - Enabled
-    
-    MARLIN["EEPROM_AUTO_INIT"]                           = True
-    MARLIN["EMERGENCY_PARSER"]                           = True
-    MARLIN["ADVANCED_OK"]                                = True
-    MARLIN["TX_BUFFER_SIZE"]                             = 32
-    MARLIN["PRINTJOB_TIMER_AUTOSTART"]                   = False
-    MARLIN["BAUDRATE"]                                   = 250000
     MARLIN["CUSTOM_MACHINE_NAME"]                        = C_STRING("Cocoa Press")
     MARLIN["MACHINE_UUID"]                               = C_STRING("c51664e3-50b4-40fb-9bd0-63a8cd30df18")
 
@@ -120,22 +111,16 @@ def make_config(PRINTER, TOOLHEAD):
 
     MARLIN["CASE_LIGHT_ENABLE"]                          = True
     MARLIN["CASE_LIGHT_USE_NEOPIXEL"]                    = True
-    MARLIN["NEOPIXEL_PIN"]                               = 32    # X_MAX_PIN
+    MARLIN["NEOPIXEL_LED"]                               = True
     MARLIN["NEOPIXEL_PIXELS"]                            = 8
-    MARLIN["USE_XMAX_PLUG"]                              = False
 
 ###################### MOTHERBOARD AND PIN CONFIGURATION ######################
 
+    MARLIN["CONTROLLER_FAN_PIN"]                         = 'FAN1_PIN' # Digital pin 6
+        
     if USE_ARCHIM2:
         MARLIN["MOTHERBOARD"]                            = 'BOARD_ARCHIM2'
-        MARLIN["CONTROLLER_FAN_PIN"]                     = 'FAN1_PIN'
         MARLIN["SERIAL_PORT"]                            = -1
-        MARLIN["SPI_SPEED"]                              = 'SPI_SIXTEENTH_SPEED'
-
-        # Force Archim to use same USB ID as Mini-Rambo and Rambo when flashed
-        # NOTE: While in "erase" (bootloader) mode, the ID will be 03eb:6124
-        MARLIN["USB_DEVICE_VENDOR_ID"]                   = '0x27b1'
-        MARLIN["USB_DEVICE_PRODUCT_ID"]                  = '0x0001'
 
         # The host MMC bridge is impractically slow and should not be used
         if ENABLED("SDSUPPORT") or ENABLED("USB_FLASH_DRIVE_SUPPORT"):
@@ -143,9 +128,7 @@ def make_config(PRINTER, TOOLHEAD):
 
     elif USE_EINSY_RETRO:
         MARLIN["MOTHERBOARD"]                            = 'BOARD_EINSY_RETRO'
-        MARLIN["CONTROLLER_FAN_PIN"]                     = 'FAN1_PIN' # Digital pin 6
         MARLIN["SERIAL_PORT"]                            = 0
-        MARLIN["SPI_SPEED"]                              = 'SPI_SIXTEENTH_SPEED'
 
     if ENABLED("USB_FLASH_DRIVE_SUPPORT"):
         MARLIN["USB_INTR_PIN"]                           = 'SD_DETECT_PIN'
@@ -162,8 +145,8 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["USE_YMAX_PLUG"]                              = True # EW - eventually use this one? gives compiling errors
     MARLIN["USE_ZMAX_PLUG"]                              = False
     
-    MARLIN["X_MIN_ENDSTOP_INVERTING"]                    = False
-    MARLIN["Z_MIN_ENDSTOP_INVERTING"]                    = False # EW - set back to false set to true (https://www.youtube.com/watch?v=G-TwWfUzXpc) set to true to invert the logic of the endstop.
+    MARLIN["X_MIN_ENDSTOP_INVERTING"]                    = 'false'
+    MARLIN["Z_MIN_ENDSTOP_INVERTING"]                    = 'false' # EW - set back to false set to true (https://www.youtube.com/watch?v=G-TwWfUzXpc) set to true to invert the logic of the endstop.
 
     MARLIN["SD_ABORT_ON_ENDSTOP_HIT"]                    = ENABLED("SDSUPPORT")
 
@@ -185,7 +168,7 @@ def make_config(PRINTER, TOOLHEAD):
 ################################ COCOA PRESS TOOLHEADS ###############################
 
     if TOOLHEAD in ["CocoaPress_SingleExtruder"]:
-        MARLIN["EXTRUDERS"]                              = 2
+        MARLIN["EXTRUDERS"]                              = 2 if USE_ARCHIM2 else 1
         MARLIN["E0_CURRENT"]                             = 960 # mA
         MARLIN["E1_CURRENT"]                             = 960 # mA
 
@@ -198,8 +181,9 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["EXTRUDE_MINTEMP"]                            = 10 # EW - changed from 175 to 10
 
     # 1 is the custom CocoaPress thermistor profile
-    MARLIN["TEMP_SENSOR_0"]                              = 1 
-    MARLIN["TEMP_SENSOR_1"]                              = 1
+    MARLIN["TEMP_SENSOR_0"]                              = 1
+    if USE_ARCHIM2:
+        MARLIN["TEMP_SENSOR_1"]                          = 1
     
     # These values are scaled by 10
     MARLIN["HEATER_0_MAXTEMP"]                           = 500
@@ -248,18 +232,18 @@ def make_config(PRINTER, TOOLHEAD):
 ########################## AUTOLEVELING / BED PROBE ###########################
 
     if USE_AUTOLEVELING:
-      MARLIN["FIX_MOUNTED_PROBE"]                          = False # EW - inductive sensor
-      MARLIN["NOZZLE_TO_PROBE_OFFSET"]                     = [-20.7, 47.05, .5] # EW - as of 3/24/19 3pm
-      MARLIN["XY_PROBE_SPEED"]                             = 8000 # EW - 3000 to stop binding
-      MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]             = True # EW - enabled
-      MARLIN["AUTO_BED_LEVELING_BILINEAR"]                 = True
-      MARLIN["AUTO_BED_LEVELING_UBL"]                      = False # EW - recommended in Marlin documentation, off for now
+      MARLIN["FIX_MOUNTED_PROBE"]                        = False # EW - inductive sensor
+      MARLIN["NOZZLE_TO_PROBE_OFFSET"]                   = [-20.7, 47.05, .5] # EW - as of 3/24/19 3pm
+      MARLIN["XY_PROBE_SPEED"]                           = 8000 # EW - 3000 to stop binding
+      MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]           = True # EW - enabled
+      MARLIN["AUTO_BED_LEVELING_BILINEAR"]               = True
+      MARLIN["AUTO_BED_LEVELING_UBL"]                    = False # EW - recommended in Marlin documentation, off for now
       
-      MARLIN["MESH_TEST_HOTEND_TEMP"]                      = 32 # EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.
+      MARLIN["MESH_TEST_HOTEND_TEMP"]                    = 32 # EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.
 
 ############################# FILAMENT SETTINGS ############################
 
-      MARLIN["RETRACT_LENGTH"]                             = 0 # EW - changed retract to 0
+      MARLIN["RETRACT_LENGTH"]                           = 0 # EW - changed retract to 0
     
 ############################## MOTOR DRIVER TYPE ##############################
 
@@ -338,13 +322,17 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["LULZBOT_TOUCH_UI"]                           = True
     MARLIN["LCD_ALEPHOBJECTS_CLCD_UI"]                   = True
     MARLIN["TOUCH_UI_800x480"]                           = True
-    MARLIN["AO_EXP2_PINMAP"]                             = True
+    if USE_ARCHIM2:
+      MARLIN["AO_EXP2_PINMAP"]                           = True
+    else:
+      MARLIN["AO_EXP1_PINMAP"]                           = True
     MARLIN["TOUCH_UI_USE_UTF8"]                          = True
     MARLIN["TOUCH_UI_UTF8_COPYRIGHT"]                    = True
     MARLIN["TOUCH_UI_UTF8_SUPERSCRIPTS"]                 = True
     MARLIN["SD_DETECT_INVERTED"]                         = False
     MARLIN["SCROLL_LONG_FILENAMES"]                      = True
     MARLIN["DEVELOPER_SCREENS"]                          = True
+    MARLIN["TOUCH_UI_DEBUG"]                             = True
                                                          
     # Virtual joystick functionality                     
     MARLIN["JOYSTICK"]                                   = True

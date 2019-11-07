@@ -124,3 +124,10 @@ const PROGMEM uint16_t surface[] = {
    0x6D01, 0x97F7, 0x7747, 0x9E7A, 0x83D9, 0xA18C, 0x8CBB, 0xA14B, 0x8CBB, 0xA14B
 };
 
+#define LOGO_BACKGROUND 0xF05A22
+
+#define LOGO_PAINT_PATHS \
+  LOGO_PAINT_PATH(0xF27121, surface) \
+  LOGO_PAINT_PATH(0x6B2C1B, shadow) \
+  LOGO_PAINT_PATH(0xBC3E26, highlight) \
+  LOGO_PAINT_PATH(0x3C2215, stroke)

@@ -16,7 +16,7 @@ Please do not attempt to use it on any printer (or do so at your own risk).
 sudo apt-get update
 sudo apt-get install python git make rename
 sudo apt-get install gcc-avr avr-libc
-sudo apt-get install gcc-arm-none-eabi
+sudo apt-get install gcc-arm-none-eabi bossac-cli
 sudo ln -s "/mnt/c/Users/YOUR_WINDOWS_USER_DIR/Documents" Documents
 cd Documents
 git clone https://github.com/marcio-cp/cocoa-press-marlin.git marlin
@@ -42,6 +42,12 @@ In the "Boards Manager":
 Choose the board corresponding to your printer from the "Board" submenu menu of the "Tools" menu.
 
 To compile and upload the firmware to your printer, select "Upload" from the "Sketch" menu.
+
+# Wiring notes:
+
+For NeoPixel control:
+  * Einsy Retro: Pin 9 on header P1
+  * Archim 2:    Pin 5 on header J20
 
 # License (from Marlin)
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ####
-# Portions copyright (C) 2019, AlephObjects, Inc.
+# Portions copyright (C) 2019, CocoaPress, Inc.
 # Portions copyright (C) 2019, Marcio Teixeira
 #
 # The bash script in this page is free software: you can
@@ -104,7 +104,6 @@ get_config_info() {
   fw_filename=Marlin_${printer}_${toolhead}_${fw_version}_${fw_hash}
   motherboard_name=`grep "define MOTHERBOARD" $config/Configuration.h | awk '{print $3}'`
   motherboard_number=`grep "$motherboard_name\b" Marlin/src/core/boards.h | awk '{print $3}'`
-  is_lulzbot=`grep "define LULZBOT_" $config/Configuration.h`
 }
 
 ####
@@ -149,12 +148,6 @@ build_firmware() {
   get_config_info $config
   locate_gcc_for_board $motherboard_name
   compile_deps_for_board $motherboard_name
-
-  if [ -z "$is_lulzbot" ]; then
-    # Bail if the FW is not an official Lulzbot build
-    echo Skipping $config because it does not appear compatible with this script.
-    return
-  fi
 
   # Copy over the configuration files
   cp $config/Configuration.h $config/Configuration_adv.h Marlin
@@ -324,9 +317,9 @@ mkdir  build
 case $# in
   2)
     # If the user specified a printer and toolhead, try finding the config files
-    CONFIG_DIRS="config/examples/AlephObjects/$1/$2"
+    CONFIG_DIRS="config/examples/CocoaPress/$1/$2"
     if [ ! -f "$CONFIG_DIRS/Configuration.h" ]; then
-      CONFIG_DIRS="config/examples/AlephObjects/EXPERIMENTAL/$1/$2"
+      CONFIG_DIRS="config/examples/CocoaPress/EXPERIMENTAL/$1/$2"
     fi
     ;;
   1)
@@ -334,8 +327,8 @@ case $# in
     CONFIG_DIRS=`dirname $1`
     ;;
   0)
-    # Otherwise, build all AlephObjects configuration files
-    CONFIG_DIRS=`find config/examples/AlephObjects/ -name Configuration.h -exec dirname {} \;`
+    # Otherwise, build all CocoaPress configuration files
+    CONFIG_DIRS=`find config/examples/CocoaPress/ -name Configuration.h -exec dirname {} \;`
     ;;
 esac
 

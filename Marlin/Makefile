@@ -92,6 +92,9 @@ U8GLIB             ?= 1
 # this defines whether to include the Trinamic TMCStepper library
 TMC                ?= 1
 
+# this defines whether to include the AdaFruit NeoPixel library
+NEOPIXEL           ?= 1
+
 ############################################################################
 # Below here nothing should be changed...
 

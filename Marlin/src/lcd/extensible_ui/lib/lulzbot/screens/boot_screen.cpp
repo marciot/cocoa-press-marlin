@@ -70,6 +70,7 @@ void BootScreen::onIdle() {
     GOTO_SCREEN(TouchCalibrationScreen);
     current_screen.forget();
     PUSH_SCREEN(StatusScreen);
+    StatusScreen::setStatusMessage(GET_TEXT_F(WELCOME_MSG));
   } else {
     if (!UIFlashStorage::is_valid()) {
       StatusScreen::loadBitmaps();
@@ -105,21 +106,15 @@ void BootScreen::onIdle() {
 void BootScreen::showSplashScreen() {
   CommandProcessor cmd;
   cmd.cmd(CMD_DLSTART);
-  cmd.cmd(CLEAR_COLOR_RGB(logo_bg_rgb));
+  cmd.cmd(CLEAR_COLOR_RGB(LOGO_BACKGROUND));
   cmd.cmd(CLEAR(true,true,true));
 
   #define POLY(A) PolyUI::poly_reader_t(A, sizeof(A)/sizeof(A[0]))
-
+  #define LOGO_PAINT_PATH(rgb, path) cmd.cmd(COLOR_RGB(rgb)); ui.fill(POLY(path));
+  
   PolyUI ui(cmd);
 
-  cmd.cmd(COLOR_RGB(logo_stroke_rgb));
-  ui.fill(POLY(logo_stroke));
-  
-  cmd.cmd(COLOR_RGB(logo_fill_rgb));
-  ui.fill(POLY(logo_fill));
-  
-  cmd.cmd(COLOR_RGB(0xFFFFFF));
-  ui.fill(POLY(logo_white));
+  LOGO_PAINT_PATHS
 
   cmd.cmd(DL::DL_DISPLAY);
   cmd.cmd(CMD_SWAP);

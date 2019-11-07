@@ -34,23 +34,14 @@ class LogoScreen : public UIScreen, public UncachedScreen {
 
     static void onRedraw(draw_mode_t what) {
       CommandProcessor cmd;
-      cmd.cmd(CLEAR_COLOR_RGB(0xF05A22));
+      cmd.cmd(CLEAR_COLOR_RGB(LOGO_BACKGROUND));
       cmd.cmd(CLEAR(true,true,true));
 
       #define POLY(A) PolyUI::poly_reader_t(A, sizeof(A)/sizeof(A[0]))
-
+      #define LOGO_PAINT_PATH(rgb, path) cmd.cmd(COLOR_RGB(rgb)); ui.fill(POLY(path));
       PolyUI ui(cmd);
-      cmd.cmd(COLOR_RGB(0xF27121));
-      ui.fill(POLY(surface));
       
-      cmd.cmd(COLOR_RGB(0x6B2C1B));
-      ui.fill(POLY(shadow));
-      
-      cmd.cmd(COLOR_RGB(0xBC3E26));
-      ui.fill(POLY(highlight));
-      
-      cmd.cmd(COLOR_RGB(0x3C2215));
-      ui.fill(POLY(stroke));
+      LOGO_PAINT_PATHS
     }
 };
 
