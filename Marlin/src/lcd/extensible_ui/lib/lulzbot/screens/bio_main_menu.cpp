@@ -3,8 +3,8 @@
  *********************/
 
 /****************************************************************************
- *   Portions (c) 2019 Aleph Objects, Inc., 2019                            *
- *   Portions (c) 2019 Marcio Teixeira 2019                                 *
+ *   Written By Mark Pelletier  2017 - Aleph Objects, Inc.                  *
+ *   Written By Marcio Teixeira 2018 - Aleph Objects, Inc.                  *
  *                                                                          *
  *   This program is free software: you can redistribute it and/or modify   *
  *   it under the terms of the GNU General Public License as published by   *

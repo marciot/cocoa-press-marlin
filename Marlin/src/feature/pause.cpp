@@ -579,12 +579,10 @@ void wait_for_confirmation(const bool is_reload/*=false*/, const int8_t max_beep
       #if ENABLED(HOST_PROMPT_SUPPORT)
         host_prompt_do(PROMPT_USER_CONTINUE, PSTR("Reheat Done"), PSTR("Continue"));
       #endif
-      #if !defined(NO_PAUSE_FOR_REHEAT)
       #if ENABLED(EXTENSIBLE_UI)
         ExtUI::onUserConfirmRequired_P(PSTR("Reheat finished."));
       #endif
       wait_for_user = true;
-      #endif // NO_PAUSE_FOR_REHEAT
       nozzle_timed_out = false;
 
       #if HAS_BUZZER

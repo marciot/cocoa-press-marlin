@@ -274,7 +274,7 @@ class StatusScreen : public BaseScreen, public CachedScreen<STATUS_SCREEN_CACHE,
 
   };
 #endif
-  
+
 #if ENABLED(TOUCH_UI_LULZBOT_BIO)
   class BioPrintingDialogBox : public BaseScreen, public CachedScreen<PRINTING_SCREEN_CACHE,PRINTING_SCREEN_DL_SIZE> {
     private:

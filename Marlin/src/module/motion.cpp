@@ -987,11 +987,7 @@ void restore_feedrate_and_scaling() {
  */
 void prepare_move_to_destination() {
   apply_motion_limits(destination);
-  #ifdef E_MAX_POS
-    NOLESS(destination[E_AXIS], 0);
-    NOMORE(destination[E_AXIS], E_MAX_POS);
-  #endif
-  
+
   #if EITHER(PREVENT_COLD_EXTRUSION, PREVENT_LENGTHY_EXTRUDE)
 
     if (!DEBUGGING(DRYRUN) && destination.e != current_position.e) {

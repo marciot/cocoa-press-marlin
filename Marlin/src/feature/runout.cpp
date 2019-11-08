@@ -100,11 +100,7 @@ void event_filament_runout() {
     host_action_prompt_show();
   #endif
 
-  #if defined(CURA_LE_RUNOUT_HANDLING_WORKAROUND)
-  const bool run_runout_script = IS_SD_PRINTING();
-  #else
   const bool run_runout_script = !runout.host_handling;
-  #endif
 
   #if ENABLED(HOST_ACTION_COMMANDS)
     if (run_runout_script
