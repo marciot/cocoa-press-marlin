@@ -320,6 +320,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["SPI_SPEED"]                                  = 'SPI_SIXTEENTH_SPEED'
                                                          
     MARLIN["LULZBOT_TOUCH_UI"]                           = True
+    MARLIN["TOUCH_UI_COCOA_PRESS"]                       = True
     MARLIN["LCD_ALEPHOBJECTS_CLCD_UI"]                   = True
     MARLIN["TOUCH_UI_800x480"]                           = True
     if USE_ARCHIM2:

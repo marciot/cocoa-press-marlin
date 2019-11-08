@@ -22,7 +22,7 @@
 
 #include "../config.h"
 
-#if ENABLED(LULZBOT_TOUCH_UI) && !defined(LULZBOT_USE_BIOPRINTER_UI)
+#if ENABLED(LULZBOT_TOUCH_UI) && !defined(TOUCH_UI_LULZBOT_BIO)
 
 #include "screens.h"
 
@@ -53,6 +53,11 @@ void MainMenu::onRedraw(draw_mode_t what) {
         .tag(4).button( BTN_POS(1,2), BTN_SIZE(1,1), GET_TEXT_F(MOVE_AXIS))
         .tag(5).button( BTN_POS(2,2), BTN_SIZE(1,1), GET_TEXT_F(MOTORS_OFF))
         .tag(6).button( BTN_POS(1,3), BTN_SIZE(2,1), GET_TEXT_F(TEMPERATURE))
+        #if DISABLED(TOUCH_UI_LULZBOT_BIO) && DISABLED(TOUCH_UI_COCOA_PRESS)
+         .enabled(1)
+        #else
+         .enabled(0)
+        #endif
         .tag(7).button( BTN_POS(1,4), BTN_SIZE(2,1), GET_TEXT_F(CHANGE_FILAMENT))
         .tag(8).button( BTN_POS(1,5), BTN_SIZE(2,1), GET_TEXT_F(ADVANCED_SETTINGS))
         #ifdef PRINTCOUNTER
@@ -79,6 +84,11 @@ void MainMenu::onRedraw(draw_mode_t what) {
         .tag(4).button( BTN_POS(1,2), BTN_SIZE(1,1), GET_TEXT_F(MOVE_AXIS))
         .tag(5).button( BTN_POS(2,2), BTN_SIZE(1,1), GET_TEXT_F(MOTORS_OFF))
         .tag(6).button( BTN_POS(1,3), BTN_SIZE(1,1), GET_TEXT_F(TEMPERATURE))
+        #if DISABLED(TOUCH_UI_LULZBOT_BIO) && DISABLED(TOUCH_UI_COCOA_PRESS)
+         .enabled(1)
+        #else
+         .enabled(0)
+        #endif
         .tag(7).button( BTN_POS(2,3), BTN_SIZE(1,1), GET_TEXT_F(CHANGE_FILAMENT))
         .tag(8).button( BTN_POS(1,4), BTN_SIZE(1,1), GET_TEXT_F(ADVANCED_SETTINGS))
         #ifdef PRINTCOUNTER

@@ -27,15 +27,15 @@
 //#define LCD_4DSYSTEMS_4DLCD_FT843 // 4D Systems 4.3" 480x272
 //#define LCD_HAOYU_FT800CB         // Haoyu with 4.3" or 5" 480x272
 //#define LCD_HAOYU_FT810CB         // Haoyu with 5" 800x480
-#define LCD_ALEPHOBJECTS_CLCD_UI    // Aleph Objects Color LCD User Interface
+#define LCD_ALEPHOBJECTS_CLCD_UI  // Aleph Objects Color LCD User Interface
 
 // Leave the following commented out to use a board's default resolution.
 // If you have changed the LCD panel, you may override the resolution
 // below (see "ftdi_eve_resolutions.h" for definitions):
 
 //#define TOUCH_UI_320x240
-//#define TOUCH_UI_480x272
-#define TOUCH_UI_800x480
+#define TOUCH_UI_480x272
+//#define TOUCH_UI_800x480
 
 // Select interfacing pins, the following pin specifiers are supported:
 //
@@ -59,34 +59,39 @@
 // is supported on the FT800. The FT810 or better also support a portrait
 // and mirrored orientation.
 //#define TOUCH_UI_INVERTED
-//#define TOUCH_UI_PORTRAIT
+#define TOUCH_UI_PORTRAIT
 //#define TOUCH_UI_MIRRORED
 
-// UTF8 processing and rendering.
-// Unsupported characters are shown as '?'.
+// Enable UTF8 processing and rendering. Unsupported characters
+// will be shown as '?'.
 #define TOUCH_UI_USE_UTF8
-#if defined(TOUCH_UI_USE_UTF8)
-  // Western accents support. These accented characters use
-  // combined bitmaps and require relatively little storage.
+#ifdef  TOUCH_UI_USE_UTF8
+
+  // Enable TOUCH_UI_UTF8_WESTERN_CHARSET to add support for
+  // these characters:
+  //
+  //  ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöùúûüýÿ°
+  //
+  // These are made from a few combining bitmaps (`´¸¨°~ı)
+  // and require a comparatively small amount of storage.
+  //
   #define TOUCH_UI_UTF8_WESTERN_CHARSET
-  #if defined(TOUCH_UI_UTF8_WESTERN_CHARSET)
-    // Additional character groups. These characters require
-    // full bitmaps and take up considerable storage:
-    //#define TOUCH_UI_UTF8_SUPERSCRIPTS  // ¹ ² ³
-    //#define TOUCH_UI_UTF8_COPYRIGHT     // © ®
-    //#define TOUCH_UI_UTF8_GERMANIC      // ß
-    //#define TOUCH_UI_UTF8_SCANDINAVIAN  // Æ Ð Ø Þ æ ð ø þ
-    //#define TOUCH_UI_UTF8_PUNCTUATION   // « » ¿ ¡
-    //#define TOUCH_UI_UTF8_CURRENCY      // ¢ £ ¤ ¥
-    //#define TOUCH_UI_UTF8_ORDINALS      // º ª
-    //#define TOUCH_UI_UTF8_MATHEMATICS   // ± × ÷
-    //#define TOUCH_UI_UTF8_FRACTIONS     // ¼ ½ ¾
-    //#define TOUCH_UI_UTF8_SYMBOLS       // µ ¶ ¦ § ¬
+  #ifdef TOUCH_UI_UTF8_WESTERN_CHARSET
+    // Enable additional character groups. These characters
+    // require full bitmaps and take up considerable storage:
+
+    #define TOUCH_UI_UTF8_SUPERSCRIPTS    // ¹ ² ³
+    #define TOUCH_UI_UTF8_COPYRIGHT       // © ®
+    #define TOUCH_UI_UTF8_GERMANIC        // ß
+    #define TOUCH_UI_UTF8_SCANDINAVIAN    // Æ Ð Ø Þ æ ð ø þ
+    #define TOUCH_UI_UTF8_PUNCTUATION     // « » ¿ ¡
+    #define TOUCH_UI_UTF8_CURRENCY        // ¢ £ ¤ ¥
+    #define TOUCH_UI_UTF8_ORDINALS        // º ª
+    #define TOUCH_UI_UTF8_MATHEMATICS     // ± × ÷
+    #define TOUCH_UI_UTF8_FRACTIONS       // ¼ ½ ¾
+    #define TOUCH_UI_UTF8_SYMBOLS         // µ ¶ ¦ § ¬
   #endif
 #endif
-
-// Use a smaller font when labels don't fit buttons
-#define TOUCH_UI_FIT_TEXT
 
 // Enable this to debug the event framework
 #define TOUCH_UI_DEBUG

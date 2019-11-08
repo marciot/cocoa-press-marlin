@@ -1255,6 +1255,10 @@
   //#define LCD_LANGUAGE_3 de
   //#define LCD_LANGUAGE_4 es
   //#define LCD_LANGUAGE_5 it
+  
+  // Touch UI variant:
+  //#define TOUCH_UI_LULZBOT_BIO
+  //#define TOUCH_UI_COCOA_PRESS
 
   // Use a numeric passcode for "Screen lock" keypad.
   // (recommended for smaller displays)
