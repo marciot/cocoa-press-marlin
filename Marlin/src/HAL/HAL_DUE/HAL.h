@@ -40,7 +40,7 @@
 
 // Define MYSERIAL0/1 before MarlinSerial includes!
 #if SERIAL_PORT == -1
-  #define MYSERIAL0 Serial1
+  #define MYSERIAL0 customizedSerial1
 #elif SERIAL_PORT == 0
   #define MYSERIAL0 Serial
 #elif SERIAL_PORT == 1
@@ -58,7 +58,7 @@
     #error "SERIAL_PORT_2 must be different from SERIAL_PORT. Please update your configuration."
   #endif
   #if SERIAL_PORT_2 == -1
-    #define MYSERIAL1 Serial1
+    #define MYSERIAL1 customizedSerial2
   #elif SERIAL_PORT_2 == 0
     #define MYSERIAL1 Serial
   #elif SERIAL_PORT_2 == 1
@@ -133,6 +133,7 @@ extern uint16_t HAL_adc_result;     // result of last ADC conversion
 inline void HAL_adc_init() {}//todo
 
 #define HAL_START_ADC(pin)  HAL_adc_start_conversion(pin)
+#define HAL_ADC_RESOLUTION  10
 #define HAL_READ_ADC()      HAL_adc_result
 #define HAL_ADC_READY()     true
 

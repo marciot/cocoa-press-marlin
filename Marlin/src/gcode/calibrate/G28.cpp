@@ -162,29 +162,32 @@
 
 #endif // Z_SAFE_HOMING
 
-#ifdef E_MIN_PIN
-  // E_MIN_PIN for syringe extruders for bio printers
-  static inline bool read_e_min_pin() {
-    return (READ(E_MIN_PIN) != E_MIN_PIN_INVERTING);
+#if ENABLED(IMPROVE_HOMING_RELIABILITY)
+
+  slow_homing_t begin_slow_homing() {
+    slow_homing_t slow_homing{0};
+    slow_homing.acceleration.set(planner.settings.max_acceleration_mm_per_s2[X_AXIS],
+                                 planner.settings.max_acceleration_mm_per_s2[Y_AXIS]);
+    planner.settings.max_acceleration_mm_per_s2[X_AXIS] = 100;
+    planner.settings.max_acceleration_mm_per_s2[Y_AXIS] = 100;
+    #if HAS_CLASSIC_JERK
+      slow_homing.jerk_xy = planner.max_jerk;
+      planner.max_jerk.set(0, 0);
+    #endif
+    planner.reset_acceleration_rates();
+    return slow_homing;
   }
 
-  static void home_e() {
-    feedrate_mm_s = 1; // mm/s
-
-    // Back off the extruder until the pin is triggered
-    destination = current_position;
-    while(!read_e_min_pin()) {
-      current_position[E_AXIS] = 0.5;
-      sync_plan_position();
-      destination[E_AXIS] = 0;
-      prepare_move_to_destination();
-      planner.synchronize();
-    };
-
-    SBI(axis_known_position, E_AXIS);
-    SBI(axis_homed, E_AXIS);
+  void end_slow_homing(const slow_homing_t &slow_homing) {
+    planner.settings.max_acceleration_mm_per_s2[X_AXIS] = slow_homing.acceleration.x;
+    planner.settings.max_acceleration_mm_per_s2[Y_AXIS] = slow_homing.acceleration.y;
+    #if HAS_CLASSIC_JERK
+      planner.max_jerk = slow_homing.jerk_xy;
+    #endif
+    planner.reset_acceleration_rates();
   }
-#endif
+
+#endif // IMPROVE_HOMING_RELIABILITY
 
 /**
  * G28: Home all axes according to settings
@@ -204,20 +207,12 @@
  *  Y   Home to the Y endstop
  *  Z   Home to the Z endstop
  *
- * Syringe extruder parameters
- *
- *  E   Home to the E endstop
- *
  */
 void GcodeSuite::G28(const bool always_home_all) {
   if (DEBUGGING(LEVELING)) {
     DEBUG_ECHOLNPGM(">>> G28");
     log_machine_info();
   }
-  
-  #ifdef E_MIN_PIN
-    if(parser.seen('E')) home_e();
-  #endif
 
   #if ENABLED(DUAL_X_CARRIAGE)
     bool IDEX_saved_duplication_state = extruder_duplication_enabled;
@@ -262,17 +257,7 @@ void GcodeSuite::G28(const bool always_home_all) {
   #endif
 
   #if ENABLED(IMPROVE_HOMING_RELIABILITY)
-    slow_homing_t slow_homing{0};
-    slow_homing.acceleration.set(planner.settings.max_acceleration_mm_per_s2[X_AXIS],
-                                 planner.settings.max_acceleration_mm_per_s2[Y_AXIS]);
-    planner.settings.max_acceleration_mm_per_s2[X_AXIS] = 100;
-    planner.settings.max_acceleration_mm_per_s2[Y_AXIS] = 100;
-    #if HAS_CLASSIC_JERK
-      slow_homing.jerk_xy = planner.max_jerk;
-      planner.max_jerk.set(0, 0);
-    #endif
-
-    planner.reset_acceleration_rates();
+    slow_homing_t slow_homing = begin_slow_homing();
   #endif
 
   // Always home with tool 0 active
@@ -295,6 +280,10 @@ void GcodeSuite::G28(const bool always_home_all) {
 
     home_delta();
     UNUSED(always_home_all);
+
+    #if ENABLED(IMPROVE_HOMING_RELIABILITY)
+      end_slow_homing(slow_homing);
+    #endif
 
   #else // NOT DELTA
 
@@ -380,6 +369,10 @@ void GcodeSuite::G28(const bool always_home_all) {
       if (doY) homeaxis(Y_AXIS);
     #endif
 
+    #if ENABLED(IMPROVE_HOMING_RELIABILITY)
+      end_slow_homing(slow_homing);
+    #endif
+
     // Home Z last if homing towards the bed
     #if Z_HOME_DIR < 0
       if (doZ) {
@@ -413,6 +406,10 @@ void GcodeSuite::G28(const bool always_home_all) {
 
     if (dxc_is_duplicating()) {
 
+      #if ENABLED(IMPROVE_HOMING_RELIABILITY)
+        slow_homing = begin_slow_homing();
+      #endif
+
       // Always home the 2nd (right) extruder first
       active_extruder = 1;
       homeaxis(X_AXIS);
@@ -433,6 +430,10 @@ void GcodeSuite::G28(const bool always_home_all) {
 
       dual_x_carriage_mode         = IDEX_saved_mode;
       stepper.set_directions();
+
+      #if ENABLED(IMPROVE_HOMING_RELIABILITY)
+        end_slow_homing(slow_homing);
+      #endif
     }
 
   #endif // DUAL_X_CARRIAGE
@@ -463,15 +464,6 @@ void GcodeSuite::G28(const bool always_home_all) {
       #define NO_FETCH true
     #endif
     tool_change(old_tool_index, NO_FETCH);
-  #endif
-
-  #if ENABLED(IMPROVE_HOMING_RELIABILITY)
-    planner.settings.max_acceleration_mm_per_s2[X_AXIS] = slow_homing.acceleration.x;
-    planner.settings.max_acceleration_mm_per_s2[Y_AXIS] = slow_homing.acceleration.y;
-    #if HAS_CLASSIC_JERK
-      planner.max_jerk = slow_homing.jerk_xy;
-    #endif
-    planner.reset_acceleration_rates();
   #endif
 
   ui.refresh();
