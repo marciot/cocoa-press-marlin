@@ -2209,30 +2209,9 @@
 //#define EDITABLE_SERVO_ANGLES
 
 /**
- * Extra modifications to Marlin for LulzBot printers
+ * Extra modification for CocoaPress Printers
  */
-//#define SOURCE_CODE_URL
-//#define TOOLHEAD_NAME
-//#define TOOLHEAD_TYPE
-//#define WIPE_SEQUENCE_COMMANDS
-//#define AXIS_LEVELING_COMMANDS
-//#define PARK_AND_RELEASE_COMMANDS
-//#define CALIBRATION_COMMANDS
-//#define AO_EXP1_DEPRECATED_PINMAP
+ 
+//#define COCOA_PRESS_SCALE_UI_TEMP
 //#define DISABLE_DUE_SD_MMC
-//#define EXTRUDER_FAN_ON_PIN_6
-//#define ACTION_ON_FILAMENT_RUNOUT
 //#define ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE
-//#define END_G29_ON_BACK_LEFT_CORNER
-//#define USB_DEVICE_VENDOR_ID
-//#define USB_DEVICE_PRODUCT_ID
-//#define NO_PAUSE_FOR_REHEAT
-//#define CURA_LE_RUNOUT_HANDLING_WORKAROUND
-//#define PRESERVE_LCD_MESSAGE_AFTER_PRINT
-//#define E_MIN_PIN
-//#define E_MIN_PIN_INVERTING
-//#define E_MAX_POS
-//#define NO_TOOLHEAD_HEATER_GCODE
-//#define DEVELOPER_SCREENS
-//#define SWAP_E0_AND_E1
-

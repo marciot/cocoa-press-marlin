@@ -180,10 +180,12 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["PREVENT_COLD_EXTRUSION"]                     = False # EW - Turning off so we can use solenoid even when chocolate is cold
     MARLIN["EXTRUDE_MINTEMP"]                            = 10 # EW - changed from 175 to 10
 
-    # 1 is the custom CocoaPress thermistor profile
-    MARLIN["TEMP_SENSOR_0"]                              = 1
+    # 999 is the custom CocoaPress thermistor profile
+    MARLIN["TEMP_SENSOR_0"]                              = 999
     if USE_ARCHIM2:
-        MARLIN["TEMP_SENSOR_1"]                          = 1
+        MARLIN["TEMP_SENSOR_1"]                          = 999
+        
+    MARLIN["COCOA_PRESS_SCALE_UI_TEMP"]                     = 10 # Scale all UI temperatures by 10
     
     # These values are scaled by 10
     MARLIN["HEATER_0_MAXTEMP"]                           = 500
