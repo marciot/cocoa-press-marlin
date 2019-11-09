@@ -101,7 +101,6 @@ def make_config(PRINTER, TOOLHEAD):
 ############################ GENERAL CONFIGURATION ############################
 
     MARLIN["STRING_CONFIG_H_AUTHOR"]                     = C_STRING("(Cocoa Press Marlin)")
-    MARLIN["SOURCE_CODE_URL"]                            = C_STRING("https://github.com/marcio-cp/cocoa-press-marlin")
     MARLIN["EEPROM_SETTINGS"]                            = True # EW - Enabled
     MARLIN["PRINTCOUNTER"]                               = True # EW - Enabled
     MARLIN["CUSTOM_MACHINE_NAME"]                        = C_STRING("Cocoa Press")
@@ -334,7 +333,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["TOUCH_UI_UTF8_SUPERSCRIPTS"]                 = True
     MARLIN["SD_DETECT_INVERTED"]                         = False
     MARLIN["SCROLL_LONG_FILENAMES"]                      = True
-    MARLIN["DEVELOPER_SCREENS"]                          = True
+    MARLIN["TOUCH_UI_DEVELOPER_MENU"]                    = True
     MARLIN["TOUCH_UI_DEBUG"]                             = True
                                                          
     # Virtual joystick functionality                     
