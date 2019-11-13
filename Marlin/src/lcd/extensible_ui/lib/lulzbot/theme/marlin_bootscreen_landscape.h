@@ -15,7 +15,7 @@
  ****************************************************************************/
 
 /**
- * This file was auto-generated using "svg2cpp.pl"
+ * This file was auto-generated using "svg2cpp.py"
  *
  * The encoding consists of x,y pairs with the min and max scaled to
  * 0x0000 and 0xFFFE. A single 0xFFFF in the data stream indicates the
@@ -25,11 +25,8 @@
 #pragma once
 
 constexpr float x_min = 0.000000;
-
 constexpr float x_max = 480.000000;
-
 constexpr float y_min = 0.000000;
-
 constexpr float y_max = 272.000000;
 
 const PROGMEM uint16_t logo_fill[] = {0x419D, 0x546F, 0x3D05, 0x5615, 0x3942, 0x5A92, 0x36B7, 0x6136, 0x35C8, 0x6950, 0x35C8, 0x96B0, 0x36B7, 0x9ECA, 0x3942, 0xA56E, 0x3D05, 0xA9EB, 0x419D, 0xAB91, 0xBE60, 0xAB91, 0xC2F8, 0xA9EB, 0xC6BB, 0xA56E, 0xC946, 0x9ECA, 0xCA35, 0x96B0, 0xCA32, 0x546C, 0x419D, 0x546F};
