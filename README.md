@@ -45,9 +45,21 @@ To compile and upload the firmware to your printer, select "Upload" from the "Sk
 
 # Wiring notes:
 
-For NeoPixel control:
-  * Einsy Retro: Pin 9 on header P1
-  * Archim 2:    Pin 5 on header J20
+On Einsy Retro:
+
+| Feature          | Pin                 |
+|------------------|---------------------|
+| NeoPixel         | Pin 9 on header P1  |
+| Extruder Control | N/A                 |
+| Cooling Control  | N/A                 |
+  
+On Archim 2.0:
+
+| Feature          | Port  | Arduino Pin | Archim Pin |
+|------------------|-------|-------------|------------|
+| NeoPixel         | PB5   | 94          | J20 Pin 5  |
+| Extruder Control | PB0   | 95          | J20 Pin 6  |
+| Cooling Control  | PB3   | 103         | J20 Pin 7  |
 
 # License (from Marlin)
 

@@ -108,10 +108,15 @@ def make_config(PRINTER, TOOLHEAD):
 
 ############################ NEOPIXEL SUPPORT ############################
 
-    MARLIN["CASE_LIGHT_ENABLE"]                          = True
-    MARLIN["CASE_LIGHT_USE_NEOPIXEL"]                    = True
+    #MARLIN["CASE_LIGHT_ENABLE"]                          = True
+    #MARLIN["CASE_LIGHT_USE_NEOPIXEL"]                    = True
     MARLIN["NEOPIXEL_LED"]                               = True
-    MARLIN["NEOPIXEL_PIXELS"]                            = 8
+    MARLIN["NEOPIXEL_PIXELS"]                            = 16
+    if USE_ARCHIM2:
+      MARLIN["NEOPIXEL_PIN"]                             = 94 # GPIO_PB1_J20_5
+    else:
+      MARLIN["NEOPIXEL_PIN"]                             = 9
+    MARLIN["NEOPIXEL_STARTUP_TEST"]                      = True
 
 ###################### MOTHERBOARD AND PIN CONFIGURATION ######################
 
@@ -334,7 +339,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["SD_DETECT_INVERTED"]                         = False
     MARLIN["SCROLL_LONG_FILENAMES"]                      = True
     MARLIN["TOUCH_UI_DEVELOPER_MENU"]                    = True
-    MARLIN["TOUCH_UI_DEBUG"]                             = True
+    MARLIN["TOUCH_UI_DEBUG"]                             = False
                                                          
     # Virtual joystick functionality                     
     MARLIN["JOYSTICK"]                                   = True

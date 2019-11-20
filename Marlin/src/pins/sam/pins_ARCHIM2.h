@@ -218,6 +218,10 @@
 
 #define CASE_LIGHT_PIN     GPIO_PB1_J20_5
 
+// Cocoa Press Specifics
+#define EXTRUDER_CONTROL   GPIO_PB0_J20_6
+#define COOLING_CONTROL    GPIO_PB3_J20_7
+
 // 2MB SPI Flash
 #define SPI_FLASH_SS       52   // D52 PB21
 
