@@ -875,6 +875,11 @@ namespace ExtUI {
       value *= COCOA_PRESS_SCALE_UI_TEMP;
     #endif
     enableHeater(heater);
+    #if HAS_HEATED_CHAMBER
+      if (heater == CHAMBER)
+        thermalManager.setTargetChamber(constrain(value, 0, CHAMBER_MAXTEMP - 10));
+      else
+    #endif
     #if HAS_HEATED_BED
       if (heater == BED)
         thermalManager.setTargetBed(constrain(value, 0, BED_MAXTEMP - 10));

@@ -211,6 +211,8 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["CHAMBER_MINTEMP"]                            = -10
     
     MARLIN["THERMAL_PROTECTION_HYSTERESIS"]              = 1 # EW - changed from 4 to 1
+    MARLIN["HEATER_CHAMBER_INVERTING"]                   = 'true' # Activate cooler when temperature is above threshold
+    MARLIN["THERMAL_PROTECTION_CHAMBER"]                 = False
     
 ########################## COOLING FAN CONFIGURATION ##########################
 
