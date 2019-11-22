@@ -264,7 +264,7 @@ namespace ExtUI {
   }
 
   #ifdef COCOA_PRESS_SCALE_UI_TEMP
-    #define GET_TEMP_ADJUSTMENT(A) A/COCOA_PRESS_SCALE_UI_TEMP
+    #define GET_TEMP_ADJUSTMENT(A) float(A)/COCOA_PRESS_SCALE_UI_TEMP
   #else
     #define GET_TEMP_ADJUSTMENT(A) A
   #endif
@@ -897,7 +897,7 @@ namespace ExtUI {
       constexpr int16_t heater_maxtemp[HOTENDS] = ARRAY_BY_HOTENDS(HEATER_0_MAXTEMP, HEATER_1_MAXTEMP, HEATER_2_MAXTEMP, HEATER_3_MAXTEMP, HEATER_4_MAXTEMP, HEATER_5_MAXTEMP);
       const int16_t e = extruder - E0;
       enableHeater(extruder);
-      thermalManager.setTargetHotend(constrain(value, 0, heater_maxtemp[e] - 15), e);
+      thermalManager.setTargetHotend(LROUND(constrain(value, 0, heater_maxtemp[e] - 15)), e);
     #endif
   }
 

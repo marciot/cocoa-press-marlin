@@ -32,7 +32,12 @@ using namespace ExtUI;
 
 void TemperatureScreen::onRedraw(draw_mode_t what) {
   widgets_t w(what);
-  w.precision(0).color(temp).units(GET_TEXT_F(MSG_UNITS_C));
+  #if COCOA_PRESS_SCALE_UI_TEMP == 10
+    w.precision(1)
+  #else
+    w.precision(0)
+  #endif
+   .color(temp).units(GET_TEXT_F(MSG_UNITS_C));
   w.heading(GET_TEXT_F(MSG_TEMPERATURE));
   w.button(30, GET_TEXT_F(MSG_COOLDOWN));
   #ifndef NO_TOOLHEAD_HEATER_GCODE
