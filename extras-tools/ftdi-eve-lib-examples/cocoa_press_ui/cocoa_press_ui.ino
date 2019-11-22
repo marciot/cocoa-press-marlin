@@ -98,16 +98,28 @@ class LogoScreen : public UIScreen, public UncachedScreen {
       
       cmd.font(30);
       
-      ui.bounds(POLY(zone1_label), x, y, h, v);
+      ui.bounds(POLY(h0_label), x, y, h, v);
       cmd.text(x, y, h, v, F("Zone 1:"));
 
-      ui.bounds(POLY(zone2_label), x, y, h, v);
+      ui.bounds(POLY(h1_label), x, y, h, v);
       cmd.text(x, y, h, v, F("Zone 2:"));
       
-      ui.bounds(POLY(zone1_temp), x, y, h, v);
+      ui.bounds(POLY(h2_label), x, y, h, v);
+      cmd.text(x, y, h, v, F("Zone 3:"));
+      
+      ui.bounds(POLY(h3_label), x, y, h, v);
+      cmd.text(x, y, h, v, F("Zone 4:"));
+      
+      ui.bounds(POLY(h0_temp), x, y, h, v);
       cmd.text(x, y, h, v, F("2 / 30°C"));
       
-      ui.bounds(POLY(zone2_temp), x, y, h, v);
+      ui.bounds(POLY(h1_temp), x, y, h, v);
+      cmd.text(x, y, h, v, F("20 / 20°C"));
+      
+      ui.bounds(POLY(h2_temp), x, y, h, v);
+      cmd.text(x, y, h, v, F("20 / 20°C"));
+      
+      ui.bounds(POLY(h3_temp), x, y, h, v);
       cmd.text(x, y, h, v, F("20 / 20°C"));
     }
 

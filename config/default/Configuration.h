@@ -2211,7 +2211,9 @@
 /**
  * Extra modification for CocoaPress Printers
  */
- 
+
+//#define HOTENDS
+//#define COCOA_PRESS_EXTRUDER
 //#define COCOA_PRESS_SCALE_UI_TEMP
 //#define DISABLE_DUE_SD_MMC
 //#define ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE

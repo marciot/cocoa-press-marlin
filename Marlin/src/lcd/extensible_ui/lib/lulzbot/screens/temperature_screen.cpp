@@ -52,6 +52,9 @@ void TemperatureScreen::onRedraw(draw_mode_t what) {
   #if HAS_HEATED_BED
     w.adjuster(    20, GET_TEXT_F(MSG_BED),     getTargetTemp_celsius(BED));
   #endif
+  #if HAS_HEATED_CHAMBER
+    w.adjuster(    22, GET_TEXT_F(MSG_CHAMBER), getTargetTemp_celsius(CHAMBER));
+  #endif
   #if FAN_COUNT > 0
     w.color(fan_speed).units(GET_TEXT_F(MSG_UNITS_PERCENT));
     w.adjuster(    10, GET_TEXT_F(MSG_FAN_SPEED), getTargetFan_percent(FAN0));
@@ -64,6 +67,8 @@ bool TemperatureScreen::onTouchHeld(uint8_t tag) {
   switch (tag) {
     case 20: UI_DECREMENT(TargetTemp_celsius, BED); break;
     case 21: UI_INCREMENT(TargetTemp_celsius, BED); break;
+    case 22: UI_DECREMENT(TargetTemp_celsius, CHAMBER); break;
+    case 23: UI_INCREMENT(TargetTemp_celsius, CHAMBER); break;
     #ifndef NO_TOOLHEAD_HEATER_GCODE
     case  2: UI_DECREMENT(TargetTemp_celsius, E0); break;
     case  3: UI_INCREMENT(TargetTemp_celsius, E0); break;
@@ -89,6 +94,9 @@ bool TemperatureScreen::onTouchHeld(uint8_t tag) {
       REPEAT(HOTENDS, _HOTEND_OFF);
       #if HAS_HEATED_BED
         setTargetTemp_celsius(0,BED);
+      #endif
+      #if HAS_HEATED_CHAMBER
+        setTargetTemp_celsius(0,CHAMBER);
       #endif
       #if FAN_COUNT > 0
         setTargetFan_percent(0,FAN0);

@@ -24,11 +24,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1896685"
-     inkscape:cx="287.28794"
+     inkscape:zoom="2.08"
+     inkscape:cx="255.5047"
      inkscape:cy="63.197832"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="true"
      units="px"
      inkscape:window-width="1536"
@@ -53,7 +53,7 @@
     <linearGradient
        id="linearGradient4768"
        osb:paint="solid"
-       gradientTransform="matrix(0.00461043,0,0,0.07831043,228.61112,-953.8879)">
+       gradientTransform="matrix(0.00341974,0,0,0.07831043,172.15921,-953.8879)">
       <stop
          style="stop-color:#ffd32e;stop-opacity:1;"
          offset="0"
@@ -156,13 +156,13 @@
        sodipodi:nodetypes="ccccccccccccccc" />
     <path
        id="usb_btn"
-       d="m 10.025377,204.89731 118.682263,0 0,54.56405 -118.682263,0 0,-54.56405"
+       d="m 10.025377,204.89731 102.214313,0 0,54.56405 -102.214313,0 0,-54.56405"
        style="display:inline;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:2.11660099;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        id="menu_btn"
-       d="m 140.81153,204.89731 118.68225,0 0,54.56405 -118.68225,0 0,-54.56405"
+       d="m 122.66409,204.89731 102.21431,0 0,54.56405 -102.21431,0 0,-54.56405"
        style="display:inline;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:2.11660099;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
@@ -203,26 +203,50 @@
      inkscape:label="Cocoa Press"
      style="display:inline">
     <path
-       id="zone2_temp"
-       d="m 371.49705,224.56914 103,0 0,30.92694 -103,0"
+       id="h1_temp"
+       d="m 292.82831,235.0684 59.43727,0 0,30.92694 -59.43727,0"
        style="display:inline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:4.79754782;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <path
-       id="zone1_temp"
-       d="m 266.29242,224.56914 103,0 0,30.92691 -103,0"
+       id="h1_label"
+       d="m 292.82831,202.47505 59.41928,0 0,30.92696 -59.41928,0"
        style="display:inline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:4.79754782;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <path
-       id="zone2_label"
-       d="m 371.49705,191.97579 102.96883,0 0,30.92696 -102.96883,0"
+       id="h0_temp"
+       d="m 232.1578,235.0684 59.43727,0 0,30.92691 -59.43727,0"
        style="display:inline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:4.79754782;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <path
-       id="zone1_label"
-       d="m 266.29242,191.97577 103,0 0,30.92698 -103,0"
+       id="h0_label"
+       d="m 232.1578,202.47505 59.43727,0 0,30.92698 -59.43727,0"
+       style="display:inline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:4.79754782;stroke-miterlimit:4;stroke-dasharray:none"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       id="h2_temp"
+       d="m 353.4988,235.0684 59.43726,0 0,30.92694 -59.43726,0"
+       style="display:inline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:4.79754782;stroke-miterlimit:4;stroke-dasharray:none"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       id="h2_label"
+       d="m 353.4988,202.47505 59.41927,0 0,30.92696 -59.41927,0"
+       style="display:inline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:4.79754782;stroke-miterlimit:4;stroke-dasharray:none"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       id="h3_temp"
+       d="m 414.16927,234.87609 59.43725,0 0,30.92694 -59.43725,0"
+       style="display:inline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:4.79754782;stroke-miterlimit:4;stroke-dasharray:none"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       id="h3_label"
+       d="m 414.16927,202.28274 59.41927,0 0,30.92696 -59.41927,0"
        style="display:inline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:4.79754782;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
@@ -231,7 +255,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Lulzbot Bio"
-     style="display:inline">
+     style="display:none">
     <path
        style="display:inline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:4.79754782;stroke-miterlimit:4;stroke-dasharray:none"
        d="m 386.19104,221.23601 78.43138,0 0,38.1751 -78.43138,0"

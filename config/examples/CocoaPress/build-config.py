@@ -172,9 +172,9 @@ def make_config(PRINTER, TOOLHEAD):
 ################################ COCOA PRESS TOOLHEADS ###############################
 
     if TOOLHEAD in ["CocoaPress_SingleExtruder"]:
-        MARLIN["EXTRUDERS"]                              = 2 if USE_ARCHIM2 else 1
+        MARLIN["EXTRUDERS"]                              = 1
+        MARLIN["HOTENDS"]                                = 3 if USE_ARCHIM2 else 1
         MARLIN["E0_CURRENT"]                             = 960 # mA
-        MARLIN["E1_CURRENT"]                             = 960 # mA
 
 ############################# TEMPERATURE SETTINGS ############################
 
@@ -186,10 +186,12 @@ def make_config(PRINTER, TOOLHEAD):
 
     # 999 is the custom CocoaPress thermistor profile
     MARLIN["TEMP_SENSOR_0"]                              = 999
-    if USE_ARCHIM2:
-        MARLIN["TEMP_SENSOR_1"]                          = 999
+    if MARLIN["HOTENDS"] > 1:
+      MARLIN["TEMP_SENSOR_1"]                            = 999
+      MARLIN["TEMP_SENSOR_2"]                            = 999
+    MARLIN["TEMP_SENSOR_CHAMBER"]                        = 999
         
-    MARLIN["COCOA_PRESS_SCALE_UI_TEMP"]                     = 10 # Scale all UI temperatures by 10
+    MARLIN["COCOA_PRESS_SCALE_UI_TEMP"]                  = 10 # Scale all UI temperatures by 10
     
     # These values are scaled by 10
     MARLIN["HEATER_0_MAXTEMP"]                           = 500
@@ -198,7 +200,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["HEATER_3_MAXTEMP"]                           = 500
     MARLIN["HEATER_4_MAXTEMP"]                           = 500
     MARLIN["HEATER_5_MAXTEMP"]                           = 500
-    MARLIN["BED_MAXTEMP"]                                = 500
+    MARLIN["CHAMBER_MAXTEMP"]                            = 500
     
     MARLIN["THERMAL_PROTECTION_HYSTERESIS"]              = 1 # EW - changed from 4 to 1
     
