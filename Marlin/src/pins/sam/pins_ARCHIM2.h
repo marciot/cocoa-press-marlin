@@ -167,7 +167,7 @@
 #define TEMP_1_PIN          9   // D9 PB18 THERM AN2 *
 #define TEMP_2_PIN          8   // D8 PB17 THERM AN4 *
 //#define TEMP_BED_PIN       11   // D11 PB20 THERM AN3 *
-#define TEMP_CHAMBER_PIN   11   // D11 PB20 THERM AN3 *
+#define TEMP_CHAMBER_PIN   11   // D11 PB20 THERM AN3 * - Changed for CocoaPress
 
 //
 // Heaters / Fans
@@ -176,7 +176,7 @@
 #define HEATER_1_PIN        7   // D7 PC23 FET_PWM4
 #define HEATER_2_PIN        8   // D8 PC22 FET_PWM5
 #define HEATER_BED_PIN      9   // D9 PC21 BED_PWM
-#define HEATER_CHAMBER_PIN  103 // D103 PB3 J20 Pin 7
+#define HEATER_CHAMBER_PIN  103 // D103 PB3 J20 Pin 7 - Changed for CocoaPress
 
 #ifndef FAN_PIN
   #define FAN_PIN           4   // D4 PC26 FET_PWM1
@@ -220,9 +220,8 @@
 
 #define CASE_LIGHT_PIN     GPIO_PB1_J20_5
 
-// Cocoa Press Specifics
+// MLT - Cocoa Press Specifics
 #define EXTRUDER_CNTL_PIN  GPIO_PB0_J20_6
-#define COOLING_CNTL_PIN   GPIO_PB3_J20_7
 
 // 2MB SPI Flash
 #define SPI_FLASH_SS       52   // D52 PB21
