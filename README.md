@@ -55,11 +55,15 @@ On Einsy Retro:
   
 On Archim 2.0:
 
-| Feature          | Port  | Arduino Pin | Archim Pin |
-|------------------|-------|-------------|------------|
-| NeoPixel         | PB5   | 94          | J20 Pin 5  |
-| Extruder Control | PB0   | 95          | J20 Pin 6  |
-| Cooling Control  | PB3   | 103         | J20 Pin 7  |
+| Feature                | Port  | Arduino Pin | Archim Pin |
+|------------------------|-------|-------------|------------|
+| NEOPIXEL_PIN           | PB5   | 94          | J20 Pin 5  |
+| Extruder Control       | PB0   | 95          | J20 Pin 6  |
+| Cooling Control        | PB3   | 103         | J20 Pin 7  |
+| FIL_RUNOUT_PIN         | PB15  | 66          | J20 Pin 15 |
+| FIL_RUNOUT2_PIN        | PB16  | 67          | J20 Pin 16 |
+| SERVO1_PIN             | PB13  | 21          | J20 Pin 19 |
+| SERVO0_PIN (BLTouch)   | PB12  | 20          | J20 Pin 20 |
 
 # License (from Marlin)
 

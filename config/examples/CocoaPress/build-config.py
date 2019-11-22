@@ -80,6 +80,7 @@ def make_config(PRINTER, TOOLHEAD):
     USE_TOUCH_UI                                         = True
 
     MARLIN["SDSUPPORT"]                                  = False
+    MARLIN["BLTOUCH"]                                    = False
 
 ######################## PRINTER MODEL CHARACTERISTICS ########################
 
@@ -91,6 +92,9 @@ def make_config(PRINTER, TOOLHEAD):
     if PRINTER == "CocoaPress_Archim":
         USE_ARCHIM2                                      = True
         MARLIN["USB_FLASH_DRIVE_SUPPORT"]                = True
+        MARLIN["SENSORLESS_HOMING"]                      = True
+        MARLIN["BLTOUCH"]                                = True
+        MARLIN["FILAMENT_RUNOUT_SENSOR"]                 = True
         MARLIN["CUSTOM_MACHINE_NAME"]                    = C_STRING("Cocoa Press")
 
     if PRINTER == "CocoaPress_TouchDemo":
@@ -116,7 +120,7 @@ def make_config(PRINTER, TOOLHEAD):
       MARLIN["NEOPIXEL_PIN"]                             = 94 # GPIO_PB1_J20_5
     else:
       MARLIN["NEOPIXEL_PIN"]                             = 9
-    MARLIN["NEOPIXEL_STARTUP_TEST"]                      = True
+    #MARLIN["NEOPIXEL_STARTUP_TEST"]                      = True
 
 ###################### MOTHERBOARD AND PIN CONFIGURATION ######################
 
@@ -255,13 +259,22 @@ def make_config(PRINTER, TOOLHEAD):
       MARLIN["XY_PROBE_SPEED"]                           = 8000 # EW - 3000 to stop binding
       MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]           = True # EW - enabled
       MARLIN["AUTO_BED_LEVELING_BILINEAR"]               = True
-      MARLIN["AUTO_BED_LEVELING_UBL"]                    = False # EW - recommended in Marlin documentation, off for now
-      
+            
       MARLIN["MESH_TEST_HOTEND_TEMP"]                    = 32 # EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.
+      
+      if MARLIN["BLTOUCH"]:
+        MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
+        MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
+        MARLIN["MIN_PROBE_EDGE"]                         = 22
 
 ############################# FILAMENT SETTINGS ############################
 
-      MARLIN["RETRACT_LENGTH"]                           = 0 # EW - changed retract to 0
+    MARLIN["RETRACT_LENGTH"]                           = 0 # EW - changed retract to 0
+
+    if ENABLED("FILAMENT_RUNOUT_SENSOR"):
+        MARLIN["NUM_RUNOUT_SENSORS"]                     = 1
+        MARLIN["FILAMENT_RUNOUT_SCRIPT"]                 = C_STRING("M25\nM0 I'm hungry, feed me more chocolate.")
+        MARLIN["FILAMENT_RUNOUT_DISTANCE_MM"]            = 50
     
 ############################## MOTOR DRIVER TYPE ##############################
 
@@ -305,6 +318,29 @@ def make_config(PRINTER, TOOLHEAD):
             MARLIN["E1_RSENSE"]                          = RSENSE
 
         MARLIN["TMC_USE_SW_SPI"]                         = USE_ARCHIM2
+        
+########################## TRINAMIC SENSORLESS HOMING ##########################
+
+    if ENABLED("SENSORLESS_HOMING"):
+        #MARLIN["X_STALL_SENSITIVITY"]                   = 4
+        #MARLIN["Y_STALL_SENSITIVITY"]                   = 4
+
+        MARLIN["USE_XMIN_PLUG"]                          = True # Uses Stallguard
+        MARLIN["USE_YMAX_PLUG"]                          = True # Uses Stallguard
+        
+        MARLIN["X_MIN_ENDSTOP_INVERTING"]                = 1
+        MARLIN["Y_MAX_ENDSTOP_INVERTING"]                = 1
+
+        # Quickhome does not work with sensorless homing
+        MARLIN["QUICK_HOME"]                             = False
+
+        MARLIN["X_HOME_BUMP_MM"]                         = 0
+        MARLIN["Y_HOME_BUMP_MM"]                         = 0
+        
+        # Leaving the toolhead resting on the endstops with sensorless homing
+        # will likely cause chatter if the machine is immediately re-homed, so
+        # don't leave the head sitting on the endstops after homing.
+        MARLIN["HOMING_BACKOFF_MM"]                      = [5, 5, 2]
 
 ################################ MOTOR CURRENTS ###############################
 
