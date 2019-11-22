@@ -202,6 +202,14 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["HEATER_5_MAXTEMP"]                           = 500
     MARLIN["CHAMBER_MAXTEMP"]                            = 500
     
+    MARLIN["HEATER_0_MINTEMP"]                           = -10
+    MARLIN["HEATER_1_MINTEMP"]                           = -10
+    MARLIN["HEATER_2_MINTEMP"]                           = -10
+    MARLIN["HEATER_3_MINTEMP"]                           = -10
+    MARLIN["HEATER_4_MINTEMP"]                           = -10
+    MARLIN["HEATER_5_MINTEMP"]                           = -10
+    MARLIN["CHAMBER_MINTEMP"]                            = -10
+    
     MARLIN["THERMAL_PROTECTION_HYSTERESIS"]              = 1 # EW - changed from 4 to 1
     
 ########################## COOLING FAN CONFIGURATION ##########################
@@ -326,7 +334,8 @@ def make_config(PRINTER, TOOLHEAD):
 
     # Slow down SPI speed when using unshielded ribbon cables.
     MARLIN["SPI_SPEED"]                                  = 'SPI_SIXTEENTH_SPEED'
-                                                         
+    
+    MARLIN["LCD_TIMEOUT_TO_STATUS"]                      = 600000 # Ten Minutes     
     MARLIN["LULZBOT_TOUCH_UI"]                           = True
     MARLIN["TOUCH_UI_COCOA_PRESS"]                       = True
     MARLIN["LCD_ALEPHOBJECTS_CLCD_UI"]                   = True
