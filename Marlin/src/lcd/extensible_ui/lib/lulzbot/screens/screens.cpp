@@ -80,6 +80,9 @@ SCREEN_TABLE {
 #else
   DECL_SCREEN(JerkScreen),
 #endif
+#if HAS_CASE_LIGHT
+  DECL_SCREEN(CaseLightScreen),
+#endif
 #if EITHER(LIN_ADVANCE, FILAMENT_RUNOUT_SENSOR)
   DECL_SCREEN(FilamentMenu),
 #endif

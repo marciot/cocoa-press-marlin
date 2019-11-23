@@ -94,6 +94,10 @@
   #include "../../feature/runout.h"
 #endif
 
+#if ENABLED(CASE_LIGHT_ENABLE)
+  #include "../../feature/caselight.h"
+#endif
+
 #if ENABLED(BABYSTEPPING)
   #include "../../feature/babystep.h"
 #endif
@@ -616,6 +620,16 @@ namespace ExtUI {
     #ifdef FILAMENT_RUNOUT_DISTANCE_MM
       float getFilamentRunoutDistance_mm()                 { return runout.runout_distance(); }
       void setFilamentRunoutDistance_mm(const float value) { runout.set_runout_distance(constrain(value, 0, 999)); }
+    #endif
+  #endif
+  
+  #if HAS_CASE_LIGHT
+    bool getCaseLightState()                 { return case_light_on; }
+    void setCaseLightState(const bool value) { case_light_on = value; }
+
+    #if DISABLED(CASE_LIGHT_NO_BRIGHTNESS)
+      float getCaseLightBrightness_percent()                 { return ui8_to_percent(case_light_brightness); }
+      void setCaseLightBrightness_percent(const float value) { case_light_brightness = map(constrain(value, 0, 100), 0, 100, 0, 255); }
     #endif
   #endif
 

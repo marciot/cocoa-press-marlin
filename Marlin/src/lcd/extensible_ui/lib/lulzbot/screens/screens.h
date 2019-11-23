@@ -60,6 +60,9 @@ enum {
 #else
   JERK_SCREEN_CACHE,
 #endif
+#if HAS_CASE_LIGHT
+  CASE_LIGHT_SCREEN_CACHE,
+#endif
 #if EITHER(LIN_ADVANCE, FILAMENT_RUNOUT_SENSOR)
   FILAMENT_MENU_CACHE,
 #endif
@@ -534,6 +537,14 @@ class DefaultAccelerationScreen : public BaseNumericAdjustmentScreen, public Cac
   };
 #else
   class JerkScreen : public BaseNumericAdjustmentScreen, public CachedScreen<JERK_SCREEN_CACHE> {
+    public:
+      static void onRedraw(draw_mode_t);
+      static bool onTouchHeld(uint8_t tag);
+  };
+#endif
+
+#if HAS_CASE_LIGHT
+  class CaseLightScreen : public BaseNumericAdjustmentScreen, public CachedScreen<CASE_LIGHT_SCREEN_CACHE> {
     public:
       static void onRedraw(draw_mode_t);
       static bool onTouchHeld(uint8_t tag);

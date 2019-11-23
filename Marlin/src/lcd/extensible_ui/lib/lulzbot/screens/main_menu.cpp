@@ -89,12 +89,16 @@ void MainMenu::onRedraw(draw_mode_t what) {
         .tag(4).button( BTN_POS(1,2), BTN_SIZE(1,1), GET_TEXT_F(MSG_MOVE_AXIS))
         .tag(5).button( BTN_POS(2,2), BTN_SIZE(1,1), GET_TEXT_F(MSG_DISABLE_STEPPERS))
         .tag(6).button( BTN_POS(1,3), BTN_SIZE(1,1), GET_TEXT_F(MSG_TEMPERATURE))
-        #if DISABLED(TOUCH_UI_LULZBOT_BIO) && DISABLED(TOUCH_UI_COCOA_PRESS)
-         .enabled(1)
+        #if ENABLED(TOUCH_UI_COCOA_PRESS)
+          .tag(7).button( BTN_POS(2,3), BTN_SIZE(1,1), GET_TEXT_F(MSG_CASE_LIGHT))
         #else
-         .enabled(0)
+          #if DISABLED(TOUCH_UI_LULZBOT_BIO)
+            .enabled(1)
+          #else
+            .enabled(0)
+          #endif
+          .tag(7).button( BTN_POS(2,3), BTN_SIZE(1,1), GET_TEXT_F(MSG_FILAMENTCHANGE))
         #endif
-        .tag(7).button( BTN_POS(2,3), BTN_SIZE(1,1), GET_TEXT_F(MSG_FILAMENTCHANGE))
         .tag(8).button( BTN_POS(1,4), BTN_SIZE(1,1), GET_TEXT_F(MSG_ADVANCED_SETTINGS))
         #ifdef PRINTCOUNTER
          .enabled(1)
@@ -125,7 +129,11 @@ bool MainMenu::onTouchEnd(uint8_t tag) {
     case 4:  GOTO_SCREEN(MoveAxisScreen);                             break;
     case 5:  injectCommands_P(PSTR("M84"));                           break;
     case 6:  GOTO_SCREEN(TemperatureScreen);                          break;
+    #if ENABLED(TOUCH_UI_COCOA_PRESS)
+    case 7:  GOTO_SCREEN(CaseLightScreen);                            break;
+    #else
     case 7:  GOTO_SCREEN(ChangeFilamentScreen);                       break;
+    #endif
     case 8:  GOTO_SCREEN(AdvancedSettingsMenu);                       break;
 #if ENABLED(PRINTCOUNTER)
     case 9:  GOTO_SCREEN(StatisticsScreen);                           break;
