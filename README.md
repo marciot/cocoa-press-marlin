@@ -65,6 +65,14 @@ On Archim 2.0:
 | SERVO1_PIN             | PB13  | 21          | J20 Pin 19 |
 | SERVO0_PIN (BLTouch)   | PB12  | 20          | J20 Pin 20 |
 
+# Sending Messages to the User to Set The Pressure Regulator from the GCODE:
+
+Use [M0], as follows:
+
+```
+M0 Set the pressure to 29.92 inches of mercury
+```
+
 # License (from Marlin)
 
 Marlin is published under the [GPL license](/LICENSE) because we believe in open development. The GPL comes with both rights and obligations. Whether you use Marlin firmware as the driver for your open or closed-source product, you must keep Marlin open, and you must provide your compatible Marlin source code to end users upon request. The most straightforward way to comply with the Marlin license is to make a fork of Marlin on Github, perform your modifications, and direct users to your modified fork.
@@ -75,3 +83,4 @@ While we can't prevent the use of this code in products (3D printers, CNC, etc.)
 [Cocoa Press]: https://www.cocoapress.com
 [this guide]: https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/
 [GitHub repo]: https://github.com/marcio-cp/cocoa-press-marlin
+[M1]:http://marlinfw.org/docs/gcode/M000-M001.html
