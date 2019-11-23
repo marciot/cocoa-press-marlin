@@ -197,7 +197,7 @@ def make_config(PRINTER, TOOLHEAD):
       MARLIN["TEMP_SENSOR_2"]                            = 999
     MARLIN["TEMP_SENSOR_CHAMBER"]                        = 999
         
-    MARLIN["COCOA_PRESS_SCALE_UI_TEMP"]                  = 10 # Scale all UI temperatures by 10
+    MARLIN["TOUCH_UI_LCD_TEMP_SCALING"]                  = 10 # Scale all UI temperatures by 10
     
     # These values are scaled by 10
     MARLIN["HEATER_0_MAXTEMP"]                           = 500

@@ -2215,7 +2215,7 @@
 
 #define HOTENDS 3 // <-- changed
 //#define COCOA_PRESS_EXTRUDER
-#define COCOA_PRESS_SCALE_UI_TEMP 10 // <-- changed
+#define TOUCH_UI_LCD_TEMP_SCALING 10 // <-- changed
 #define COCOA_PRESS_PREHEAT_SECONDS 1800 // <-- changed
 #define COCOA_PRESS_PREHEAT_SCRIPT "M104 S300 T0" // <-- changed
 #define DISABLE_DUE_SD_MMC // <-- changed

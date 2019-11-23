@@ -32,7 +32,7 @@ using namespace ExtUI;
 
 void TemperatureScreen::onRedraw(draw_mode_t what) {
   widgets_t w(what);
-  #if COCOA_PRESS_SCALE_UI_TEMP == 10
+  #if TOUCH_UI_LCD_TEMP_SCALING == 10
     w.precision(1)
   #else
     w.precision(0)

@@ -267,8 +267,8 @@ namespace ExtUI {
     #endif
   }
 
-  #ifdef COCOA_PRESS_SCALE_UI_TEMP
-    #define GET_TEMP_ADJUSTMENT(A) float(A)/COCOA_PRESS_SCALE_UI_TEMP
+  #ifdef TOUCH_UI_LCD_TEMP_SCALING
+    #define GET_TEMP_ADJUSTMENT(A) float(A)/TOUCH_UI_LCD_TEMP_SCALING
   #else
     #define GET_TEMP_ADJUSTMENT(A) A
   #endif
@@ -891,8 +891,8 @@ namespace ExtUI {
   }
 
   void setTargetTemp_celsius(float value, const heater_t heater) {
-    #ifdef COCOA_PRESS_SCALE_UI_TEMP
-      value *= COCOA_PRESS_SCALE_UI_TEMP;
+    #ifdef TOUCH_UI_LCD_TEMP_SCALING
+      value *= TOUCH_UI_LCD_TEMP_SCALING;
     #endif
     enableHeater(heater);
     #if HAS_HEATED_CHAMBER
@@ -915,8 +915,8 @@ namespace ExtUI {
   }
 
   void setTargetTemp_celsius(float value, const extruder_t extruder) {
-    #ifdef COCOA_PRESS_SCALE_UI_TEMP
-      value *= COCOA_PRESS_SCALE_UI_TEMP;
+    #ifdef TOUCH_UI_LCD_TEMP_SCALING
+      value *= TOUCH_UI_LCD_TEMP_SCALING;
     #endif
     #if HOTENDS
       constexpr int16_t heater_maxtemp[HOTENDS] = ARRAY_BY_HOTENDS(HEATER_0_MAXTEMP, HEATER_1_MAXTEMP, HEATER_2_MAXTEMP, HEATER_3_MAXTEMP, HEATER_4_MAXTEMP, HEATER_5_MAXTEMP);
