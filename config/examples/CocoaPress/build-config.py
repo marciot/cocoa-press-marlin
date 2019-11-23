@@ -388,7 +388,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["SPI_SPEED"]                                  = 'SPI_SIXTEENTH_SPEED'
     
     MARLIN["LCD_TIMEOUT_TO_STATUS"]                      = 600000 # Ten Minutes     
-    MARLIN["LULZBOT_TOUCH_UI"]                           = True
+    MARLIN["TOUCH_UI_FTDI_EVE"]                           = True
     MARLIN["TOUCH_UI_COCOA_PRESS"]                       = True
     MARLIN["LCD_ALEPHOBJECTS_CLCD_UI"]                   = True
     MARLIN["TOUCH_UI_800x480"]                           = True
