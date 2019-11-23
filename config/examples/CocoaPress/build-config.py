@@ -59,9 +59,10 @@ LulzBot printers.'''
 #  15. MOTOR DRIVER TYPE
 #  16. TRINAMIC DRIVER CONFIGURATION
 #  17. TRINAMIC SENSORLESS HOMING
-#  18. MOTOR CURRENTS
-#  19. ACCELERATION, FEEDRATES AND XYZ MOTOR STEPS
-#  20. LCD OPTIONS
+#  18. BACKLASH COMPENSATION
+#  19. MOTOR CURRENTS
+#  20. ACCELERATION, FEEDRATES AND XYZ MOTOR STEPS
+#  21. LCD OPTIONS
 
 def C_STRING(str):
     return '"' + str.strip().replace('\n','\\n') + '"'
@@ -112,8 +113,9 @@ def make_config(PRINTER, TOOLHEAD):
 
 ############################ NEOPIXEL SUPPORT ############################
 
-    #MARLIN["CASE_LIGHT_ENABLE"]                          = True
-    #MARLIN["CASE_LIGHT_USE_NEOPIXEL"]                    = True
+    MARLIN["CASE_LIGHT_ENABLE"]                          = True
+    MARLIN["CASE_LIGHT_USE_NEOPIXEL"]                    = True
+
     MARLIN["NEOPIXEL_LED"]                               = True
     MARLIN["NEOPIXEL_PIXELS"]                            = 16
     if USE_ARCHIM2:
@@ -347,6 +349,12 @@ def make_config(PRINTER, TOOLHEAD):
         # will likely cause chatter if the machine is immediately re-homed, so
         # don't leave the head sitting on the endstops after homing.
         MARLIN["HOMING_BACKOFF_MM"]                      = [5, 5, 2]
+
+############################ BACKLASH COMPENSATION ############################
+
+    MARLIN["BACKLASH_COMPENSATION"]                      = True
+    MARLIN["BACKLASH_GCODE"]                             = True
+    MARLIN["BACKLASH_SMOOTHING_MM"]                      = 3
 
 ################################ MOTOR CURRENTS ###############################
 
