@@ -70,7 +70,8 @@ namespace Language_en {
   PROGMEM Language_Str MSG_PRINT_FINISHED           = u8"Print finished";
   PROGMEM Language_Str MSG_PRINT_ERROR              = u8"Print error";
   PROGMEM Language_Str MSG_ABOUT_TOUCH_PANEL_1      = u8"Color Touch Panel";
-  PROGMEM Language_Str MSG_ABOUT_TOUCH_PANEL_2      = u8"Portions " COPYRIGHT_SIGN " 2019 Aleph Objects, Inc.";
+  PROGMEM Language_Str MSG_ABOUT_TOUCH_PANEL_2      = u8"Portions " COPYRIGHT_SIGN " 2019 Aleph Objects, Inc.\n"
+                                                        "Portions " COPYRIGHT_SIGN " 2019 Cocoa Press";
   PROGMEM Language_Str MSG_FIRMWARE_FOR_TOOLHEAD    = u8"Firmware for toolhead:\n%s\n\n";
   PROGMEM Language_Str MSG_RUNOUT_1                 = u8"Runout 1";
   PROGMEM Language_Str MSG_RUNOUT_2                 = u8"Runout 2";
