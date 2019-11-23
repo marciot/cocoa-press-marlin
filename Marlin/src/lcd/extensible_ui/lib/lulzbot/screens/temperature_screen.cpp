@@ -44,13 +44,13 @@ void TemperatureScreen::onRedraw(draw_mode_t what) {
     #if HOTENDS == 1
       w.adjuster(   2, GET_TEXT_F(MSG_NOZZLE),   getTargetTemp_celsius(E0));
     #else
-      w.adjuster(   2, GET_TEXT_F(MSG_NOZZLE_0), getTargetTemp_celsius(E0));
-      w.adjuster(   4, GET_TEXT_F(MSG_NOZZLE_1), getTargetTemp_celsius(E1));
+      w.adjuster(   2, F(LCD_STR_E0), getTargetTemp_celsius(E0));
+      w.adjuster(   4, F(LCD_STR_E1), getTargetTemp_celsius(E1));
       #if HOTENDS > 2
-        w.adjuster( 6, GET_TEXT_F(MSG_NOZZLE_2), getTargetTemp_celsius(E2));
+        w.adjuster( 6, F(LCD_STR_E2), getTargetTemp_celsius(E2));
       #endif
       #if HOTENDS > 3
-        w.adjuster( 8, GET_TEXT_F(MSG_NOZZLE_3), getTargetTemp_celsius(E3));
+        w.adjuster( 8, F(LCD_STR_E3), getTargetTemp_celsius(E3));
       #endif
     #endif
   #endif
