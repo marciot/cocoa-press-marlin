@@ -218,6 +218,12 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["HEATER_CHAMBER_INVERTING"]                   = 'true' # Activate cooler when temperature is above threshold
     MARLIN["THERMAL_PROTECTION_CHAMBER"]                 = False
     
+    # Preheat options for chocolate
+    
+    MARLIN["PREHEAT_1_LABEL"]                            = C_STRING("Cocoa")
+    MARLIN["COCOA_PRESS_PREHEAT_SECONDS"]                = 30*60
+    MARLIN["COCOA_PRESS_PREHEAT_SCRIPT"]                 = C_STRING("M104 S300 T0")
+    
 ########################## COOLING FAN CONFIGURATION ##########################
 
     # Set fan speed to 122Hz for compatibility with some fans.

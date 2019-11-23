@@ -76,12 +76,16 @@ void MainMenu::onRedraw(draw_mode_t what) {
       #define GRID_ROWS 5
       #define GRID_COLS 2
         .tag(2).button( BTN_POS(1,1), BTN_SIZE(1,1), GET_TEXT_F(MSG_AUTO_HOME))
-        #if ENABLED(NOZZLE_CLEAN_FEATURE)
-         .enabled(1)
+        #if ENABLED(TOUCH_UI_COCOA_PRESS)
+          .tag(3).button( BTN_POS(2,1), BTN_SIZE(1,1), GET_TEXT_F(MSG_PREHEAT_1))
         #else
-         .enabled(0)
+          #if ENABLED(NOZZLE_CLEAN_FEATURE)
+           .enabled(1)
+          #else
+           .enabled(0)
+          #endif
+          .tag(3).button( BTN_POS(2,1), BTN_SIZE(1,1), GET_TEXT_F(MSG_CLEAN_NOZZLE))
         #endif
-        .tag(3).button( BTN_POS(2,1), BTN_SIZE(1,1), GET_TEXT_F(MSG_CLEAN_NOZZLE))
         .tag(4).button( BTN_POS(1,2), BTN_SIZE(1,1), GET_TEXT_F(MSG_MOVE_AXIS))
         .tag(5).button( BTN_POS(2,2), BTN_SIZE(1,1), GET_TEXT_F(MSG_DISABLE_STEPPERS))
         .tag(6).button( BTN_POS(1,3), BTN_SIZE(1,1), GET_TEXT_F(MSG_TEMPERATURE))
@@ -113,8 +117,10 @@ bool MainMenu::onTouchEnd(uint8_t tag) {
   switch (tag) {
     case 1:  GOTO_PREVIOUS();                                         break;
     case 2:  SpinnerDialogBox::enqueueAndWait_P(F("G28"));            break;
-    #if ENABLED(NOZZLE_CLEAN_FEATURE)
-    case 3:  injectCommands_P(PSTR("G12")); GOTO_SCREEN(StatusScreen); break;
+    #if ENABLED(TOUCH_UI_COCOA_PRESS)
+    case 3:  GOTO_SCREEN(PreheatTimerScreen);                         break;
+    #elif ENABLED(NOZZLE_CLEAN_FEATURE)
+    case 3: injectCommands_P(PSTR("G12")); GOTO_SCREEN(StatusScreen); break;
     #endif
     case 4:  GOTO_SCREEN(MoveAxisScreen);                             break;
     case 5:  injectCommands_P(PSTR("M84"));                           break;

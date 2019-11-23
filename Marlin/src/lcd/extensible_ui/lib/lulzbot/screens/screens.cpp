@@ -96,10 +96,13 @@ SCREEN_TABLE {
   DECL_SCREEN(LockScreen),
   DECL_SCREEN(FilesScreen),
   DECL_SCREEN(EndstopStatesScreen),
-#ifdef TOUCH_UI_LULZBOT_BIO
+#if ENABLED(TOUCH_UI_LULZBOT_BIO)
   DECL_SCREEN(BioPrintingDialogBox),
   DECL_SCREEN(BioConfirmHomeXYZ),
   DECL_SCREEN(BioConfirmHomeE),
+#endif
+#if ENABLED(TOUCH_UI_COCOA_PRESS)
+  DECL_SCREEN(PreheatTimerScreen),
 #endif
 #if ENABLED(TOUCH_UI_DEVELOPER_MENU)
   DECL_SCREEN(DeveloperMenu),
