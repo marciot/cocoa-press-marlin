@@ -100,7 +100,7 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
       // heating zones, but has no bed temperature
 
       cmd.cmd(COLOR_RGB(bg_text_enabled));
-      cmd.font(font_medium);
+      cmd.font(font_xsmall);
 
       ui.bounds(POLY(h0_label), x, y, h, v);
       cmd.text(x, y, h, v, GET_TEXT_F(MSG_ZONE_1));

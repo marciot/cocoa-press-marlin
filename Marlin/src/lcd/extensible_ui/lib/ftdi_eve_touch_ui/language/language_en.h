@@ -156,9 +156,9 @@ namespace Language_en {
   #endif
 
   #ifdef TOUCH_UI_COCOA_PRESS
-    PROGMEM Language_Str MSG_ZONE_1                 = u8"Zone 1:";
-    PROGMEM Language_Str MSG_ZONE_2                 = u8"Zone 2:";
-    PROGMEM Language_Str MSG_ZONE_3                 = u8"Zone 3:";
+    PROGMEM Language_Str MSG_ZONE_1                 = u8"Nozzle:";
+    PROGMEM Language_Str MSG_ZONE_2                 = u8"Body:";
+    PROGMEM Language_Str MSG_ZONE_3                 = u8"Cap:";
     PROGMEM Language_Str MSG_PREHEAT_FINISHED       = u8"Preheat finished";
   #endif
 }; // namespace Language_en

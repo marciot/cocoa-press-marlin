@@ -178,8 +178,8 @@
 #define HEATER_BED_PIN      9   // D9 PC21 BED_PWM
 #define HEATER_CHAMBER_PIN  103 // D103 PB3 J20 Pin 7 - Changed for CocoaPress
 
-#ifndef FAN_PIN
-  #define FAN_PIN           4   // D4 PC26 FET_PWM1
+#ifndef FAN_PIN 
+  //#define FAN_PIN           4   // D4 PC26 FET_PWM1 - Changed for CocoaPress
 #endif
 #define FAN1_PIN            5   // D5 PC25 FET_PWM2
 
@@ -221,7 +221,7 @@
 #define CASE_LIGHT_PIN     GPIO_PB1_J20_5
 
 // MLT - Cocoa Press Specifics
-#define EXTRUDER_CNTL_PIN  GPIO_PB0_J20_6
+#define EXTRUDER_CNTL_PIN  4    // D4 PC26 FET_PWM1
 
 // 2MB SPI Flash
 #define SPI_FLASH_SS       52   // D52 PB21

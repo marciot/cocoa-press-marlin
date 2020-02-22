@@ -59,10 +59,9 @@ LulzBot printers.'''
 #  15. MOTOR DRIVER TYPE
 #  16. TRINAMIC DRIVER CONFIGURATION
 #  17. TRINAMIC SENSORLESS HOMING
-#  18. BACKLASH COMPENSATION
-#  19. MOTOR CURRENTS
-#  20. ACCELERATION, FEEDRATES AND XYZ MOTOR STEPS
-#  21. LCD OPTIONS
+#  18. MOTOR CURRENTS
+#  19. ACCELERATION, FEEDRATES AND XYZ MOTOR STEPS
+#  20. LCD OPTIONS
 
 def C_STRING(str):
     return '"' + str.strip().replace('\n','\\n') + '"'
@@ -162,6 +161,7 @@ def make_config(PRINTER, TOOLHEAD):
 
 ########################## HOMING & AXIS DIRECTIONS ###########################
 
+    MARLIN["COREXY"]                                     = True
     MARLIN["INVERT_X_DIR"]                               = 'false'
     MARLIN["INVERT_Y_DIR"]                               = 'true'
     MARLIN["INVERT_Z_DIR"]                               = 'true'
@@ -350,12 +350,6 @@ def make_config(PRINTER, TOOLHEAD):
         # don't leave the head sitting on the endstops after homing.
         MARLIN["HOMING_BACKOFF_MM"]                      = [5, 5, 2]
 
-############################ BACKLASH COMPENSATION ############################
-
-    MARLIN["BACKLASH_COMPENSATION"]                      = True
-    MARLIN["BACKLASH_GCODE"]                             = True
-    MARLIN["BACKLASH_SMOOTHING_MM"]                      = 3
-
 ################################ MOTOR CURRENTS ###############################
 
     # These values specify the maximum current, but actual
@@ -422,12 +416,12 @@ def make_config(PRINTER, TOOLHEAD):
       MARLIN["ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE"]     = 1000
                                                          
     MARLIN["SHOW_CUSTOM_BOOTSCREEN"]                     = True
-    MARLIN["BABYSTEPPING"]                               = True
-    MARLIN["BABYSTEP_XY"]                                = True
+    MARLIN["BABYSTEPPING"]                               = False
+    MARLIN["BABYSTEP_XY"]                                = False
                                                          
     if USE_AUTOLEVELING:                                 
-      MARLIN["BABYSTEP_ZPROBE_OFFSET"]                   = True
-      MARLIN["BABYSTEP_HOTEND_Z_OFFSET"]                 = True
+      MARLIN["BABYSTEP_ZPROBE_OFFSET"]                   = False
+      MARLIN["BABYSTEP_HOTEND_Z_OFFSET"]                 = False
 
 #################################### CLEAN UP ###################################
 
