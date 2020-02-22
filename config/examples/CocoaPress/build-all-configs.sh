@@ -15,22 +15,34 @@
 # FOR A PARTICULAR PURPOSE.  See the GNU AGPL for more details.
 #
 
-build_config() {
-  printer_name=$1
-  toolhead_name=$2
-
-  case "$printer_name" in
-  *_Experimental)
-    PREFIX=EXPERIMENTAL/
-    ;;
-  *)
-    PREFIX=
-    ;;
-  esac
-
-  ./build-config.py $1 $2 -D ${PREFIX}${printer_name}/${toolhead_name} --summary
+fetch_default_config() {
+    CONF_URL=https://raw.githubusercontent.com/MarlinFirmware/Configurations/bugfix-2.0.x/config/default
+    CONF_DIR=../../default
+    (wget $CONF_URL/Configuration.h -O $CONF_DIR/Configuration.h &&
+    wget $CONF_URL/Configuration_adv.h -O $CONF_DIR/Configuration_adv.h &&
+    cat  $CONF_DIR/Configuration_CocoaPress.h >> $CONF_DIR/Configuration.h) ||
+    exit 1
 }
 
-build_config CocoaPress_Einsy                   CocoaPress_SingleExtruder
-build_config CocoaPress_Archim                  CocoaPress_SingleExtruder
-build_config CocoaPress_TouchDemo               CocoaPress_SingleExtruder
+build_config() {
+  group=$1
+  printer_name=$2
+  toolhead_name=$3
+
+  echo ${group}/${printer_name}/${toolhead_name}
+  ./build-config.py $printer_name $toolhead_name -D ${group}/${printer_name}/${toolhead_name} --summary
+}
+
+if [ "$1" = "upgrade" ]; then
+  fetch_default_config || (echo Unable to retrieve new configuration files; exit 1)
+else
+  echo
+  echo
+  echo Using pre-existing config files. To update, use "./build-configs.sh upgrade"
+  echo
+  echo
+fi
+
+build_config standard CocoaPress_Archim                  CocoaPress_SingleExtruder
+build_config custom   CocoaPress_Einsy                   CocoaPress_SingleExtruder
+build_config custom   CocoaPress_TouchDemo               CocoaPress_SingleExtruder
