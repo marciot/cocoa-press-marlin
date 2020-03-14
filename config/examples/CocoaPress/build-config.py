@@ -181,6 +181,7 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["EXTRUDERS"]                              = 1
         MARLIN["HOTENDS"]                                = 3 if USE_ARCHIM2 else 1
         MARLIN["E0_CURRENT"]                             = 960 # mA
+        MARLIN["COCOA_PRESS_EXTRUDER"]                   = True
 
 ############################# TEMPERATURE SETTINGS ############################
 

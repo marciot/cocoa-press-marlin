@@ -2251,7 +2251,7 @@
  */
 
 #define HOTENDS 3 // <-- changed
-//#define COCOA_PRESS_EXTRUDER
+#define COCOA_PRESS_EXTRUDER // <-- changed
 #define TOUCH_UI_COCOA_PRESS // <-- changed
 #define TOUCH_UI_LCD_TEMP_SCALING 10 // <-- changed
 #define COCOA_PRESS_PREHEAT_SECONDS 1800 // <-- changed
