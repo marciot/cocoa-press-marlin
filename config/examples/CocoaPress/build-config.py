@@ -76,7 +76,7 @@ def make_config(PRINTER, TOOLHEAD):
 
     USE_EINSY_RETRO                                      = False
     USE_ARCHIM2                                          = False
-    USE_AUTOLEVELING                                     = False
+    USE_AUTOLEVELING                                     = True
     USE_TOUCH_UI                                         = True
 
     MARLIN["SDSUPPORT"]                                  = False
@@ -147,15 +147,14 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN"]         = True
 
     MARLIN["USE_XMIN_PLUG"]                              = True
-    MARLIN["USE_YMIN_PLUG"]                              = False
+    MARLIN["USE_YMIN_PLUG"]                              = True
     MARLIN["USE_ZMIN_PLUG"]                              = True
 
     MARLIN["USE_XMAX_PLUG"]                              = False
-    MARLIN["USE_YMAX_PLUG"]                              = True # EW - eventually use this one? gives compiling errors
+    MARLIN["USE_YMAX_PLUG"]                              = False # EW - eventually use this one? gives compiling errors
     MARLIN["USE_ZMAX_PLUG"]                              = False
     
-    MARLIN["X_MIN_ENDSTOP_INVERTING"]                    = 'false'
-    MARLIN["Z_MIN_ENDSTOP_INVERTING"]                    = 'false' # EW - set back to false set to true (https://www.youtube.com/watch?v=G-TwWfUzXpc) set to true to invert the logic of the endstop.
+    MARLIN["Y_MIN_ENDSTOP_INVERTING"]                    = 'true'
 
     MARLIN["SD_ABORT_ON_ENDSTOP_HIT"]                    = ENABLED("SDSUPPORT")
 
@@ -163,14 +162,14 @@ def make_config(PRINTER, TOOLHEAD):
 
     MARLIN["COREXY"]                                     = True
     MARLIN["INVERT_X_DIR"]                               = 'false'
-    MARLIN["INVERT_Y_DIR"]                               = 'true'
-    MARLIN["INVERT_Z_DIR"]                               = 'true'
+    MARLIN["INVERT_Y_DIR"]                               = 'false'
+    MARLIN["INVERT_Z_DIR"]                               = 'false'
     MARLIN["INVERT_E0_DIR"]                              = 'false'
     MARLIN["INVERT_E1_DIR"]                              = 'false'
 
     MARLIN["X_HOME_DIR"]                                 = -1
-    MARLIN["Y_HOME_DIR"]                                 =  1
-    MARLIN["Z_HOME_DIR"]                                 = -1
+    MARLIN["Y_HOME_DIR"]                                 = -1
+    MARLIN["Z_HOME_DIR"]                                 =  1
     
     MARLIN["Z_SAFE_HOMING"]                              = True # EW - Enabled to zero z in the middle of the bed
     MARLIN["HOMING_FEEDRATE_Z"]                          = 5*60 # EW - changed from 4 to 6
@@ -255,16 +254,16 @@ def make_config(PRINTER, TOOLHEAD):
 
     MARLIN["X_MIN_POS"]                                  = 0
     MARLIN["Y_MIN_POS"]                                  = 0
-    MARLIN["Z_MAX_POS"]                                  = 155
+    MARLIN["Z_MAX_POS"]                                  = 150
                                                        
-    MARLIN["X_BED_SIZE"]                                 = 230
-    MARLIN["Y_BED_SIZE"]                                 = 170
+    MARLIN["X_BED_SIZE"]                                 = 190
+    MARLIN["Y_BED_SIZE"]                                 = 90
 
 ########################## AUTOLEVELING / BED PROBE ###########################
 
     if USE_AUTOLEVELING:
       MARLIN["FIX_MOUNTED_PROBE"]                        = False # EW - inductive sensor
-      MARLIN["NOZZLE_TO_PROBE_OFFSET"]                   = [-20.7, 47.05, .5] # EW - as of 3/24/19 3pm
+      MARLIN["NOZZLE_TO_PROBE_OFFSET"]                   = [0.44, -2.15, .5] # EW - as of 3/24/19 3pm
       MARLIN["XY_PROBE_SPEED"]                           = 8000 # EW - 3000 to stop binding
       MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]           = True # EW - enabled
       MARLIN["AUTO_BED_LEVELING_BILINEAR"]               = True
@@ -331,14 +330,14 @@ def make_config(PRINTER, TOOLHEAD):
 ########################## TRINAMIC SENSORLESS HOMING ##########################
 
     if ENABLED("SENSORLESS_HOMING"):
-        #MARLIN["X_STALL_SENSITIVITY"]                   = 4
-        #MARLIN["Y_STALL_SENSITIVITY"]                   = 4
+        MARLIN["X_STALL_SENSITIVITY"]                    = 5
+        MARLIN["Y_STALL_SENSITIVITY"]                    = 5
 
         MARLIN["USE_XMIN_PLUG"]                          = True # Uses Stallguard
-        MARLIN["USE_YMAX_PLUG"]                          = True # Uses Stallguard
+        MARLIN["USE_YMIN_PLUG"]                          = True # Uses Stallguard
         
-        MARLIN["X_MIN_ENDSTOP_INVERTING"]                = 1
-        MARLIN["Y_MAX_ENDSTOP_INVERTING"]                = 1
+        MARLIN["X_MIN_ENDSTOP_INVERTING"]                = 'true'
+        MARLIN["Y_MIN_ENDSTOP_INVERTING"]                = 'true'
 
         # Quickhome does not work with sensorless homing
         MARLIN["QUICK_HOME"]                             = False
