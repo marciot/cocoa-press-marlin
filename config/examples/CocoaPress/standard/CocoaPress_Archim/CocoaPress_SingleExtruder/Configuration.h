@@ -618,7 +618,7 @@
 #define USE_ZMIN_PLUG
 //#define USE_XMAX_PLUG  // <-- changed
 //#define USE_YMAX_PLUG  // <-- changed
-//#define USE_ZMAX_PLUG  // <-- changed
+#define USE_ZMAX_PLUG // <-- changed
 
 // Enable pullup for all endstops to prevent a floating state
 #define ENDSTOPPULLUPS
@@ -2255,6 +2255,8 @@
 #define TOUCH_UI_COCOA_PRESS // <-- changed
 #define TOUCH_UI_LCD_TEMP_SCALING 10 // <-- changed
 #define COCOA_PRESS_PREHEAT_SECONDS 1800 // <-- changed
-#define COCOA_PRESS_PREHEAT_SCRIPT "M104 S300 T0" // <-- changed
+#define COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_SCRIPT "M104 S335 T0\nM104 S335 T1\nM104 S335 T2" // <-- changed
+#define COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_SCRIPT "M104 S327 T0\nM104 S327 T1\nM104 S327 T2" // <-- changed
+#define COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT "M104 S290 T0\nM104 S290 T1\nM104 S290 T2" // <-- changed
 #define DISABLE_DUE_SD_MMC // <-- changed
 #define ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE 1000 // <-- changed

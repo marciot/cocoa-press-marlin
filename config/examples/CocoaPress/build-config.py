@@ -152,7 +152,7 @@ def make_config(PRINTER, TOOLHEAD):
 
     MARLIN["USE_XMAX_PLUG"]                              = False
     MARLIN["USE_YMAX_PLUG"]                              = False # EW - eventually use this one? gives compiling errors
-    MARLIN["USE_ZMAX_PLUG"]                              = False
+    MARLIN["USE_ZMAX_PLUG"]                              = True
     
     MARLIN["Y_MIN_ENDSTOP_INVERTING"]                    = 'true'
 
@@ -224,7 +224,9 @@ def make_config(PRINTER, TOOLHEAD):
     
     MARLIN["PREHEAT_1_LABEL"]                            = C_STRING("Cocoa")
     MARLIN["COCOA_PRESS_PREHEAT_SECONDS"]                = 30*60
-    MARLIN["COCOA_PRESS_PREHEAT_SCRIPT"]                 = C_STRING("M104 S300 T0")
+    MARLIN["COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_SCRIPT"]  = C_STRING("M104 S335 T0\nM104 S335 T1\nM104 S335 T2")
+    MARLIN["COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_SCRIPT"]  = C_STRING("M104 S327 T0\nM104 S327 T1\nM104 S327 T2")
+    MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT"] = C_STRING("M104 S290 T0\nM104 S290 T1\nM104 S290 T2")
     
 ########################## COOLING FAN CONFIGURATION ##########################
 

@@ -122,7 +122,7 @@ bool MainMenu::onTouchEnd(uint8_t tag) {
     case 1:  SaveSettingsDialogBox::promptToSaveSettings();           break;
     case 2:  SpinnerDialogBox::enqueueAndWait_P(F("G28"));            break;
     #if ENABLED(TOUCH_UI_COCOA_PRESS)
-    case 3:  GOTO_SCREEN(PreheatTimerScreen);                         break;
+    case 3:  GOTO_SCREEN(PreheatMenu);                                break;
     #elif ENABLED(NOZZLE_CLEAN_FEATURE)
     case 3: injectCommands_P(PSTR("G12")); GOTO_SCREEN(StatusScreen); break;
     #endif
