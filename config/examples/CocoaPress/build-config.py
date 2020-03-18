@@ -264,18 +264,18 @@ def make_config(PRINTER, TOOLHEAD):
 ########################## AUTOLEVELING / BED PROBE ###########################
 
     if USE_AUTOLEVELING:
-      MARLIN["FIX_MOUNTED_PROBE"]                        = False # EW - inductive sensor
-      MARLIN["NOZZLE_TO_PROBE_OFFSET"]                   = [0.44, -2.15, .5] # EW - as of 3/24/19 3pm
-      MARLIN["XY_PROBE_SPEED"]                           = 8000 # EW - 3000 to stop binding
-      MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]           = True # EW - enabled
-      MARLIN["AUTO_BED_LEVELING_BILINEAR"]               = True
-            
-      MARLIN["MESH_TEST_HOTEND_TEMP"]                    = 32 # EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.
-      
       if MARLIN["BLTOUCH"]:
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
         MARLIN["MIN_PROBE_EDGE"]                         = 22
+        MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 0.44, -2.15]
+        MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]         = True # EW - enabled
+        MARLIN["XY_PROBE_SPEED"]                         = 8000 # EW - 3000 to stop binding
+        MARLIN["MESH_TEST_HOTEND_TEMP"]                  = 32 # EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.
+        MARLIN["AUTO_BED_LEVELING_BILINEAR"]             = True
+      else:
+        MARLIN["FIX_MOUNTED_PROBE"]                      = True
+        
 
 ############################# FILAMENT SETTINGS ############################
 

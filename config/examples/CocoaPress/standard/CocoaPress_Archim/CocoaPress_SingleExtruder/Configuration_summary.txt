@@ -33,7 +33,6 @@
 #define FILAMENT_RUNOUT_DISTANCE_MM 50
 #define FILAMENT_RUNOUT_SCRIPT "M25\nM0 I'm hungry, feed me more chocolate."
 #define FILAMENT_RUNOUT_SENSOR
-//#define FIX_MOUNTED_PROBE
 #define HEATER_0_MAXTEMP 500
 #define HEATER_0_MINTEMP -10
 #define HEATER_1_MAXTEMP 500
@@ -76,7 +75,7 @@
 #define NEOPIXEL_LED
 #define NEOPIXEL_PIN 94
 #define NEOPIXEL_PIXELS 16
-#define NOZZLE_TO_PROBE_OFFSET {0.44, -2.15, 0.5}
+#define NOZZLE_TO_PROBE_OFFSET {0, 0.44, -2.15}
 #define NUM_RUNOUT_SENSORS 1
 #define PIDTEMP
 #define PREHEAT_1_LABEL "Cocoa"
