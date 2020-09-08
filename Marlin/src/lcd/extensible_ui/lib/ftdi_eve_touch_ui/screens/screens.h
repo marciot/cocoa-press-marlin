@@ -90,7 +90,7 @@ enum {
 // To save MCU RAM, the status message is "baked" in to the status screen
 // cache, so we reserve a large chunk of memory for the DL cache
 
-#define STATUS_SCREEN_DL_SIZE        2048
+#define STATUS_SCREEN_DL_SIZE        4096
 #define ALERT_BOX_DL_SIZE            3072
 #define SPINNER_DL_SIZE              3072
 #define FILE_SCREEN_DL_SIZE          3072
