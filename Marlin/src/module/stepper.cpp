@@ -1660,9 +1660,6 @@ uint32_t Stepper::block_phase_isr() {
       #ifdef FILAMENT_RUNOUT_DISTANCE_MM
         runout.block_completed(current_block);
       #endif
-      #ifdef EXTRUDER_CNTL_PIN
-        WRITE(EXTRUDER_CNTL_PIN, LOW);
-      #endif
       axis_did_move = 0;
       current_block = nullptr;
       planner.discard_current_block();
@@ -1780,13 +1777,6 @@ uint32_t Stepper::block_phase_isr() {
         if (!(current_block = planner.get_current_block()))
           return interval; // No more queued movements!
       }
-      
-      #ifdef EXTRUDER_CNTL_PIN
-        if (current_block->steps.e && !TEST(current_block->direction_bits, E_AXIS)) {
-          SET_OUTPUT(EXTRUDER_CNTL_PIN);
-          WRITE(EXTRUDER_CNTL_PIN, HIGH);
-        }
-      #endif
 
       #if HAS_CUTTER
         cutter.apply_power(current_block->cutter_power);
