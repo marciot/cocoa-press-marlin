@@ -57,8 +57,8 @@ On Archim 2.0:
 
 | Feature                | Port  | Arduino Pin | Archim Pin |
 |------------------------|-------|-------------|------------|
-| NEOPIXEL_PIN           | PB5   | 94          | J20 Pin 5  |
-| Extruder Control       | PC26  | 4           | FAN_1      |
+| Snapshot Control       | PB5   | 94          | J20 Pin 5  |
+| Case Light Control     | PC26  | 4           | FAN_1      |
 | Cooling Control        | PB3   | 103         | J20 Pin 7  |
 | FIL_RUNOUT_PIN         | PB15  | 66          | J20 Pin 15 |
 | FIL_RUNOUT2_PIN        | PB16  | 67          | J20 Pin 16 |

@@ -45,7 +45,7 @@ LulzBot printers.'''
 #   1. PRINTER MODEL CHARACTERISTICS
 #   2. GENERAL CONFIGURATION
 #   3. EXPERIMENTAL FEATURES
-#   4. NEOPIXEL SUPPORT
+#   4. CASE LIGHT SUPPORT
 #   5. MOTHERBOARD AND PIN CONFIGURATION
 #   6. ENDSTOP CONFIGURATION
 #   7. HOMING & AXIS DIRECTIONS
@@ -79,8 +79,11 @@ def make_config(PRINTER, TOOLHEAD):
     USE_AUTOLEVELING                                     = True
     USE_TOUCH_UI                                         = True
 
-    MARLIN["SDSUPPORT"]                                  = False
+    MARLIN["SDSUPPORT"]                                  = True
     MARLIN["BLTOUCH"]                                    = False
+    
+    MARLIN["LIN_ADVANCE"]                                = True
+    MARLIN["LIN_ADVANCE_K"]                              = 0.0
 
 ######################## PRINTER MODEL CHARACTERISTICS ########################
 
@@ -91,7 +94,6 @@ def make_config(PRINTER, TOOLHEAD):
 
     if PRINTER == "CocoaPress_Archim":
         USE_ARCHIM2                                      = True
-        MARLIN["USB_FLASH_DRIVE_SUPPORT"]                = True
         MARLIN["SENSORLESS_HOMING"]                      = True
         MARLIN["BLTOUCH"]                                = True
         MARLIN["FILAMENT_RUNOUT_SENSOR"]                 = True
@@ -100,7 +102,6 @@ def make_config(PRINTER, TOOLHEAD):
     if PRINTER == "CocoaPress_TouchDemo":
         USE_EINSY_RETRO                                  = True
         MARLIN["CUSTOM_MACHINE_NAME"]                    = C_STRING("TouchDemo")
-        MARLIN["USB_FLASH_DRIVE_SUPPORT"]                = False
 
 ############################ GENERAL CONFIGURATION ############################
 
@@ -110,18 +111,10 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["CUSTOM_MACHINE_NAME"]                        = C_STRING("Cocoa Press")
     MARLIN["MACHINE_UUID"]                               = C_STRING("c51664e3-50b4-40fb-9bd0-63a8cd30df18")
 
-############################ NEOPIXEL SUPPORT ############################
+############################## CASE LIGHT SUPPORT ##############################
 
     MARLIN["CASE_LIGHT_ENABLE"]                          = True
     MARLIN["CASE_LIGHT_USE_NEOPIXEL"]                    = True
-
-    MARLIN["NEOPIXEL_LED"]                               = True
-    MARLIN["NEOPIXEL_PIXELS"]                            = 16
-    if USE_ARCHIM2:
-      MARLIN["NEOPIXEL_PIN"]                             = 94 # GPIO_PB1_J20_5
-    else:
-      MARLIN["NEOPIXEL_PIN"]                             = 9
-    #MARLIN["NEOPIXEL_STARTUP_TEST"]                      = True
 
 ###################### MOTHERBOARD AND PIN CONFIGURATION ######################
 
@@ -131,16 +124,9 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["MOTHERBOARD"]                            = 'BOARD_ARCHIM2'
         MARLIN["SERIAL_PORT"]                            = -1
 
-        # The host MMC bridge is impractically slow and should not be used
-        if ENABLED("SDSUPPORT") or ENABLED("USB_FLASH_DRIVE_SUPPORT"):
-            MARLIN["DISABLE_DUE_SD_MMC"]                 = True
-
     elif USE_EINSY_RETRO:
         MARLIN["MOTHERBOARD"]                            = 'BOARD_EINSY_RETRO'
         MARLIN["SERIAL_PORT"]                            = 0
-
-    if ENABLED("USB_FLASH_DRIVE_SUPPORT"):
-        MARLIN["USB_INTR_PIN"]                           = 'SD_DETECT_PIN'
 
 ############################ ENDSTOP CONFIGURATION ############################
 
@@ -330,6 +316,14 @@ def make_config(PRINTER, TOOLHEAD):
 
         MARLIN["TMC_USE_SW_SPI"]                         = USE_ARCHIM2
         
+        # If LIN_ADVANCE enabled, then disable STEALTHCHOP_E, because of the
+        # following bug:
+        #
+        # https://github.com/MarlinFirmware/Marlin/issues/17944
+        #
+        if ENABLED("LIN_ADVANCE"):
+            MARLIN["STEALTHCHOP_E"]                      = False
+        
 ########################## TRINAMIC SENSORLESS HOMING ##########################
 
     if ENABLED("SENSORLESS_HOMING"):
@@ -410,10 +404,6 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["JOY_X_LIMITS"]                               = False
     MARLIN["JOY_Y_LIMITS"]                               = False
     MARLIN["JOY_Z_LIMITS"]                               = False
-                                                         
-    if ENABLED("USB_FLASH_DRIVE_SUPPORT"):               
-      MARLIN["SDSUPPORT"]                                = True
-      MARLIN["USE_UHS3_USB"]                             = USE_ARCHIM2
                                                          
     if USE_ARCHIM2:                                      
       MARLIN["ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE"]     = 1000

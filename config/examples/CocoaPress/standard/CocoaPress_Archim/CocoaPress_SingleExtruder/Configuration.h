@@ -2190,13 +2190,13 @@
 #endif
 
 // Support for Adafruit Neopixel LED driver
-#define NEOPIXEL_LED // <-- changed
+//#define NEOPIXEL_LED
 #if ENABLED(NEOPIXEL_LED)
   #define NEOPIXEL_TYPE   NEO_GRBW // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
-  #define NEOPIXEL_PIN     94 // <-- changed:  LED driving pin
+  #define NEOPIXEL_PIN     4       // LED driving pin
   //#define NEOPIXEL2_TYPE NEOPIXEL_TYPE
   //#define NEOPIXEL2_PIN    5
-  #define NEOPIXEL_PIXELS 16 // <-- changed:  Number of LEDs in the strip, larger of 2 strips if 2 neopixel strips are used
+  #define NEOPIXEL_PIXELS 30       // Number of LEDs in the strip, larger of 2 strips if 2 neopixel strips are used
   #define NEOPIXEL_IS_SEQUENTIAL   // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
   #define NEOPIXEL_BRIGHTNESS 127  // Initial brightness (0-255)
   //#define NEOPIXEL_STARTUP_TEST  // Cycle through colors at startup
@@ -2258,5 +2258,5 @@
 #define COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_SCRIPT "M104 S335 T0\nM104 S335 T1\nM104 S335 T2" // <-- changed
 #define COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_SCRIPT "M104 S327 T0\nM104 S327 T1\nM104 S327 T2" // <-- changed
 #define COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT "M104 S290 T0\nM104 S290 T1\nM104 S290 T2" // <-- changed
-#define DISABLE_DUE_SD_MMC // <-- changed
+//#define DISABLE_DUE_SD_MMC
 #define ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE 1000 // <-- changed
