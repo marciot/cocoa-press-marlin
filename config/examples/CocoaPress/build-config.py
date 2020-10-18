@@ -81,7 +81,7 @@ def make_config(PRINTER, TOOLHEAD):
 
     MARLIN["SDSUPPORT"]                                  = True
     MARLIN["BLTOUCH"]                                    = False
-    
+
     MARLIN["LIN_ADVANCE"]                                = True
     MARLIN["LIN_ADVANCE_K"]                              = 0.0
 
@@ -119,7 +119,7 @@ def make_config(PRINTER, TOOLHEAD):
 ###################### MOTHERBOARD AND PIN CONFIGURATION ######################
 
     MARLIN["CONTROLLER_FAN_PIN"]                         = 'FAN1_PIN' # Digital pin 6
-        
+
     if USE_ARCHIM2:
         MARLIN["MOTHERBOARD"]                            = 'BOARD_ARCHIM2'
         MARLIN["SERIAL_PORT"]                            = -1
@@ -139,7 +139,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["USE_XMAX_PLUG"]                              = False
     MARLIN["USE_YMAX_PLUG"]                              = True
     MARLIN["USE_ZMAX_PLUG"]                              = False
-    
+
     MARLIN["Y_MIN_ENDSTOP_INVERTING"]                    = 'true'
     MARLIN["Y_MAX_ENDSTOP_INVERTING"]                    = 'true'
 
@@ -157,10 +157,10 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["X_HOME_DIR"]                                 = -1
     MARLIN["Y_HOME_DIR"]                                 = 1
     MARLIN["Z_HOME_DIR"]                                 = -1
-    
+
     MARLIN["Z_SAFE_HOMING"]                              = True # EW - Enabled to zero z in the middle of the bed
     MARLIN["HOMING_FEEDRATE_Z"]                          = 5*60 # EW - changed from 4 to 6
-    
+
 ################################ COCOA PRESS TOOLHEADS ###############################
 
     if TOOLHEAD in ["CocoaPress_SingleExtruder"]:
@@ -172,7 +172,7 @@ def make_config(PRINTER, TOOLHEAD):
 ############################# TEMPERATURE SETTINGS ############################
 
     MARLIN["PIDTEMP"]                                    = True # EW - skipping this section for now
-    
+
     MARLIN["THERMAL_PROTECTION_HOTENDS"]                 = False # EW - TEMP DISABLED
     MARLIN["PREVENT_COLD_EXTRUSION"]                     = False # EW - Turning off so we can use solenoid even when chocolate is cold
     MARLIN["EXTRUDE_MINTEMP"]                            = 10 # EW - changed from 175 to 10
@@ -183,9 +183,9 @@ def make_config(PRINTER, TOOLHEAD):
       MARLIN["TEMP_SENSOR_1"]                            = 999
       MARLIN["TEMP_SENSOR_2"]                            = 999
     MARLIN["TEMP_SENSOR_CHAMBER"]                        = 999
-        
+
     MARLIN["TOUCH_UI_LCD_TEMP_SCALING"]                  = 10 # Scale all UI temperatures by 10
-    
+
     # These values are scaled by 10
     MARLIN["HEATER_0_MAXTEMP"]                           = 500
     MARLIN["HEATER_1_MAXTEMP"]                           = 500
@@ -194,7 +194,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["HEATER_4_MAXTEMP"]                           = 500
     MARLIN["HEATER_5_MAXTEMP"]                           = 500
     MARLIN["CHAMBER_MAXTEMP"]                            = 500
-    
+
     MARLIN["HEATER_0_MINTEMP"]                           = -10
     MARLIN["HEATER_1_MINTEMP"]                           = -10
     MARLIN["HEATER_2_MINTEMP"]                           = -10
@@ -202,19 +202,19 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["HEATER_4_MINTEMP"]                           = -10
     MARLIN["HEATER_5_MINTEMP"]                           = -10
     MARLIN["CHAMBER_MINTEMP"]                            = -10
-    
+
     MARLIN["THERMAL_PROTECTION_HYSTERESIS"]              = 1 # EW - changed from 4 to 1
     MARLIN["HEATER_CHAMBER_INVERTING"]                   = 'true' # Activate cooler when temperature is above threshold
     MARLIN["THERMAL_PROTECTION_CHAMBER"]                 = False
-    
+
     # Preheat options for chocolate
-    
+
     MARLIN["PREHEAT_1_LABEL"]                            = C_STRING("Cocoa")
     MARLIN["COCOA_PRESS_PREHEAT_SECONDS"]                = 30*60
     MARLIN["COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_SCRIPT"]  = C_STRING("M104 S335 T0\nM104 S335 T1\nM104 S335 T2")
     MARLIN["COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_SCRIPT"]  = C_STRING("M104 S327 T0\nM104 S327 T1\nM104 S327 T2")
     MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT"] = C_STRING("M104 S290 T0\nM104 S290 T1\nM104 S290 T2")
-    
+
 ########################## COOLING FAN CONFIGURATION ##########################
 
     # Set fan speed to 122Hz for compatibility with some fans.
@@ -244,7 +244,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["X_MIN_POS"]                                  = 0
     MARLIN["Y_MIN_POS"]                                  = 0
     MARLIN["Z_MAX_POS"]                                  = 150
-                                                       
+
     MARLIN["X_BED_SIZE"]                                 = 190
     MARLIN["Y_BED_SIZE"]                                 = 90
 
@@ -262,7 +262,7 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["AUTO_BED_LEVELING_BILINEAR"]             = True
       else:
         MARLIN["FIX_MOUNTED_PROBE"]                      = True
-        
+
 
 ############################# FILAMENT SETTINGS ############################
 
@@ -272,7 +272,7 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["NUM_RUNOUT_SENSORS"]                     = 1
         MARLIN["FILAMENT_RUNOUT_SCRIPT"]                 = C_STRING("M25\nM0 I'm hungry, feed me more chocolate.")
         MARLIN["FILAMENT_RUNOUT_DISTANCE_MM"]            = 50
-    
+
 ############################## MOTOR DRIVER TYPE ##############################
 
     if USE_EINSY_RETRO or USE_ARCHIM2:
@@ -306,7 +306,7 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["TMC_DEBUG"]                              = True
         MARLIN["MONITOR_DRIVER_STATUS"]                  = True
         MARLIN["HOLD_MULTIPLIER"]                        = 0.5
-        
+
         MARLIN["X_RSENSE"]                               = RSENSE
         MARLIN["Y_RSENSE"]                               = RSENSE
         MARLIN["Z_RSENSE"]                               = RSENSE
@@ -315,7 +315,7 @@ def make_config(PRINTER, TOOLHEAD):
             MARLIN["E1_RSENSE"]                          = RSENSE
 
         MARLIN["TMC_USE_SW_SPI"]                         = USE_ARCHIM2
-        
+
         # If LIN_ADVANCE enabled, then disable STEALTHCHOP_E, because of the
         # following bug:
         #
@@ -323,7 +323,7 @@ def make_config(PRINTER, TOOLHEAD):
         #
         if ENABLED("LIN_ADVANCE"):
             MARLIN["STEALTHCHOP_E"]                      = False
-        
+
 ########################## TRINAMIC SENSORLESS HOMING ##########################
 
     if ENABLED("SENSORLESS_HOMING"):
@@ -332,7 +332,7 @@ def make_config(PRINTER, TOOLHEAD):
 
         MARLIN["USE_XMIN_PLUG"]                          = True # Uses Stallguard
         MARLIN["USE_YMAX_PLUG"]                          = True # Uses Stallguard
-        
+
         MARLIN["X_MIN_ENDSTOP_INVERTING"]                = 'true'
         MARLIN["Y_MIN_ENDSTOP_INVERTING"]                = 'true'
 
@@ -341,7 +341,7 @@ def make_config(PRINTER, TOOLHEAD):
 
         MARLIN["X_HOME_BUMP_MM"]                         = 0
         MARLIN["Y_HOME_BUMP_MM"]                         = 0
-        
+
         # Leaving the toolhead resting on the endstops with sensorless homing
         # will likely cause chatter if the machine is immediately re-homed, so
         # don't leave the head sitting on the endstops after homing.
@@ -351,13 +351,13 @@ def make_config(PRINTER, TOOLHEAD):
 
     # These values specify the maximum current, but actual
     # currents may be lower when used with COOLCONF
-            
+
     if USE_EINSY_RETRO:
         MARLIN["X_CURRENT"]                              = 920 # mA
         MARLIN["Y_CURRENT"]                              = 920 # mA
         MARLIN["Z_CURRENT"]                              = 960 # mA
-                                                     
-    elif USE_ARCHIM2:                                
+
+    elif USE_ARCHIM2:
         MARLIN["X_CURRENT"]                              = 975 # mA
         MARLIN["Y_CURRENT"]                              = 975 # mA
         MARLIN["Z_CURRENT"]                              = 975 # mA
@@ -367,9 +367,9 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["DEFAULT_AXIS_STEPS_PER_UNIT"]                = [80, 80, 400, 400]
     # EW - 1600 for IGUS Z changed from default of 4000
     # Z-axis leadscrew https://www.amazon.com/Witbot-Pillow-Bearing-Coupler-Printer/dp/B074Z4Q23M/ref=sr_1_4?ie=UTF8&qid=1549046242&sr=8-4&keywords=lead%20screw
-    
+
     MARLIN["DEFAULT_MAX_FEEDRATE"]                       = [300, 300, 100, 25] # EW - slowed X and Y by a factor of 10
-    
+
     # A 32-bit board can handle more segments
     MARLIN["MIN_STEPS_PER_SEGMENT"]                      = 1 if USE_ARCHIM2 else 6
 
@@ -377,8 +377,8 @@ def make_config(PRINTER, TOOLHEAD):
 
     # Slow down SPI speed when using unshielded ribbon cables.
     MARLIN["SPI_SPEED"]                                  = 'SPI_SIXTEENTH_SPEED'
-    
-    MARLIN["LCD_TIMEOUT_TO_STATUS"]                      = 600000 # Ten Minutes     
+
+    MARLIN["LCD_TIMEOUT_TO_STATUS"]                      = 600000 # Ten Minutes
     MARLIN["TOUCH_UI_FTDI_EVE"]                           = True
     MARLIN["TOUCH_UI_COCOA_PRESS"]                       = True
     MARLIN["LCD_ALEPHOBJECTS_CLCD_UI"]                   = True
@@ -394,8 +394,8 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["SCROLL_LONG_FILENAMES"]                      = True
     MARLIN["TOUCH_UI_DEVELOPER_MENU"]                    = True
     MARLIN["TOUCH_UI_DEBUG"]                             = False
-                                                         
-    # Virtual joystick functionality                     
+
+    # Virtual joystick functionality
     MARLIN["JOYSTICK"]                                   = True
     MARLIN["JOY_X_PIN"]                                  = -1
     MARLIN["JOY_Y_PIN"]                                  = -1
@@ -404,15 +404,15 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["JOY_X_LIMITS"]                               = False
     MARLIN["JOY_Y_LIMITS"]                               = False
     MARLIN["JOY_Z_LIMITS"]                               = False
-                                                         
-    if USE_ARCHIM2:                                      
+
+    if USE_ARCHIM2:
       MARLIN["ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE"]     = 1000
-                                                         
+
     MARLIN["SHOW_CUSTOM_BOOTSCREEN"]                     = True
     MARLIN["BABYSTEPPING"]                               = False
     MARLIN["BABYSTEP_XY"]                                = False
-                                                         
-    if USE_AUTOLEVELING:                                 
+
+    if USE_AUTOLEVELING:
       MARLIN["BABYSTEP_ZPROBE_OFFSET"]                   = False
       MARLIN["BABYSTEP_HOTEND_Z_OFFSET"]                 = False
 

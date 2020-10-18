@@ -178,7 +178,7 @@
 #define HEATER_BED_PIN      9   // D9 PC21 BED_PWM
 #define HEATER_CHAMBER_PIN  103 // D103 PB3 J20 Pin 7 - Changed for CocoaPress
 
-#ifndef FAN_PIN 
+#ifndef FAN_PIN
   //#define FAN_PIN           4   // D4 PC26 FET_PWM1 - Changed for CocoaPress
 #endif
 #define FAN1_PIN            5   // D5 PC25 FET_PWM2
