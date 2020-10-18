@@ -114,7 +114,6 @@ def make_config(PRINTER, TOOLHEAD):
 ############################## CASE LIGHT SUPPORT ##############################
 
     MARLIN["CASE_LIGHT_ENABLE"]                          = True
-    MARLIN["CASE_LIGHT_USE_NEOPIXEL"]                    = True
 
 ###################### MOTHERBOARD AND PIN CONFIGURATION ######################
 

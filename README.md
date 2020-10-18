@@ -65,6 +65,19 @@ On Archim 2.0:
 | SERVO1_PIN             | PB13  | 21          | J20 Pin 19 |
 | SERVO0_PIN (BLTouch)   | PB12  | 20          | J20 Pin 20 |
 
+# Using the snapshot pin
+
+Connect camera output to J20 Pin 5 and trigger using the following commands:
+
+```
+M42 S255 P94 ;Trigger
+G4 P200      ;Wait for 200ms
+M42 S0 P94   ;Untrigger
+G4 P500      ;Wait for 500ms
+```
+
+Reference: https://blog.prusaprinters.org/how-to-make-3d-print-time-lapses-with-your-smartphone-camera_29790/
+
 # Sending Messages to the User to Set The Pressure Regulator from the GCODE:
 
 Use [M0], as follows:
