@@ -614,11 +614,11 @@
 // Almost all printers will be using one per axis. Probes will use one or more of the
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
 #define USE_XMIN_PLUG
-#define USE_YMIN_PLUG
+//#define USE_YMIN_PLUG  // <-- changed
 #define USE_ZMIN_PLUG
-//#define USE_XMAX_PLUG  // <-- changed
-//#define USE_YMAX_PLUG  // <-- changed
-#define USE_ZMAX_PLUG // <-- changed
+//#define USE_XMAX_PLUG
+#define USE_YMAX_PLUG // <-- changed
+//#define USE_ZMAX_PLUG
 
 // Enable pullup for all endstops to prevent a floating state
 #define ENDSTOPPULLUPS
@@ -651,7 +651,7 @@
 #define Y_MIN_ENDSTOP_INVERTING true // <-- changed:  Set to true to invert the logic of the endstop.
 #define Z_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define Y_MAX_ENDSTOP_INVERTING true // <-- changed:  Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
 
@@ -731,7 +731,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {80, 80, 400, 500} // <-- changed
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {80, 80, 400, 400} // <-- changed
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -947,7 +947,7 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-#define NOZZLE_TO_PROBE_OFFSET {0, 0.44, -2.15} // <-- changed
+#define NOZZLE_TO_PROBE_OFFSET {0, 35, -2.15} // <-- changed
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1077,8 +1077,8 @@
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
 #define X_HOME_DIR -1
-#define Y_HOME_DIR -1
-#define Z_HOME_DIR 1 // <-- changed
+#define Y_HOME_DIR 1 // <-- changed
+#define Z_HOME_DIR -1
 
 // @section machine
 

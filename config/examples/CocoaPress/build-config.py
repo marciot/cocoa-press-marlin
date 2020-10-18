@@ -147,14 +147,15 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN"]         = True
 
     MARLIN["USE_XMIN_PLUG"]                              = True
-    MARLIN["USE_YMIN_PLUG"]                              = True
+    MARLIN["USE_YMIN_PLUG"]                              = False
     MARLIN["USE_ZMIN_PLUG"]                              = True
 
     MARLIN["USE_XMAX_PLUG"]                              = False
-    MARLIN["USE_YMAX_PLUG"]                              = False # EW - eventually use this one? gives compiling errors
-    MARLIN["USE_ZMAX_PLUG"]                              = True
+    MARLIN["USE_YMAX_PLUG"]                              = True
+    MARLIN["USE_ZMAX_PLUG"]                              = False
     
     MARLIN["Y_MIN_ENDSTOP_INVERTING"]                    = 'true'
+    MARLIN["Y_MAX_ENDSTOP_INVERTING"]                    = 'true'
 
     MARLIN["SD_ABORT_ON_ENDSTOP_HIT"]                    = ENABLED("SDSUPPORT")
 
@@ -168,8 +169,8 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["INVERT_E1_DIR"]                              = 'false'
 
     MARLIN["X_HOME_DIR"]                                 = -1
-    MARLIN["Y_HOME_DIR"]                                 = -1
-    MARLIN["Z_HOME_DIR"]                                 =  1
+    MARLIN["Y_HOME_DIR"]                                 = 1
+    MARLIN["Z_HOME_DIR"]                                 = -1
     
     MARLIN["Z_SAFE_HOMING"]                              = True # EW - Enabled to zero z in the middle of the bed
     MARLIN["HOMING_FEEDRATE_Z"]                          = 5*60 # EW - changed from 4 to 6
@@ -268,7 +269,7 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
         MARLIN["MIN_PROBE_EDGE"]                         = 22
-        MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 0.44, -2.15]
+        MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 35, -2.15]
         MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]         = True # EW - enabled
         MARLIN["XY_PROBE_SPEED"]                         = 8000 # EW - 3000 to stop binding
         MARLIN["MESH_TEST_HOTEND_TEMP"]                  = 32 # EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.
@@ -336,7 +337,7 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["Y_STALL_SENSITIVITY"]                    = 5
 
         MARLIN["USE_XMIN_PLUG"]                          = True # Uses Stallguard
-        MARLIN["USE_YMIN_PLUG"]                          = True # Uses Stallguard
+        MARLIN["USE_YMAX_PLUG"]                          = True # Uses Stallguard
         
         MARLIN["X_MIN_ENDSTOP_INVERTING"]                = 'true'
         MARLIN["Y_MIN_ENDSTOP_INVERTING"]                = 'true'
@@ -369,7 +370,7 @@ def make_config(PRINTER, TOOLHEAD):
 
 ################# ACCELERATION, FEEDRATES AND XYZ MOTOR STEPS #################
 
-    MARLIN["DEFAULT_AXIS_STEPS_PER_UNIT"]                = [80, 80, 400, 500]
+    MARLIN["DEFAULT_AXIS_STEPS_PER_UNIT"]                = [80, 80, 400, 400]
     # EW - 1600 for IGUS Z changed from default of 4000
     # Z-axis leadscrew https://www.amazon.com/Witbot-Pillow-Bearing-Coupler-Printer/dp/B074Z4Q23M/ref=sr_1_4?ie=UTF8&qid=1549046242&sr=8-4&keywords=lead%20screw
     
@@ -471,7 +472,7 @@ def do_substitions(config, counts, line):
 
                 new_command = m.group(1) + m.group(2) + var + separator + new_val
 
-            if new_command != command:
+            if new_command.rstrip() != command:
               line = new_command + " // <-- changed" + ((": " + comment) if comment else "")
 
             counts[var] += 1
@@ -526,6 +527,10 @@ def invalid_toolhead(str):
     parser.error(str + "\n\nToolhead must be one of:\n\n   " + "\n   ".join(TOOLHEAD_CHOICES) + "\n")
 
 def match_selection(str, list):
+    # Try an exact match
+    if str in list:
+        return str;
+    # Do a fuzzy match
     matches = [x for x in list if re.search(str, x, re.IGNORECASE)]
     if len(matches) > 1:
       # Try narrowing down the choices
