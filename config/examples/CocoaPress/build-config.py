@@ -235,8 +235,8 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["USE_CONTROLLER_FAN"]                         = True
     if USE_EINSY_RETRO:
         # The TMC drivers need a bit more cooling
-        MARLIN["CONTROLLERFAN_SPEED"]                    = 255
-        MARLIN["CONTROLLERFAN_SPEED_Z_ONLY"]             = 120
+        MARLIN["CONTROLLERFAN_SPEED_ACTIVE"]             = 255
+        MARLIN["CONTROLLERFAN_SPEED_IDLE"]               = 120
 
 ############################### AXIS TRAVEL LIMITS ###############################
 
@@ -253,7 +253,7 @@ def make_config(PRINTER, TOOLHEAD):
       if MARLIN["BLTOUCH"]:
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
-        MARLIN["MIN_PROBE_EDGE"]                         = 22
+        MARLIN["PROBING_MARGIN"]                         = 22
         MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 35, -2.15]
         MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]         = True # EW - enabled
         MARLIN["XY_PROBE_SPEED"]                         = 8000 # EW - 3000 to stop binding
@@ -338,13 +338,12 @@ def make_config(PRINTER, TOOLHEAD):
         # Quickhome does not work with sensorless homing
         MARLIN["QUICK_HOME"]                             = False
 
-        MARLIN["X_HOME_BUMP_MM"]                         = 0
-        MARLIN["Y_HOME_BUMP_MM"]                         = 0
+        MARLIN["HOMING_BUMP_MM"]                         = [0,0,2]
 
         # Leaving the toolhead resting on the endstops with sensorless homing
         # will likely cause chatter if the machine is immediately re-homed, so
         # don't leave the head sitting on the endstops after homing.
-        MARLIN["HOMING_BACKOFF_MM"]                      = [5, 5, 2]
+        MARLIN["SENSORLESS_BACKOFF_MM"]                  = [5, 5]
 
 ################################ MOTOR CURRENTS ###############################
 
@@ -380,6 +379,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["LCD_TIMEOUT_TO_STATUS"]                      = 600000 # Ten Minutes
     MARLIN["TOUCH_UI_FTDI_EVE"]                           = True
     MARLIN["TOUCH_UI_COCOA_PRESS"]                       = True
+    MARLIN["TOUCH_UI_COCOA_THEME"]                       = True
     MARLIN["LCD_ALEPHOBJECTS_CLCD_UI"]                   = True
     MARLIN["TOUCH_UI_800x480"]                           = True
     if USE_ARCHIM2:
@@ -389,7 +389,6 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["TOUCH_UI_USE_UTF8"]                          = True
     MARLIN["TOUCH_UI_UTF8_COPYRIGHT"]                    = True
     MARLIN["TOUCH_UI_UTF8_SUPERSCRIPTS"]                 = True
-    MARLIN["SD_DETECT_INVERTED"]                         = False
     MARLIN["SCROLL_LONG_FILENAMES"]                      = True
     MARLIN["TOUCH_UI_DEVELOPER_MENU"]                    = True
     MARLIN["TOUCH_UI_DEBUG"]                             = False

@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
 #pragma once
@@ -29,8 +29,7 @@
 
 // Custom Cocoa Press thermistor table, based on thermistor table 1
 //multiplied by 10 for 10th degree accuracy
-const short temptable_999[][2] PROGMEM = {
-
+const temp_entry_t temptable_999[] PROGMEM = {
   {OV(76),   1000},
   {OV(101),   900},
   {OV(135),   800},
@@ -58,54 +57,10 @@ const short temptable_999[][2] PROGMEM = {
   {OV(713),     150},
   {OV(766),     100},
   {OV(858),     0},
-  {OV(925),     -100}};
+  {OV(925),     -100}
+};
 
-// {OV(302),   1000},
-// {OV(403),   900},
-// {OV(540),   800},
-// {OV(727),   700},
-// {OV(976),   600},
-// {OV(1299),   500},
-// {OV(1489),    450},
-// {OV(1696),   400},
-// {OV(1739),   390},
-// {OV(1783),   380},
-// {OV(1828),   370},
-// {OV(1873),   360},
-// {OV(1918),   350},
-// {OV(1964),   340},
-// {OV(2010),   330},
-// {OV(2057),   320},
-// {OV(2104),     310},
-// {OV(2151),     300},
-// {OV(2198),     290},
-// {OV(2245),     280},
-// {OV(2293),     270},
-// {OV(2341),     260},
-// {OV(2388),     250},
-// {OV(2624),     200},
-// {OV(2852),     150},
-// {OV(3066),     100},
-// {OV(3431),     0},
-// {OV(3699),     -100}};
-
-
-// { OV(2),   2750},
-// {OV(11),   1750},
-// {OV(21),   1450},
-// {OV(31),   1300},
-// {OV(40),   1200},
-// {OV(60),   1050},
-// {OV(93),    900},
-// {OV(145),   750},
-// {OV(305),   500},
-// {OV(351),   450},
-// {OV(402),   400},
-// {OV(515),   300},
-// {OV(575),   250},
-// {OV(635),   200},
-// {OV(693),   150},
-// {OV(749),   100},
-// {OV(799),     5},
-// {OV(845),     0},
-// {OV(1024),   -5}};
+//const temp_entry_t temptable_999[] PROGMEM = {
+//  { OV(   1), DUMMY_THERMISTOR_999_VALUE },
+//  { OV(1023), DUMMY_THERMISTOR_999_VALUE }
+//};
