@@ -166,5 +166,6 @@ namespace Language_en {
     PROGMEM Language_Str MSG_ZONE_2                 = u8"Body:";
     PROGMEM Language_Str MSG_ZONE_3                 = u8"Cap:";
     PROGMEM Language_Str MSG_PREHEAT_FINISHED       = u8"Preheat finished";
+    PROGMEM Language_Str MSG_PREHEAT_1              = u8"Preheat 1";
   #endif
 }; // namespace Language_en

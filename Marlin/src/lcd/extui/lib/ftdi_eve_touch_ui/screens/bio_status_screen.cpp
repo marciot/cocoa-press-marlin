@@ -207,7 +207,7 @@ void StatusScreen::draw_syringe(draw_mode_t what) {
       0.75
     #endif
   );
-  const bool e_homed = TERN0(TOUCH_UI_LULZBOT_BIO, isAxisPositionKnown(E0));
+  const bool e_homed = TERN1(TOUCH_UI_LULZBOT_BIO, isAxisPositionKnown(E0));
 
   CommandProcessor cmd;
   PolyUI ui(cmd, what);
