@@ -123,6 +123,10 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["MOTHERBOARD"]                            = 'BOARD_ARCHIM2'
         MARLIN["SERIAL_PORT"]                            = -1
 
+        # The host MMC bridge is impractically slow and should not be used
+        if ENABLED("SDSUPPORT") or ENABLED("USB_FLASH_DRIVE_SUPPORT"):
+            MARLIN["DISABLE_DUE_SD_MMC"]                 = True
+
     elif USE_EINSY_RETRO:
         MARLIN["MOTHERBOARD"]                            = 'BOARD_EINSY_RETRO'
         MARLIN["SERIAL_PORT"]                            = 0
