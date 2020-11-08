@@ -158,7 +158,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["INVERT_E1_DIR"]                              = 'false'
 
     MARLIN["X_HOME_DIR"]                                 = -1
-    MARLIN["Y_HOME_DIR"]                                 = 1
+    MARLIN["Y_HOME_DIR"]                                 =  1
     MARLIN["Z_HOME_DIR"]                                 = -1
 
     MARLIN["Z_SAFE_HOMING"]                              = True # EW - Enabled to zero z in the middle of the bed
@@ -262,7 +262,11 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]         = True # EW - enabled
         MARLIN["XY_PROBE_SPEED"]                         = 8000 # EW - 3000 to stop binding
         MARLIN["MESH_TEST_HOTEND_TEMP"]                  = 32 # EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.
-        MARLIN["AUTO_BED_LEVELING_BILINEAR"]             = True
+        MARLIN["AUTO_BED_LEVELING_UBL"]                  = True
+        MARLIN["RESTORE_LEVELING_AFTER_G28"]             = True
+        MARLIN["GRID_MAX_POINTS_X"]                      = 5
+        MARLIN["GRID_MAX_POINTS_Y"]                      = 5
+        MARLIN["UBL_Z_RAISE_WHEN_OFF_MESH"]              = 5
       else:
         MARLIN["FIX_MOUNTED_PROBE"]                      = True
 
@@ -275,6 +279,7 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["NUM_RUNOUT_SENSORS"]                     = 1
         MARLIN["FILAMENT_RUNOUT_SCRIPT"]                 = C_STRING("M25\nM0 I'm hungry, feed me more chocolate.")
         MARLIN["FILAMENT_RUNOUT_DISTANCE_MM"]            = 50
+        MARLIN["TOUCH_UI_FILAMENT_RUNOUT_WORKAROUNDS"]   = USE_TOUCH_UI
 
 ############################## MOTOR DRIVER TYPE ##############################
 
@@ -396,6 +401,17 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["SCROLL_LONG_FILENAMES"]                      = True
     MARLIN["TOUCH_UI_DEVELOPER_MENU"]                    = True
     MARLIN["TOUCH_UI_DEBUG"]                             = False
+    
+    MARLIN["TOUCH_UI_FTDI_EVE"]                          = True
+    MARLIN["TOUCH_UI_USE_UTF8"]                          = True
+    MARLIN["TOUCH_UI_UTF8_COPYRIGHT"]                    = True
+    MARLIN["TOUCH_UI_UTF8_SUPERSCRIPTS"]                 = True
+    MARLIN["TOUCH_UI_DEVELOPER_MENU"]                    = True
+    MARLIN["LCD_SET_PROGRESS_MANUALLY"]                  = True
+    MARLIN["SCROLL_LONG_FILENAMES"]                      = True
+    MARLIN["NO_PAUSE_FOR_REHEAT"]                        = True
+    MARLIN["NO_TIME_AFTER_SD_PRINT"]                     = True
+    MARLIN["LCD_TIMEOUT_TO_STATUS"]                      = 0
 
     # Virtual joystick functionality
     MARLIN["JOYSTICK"]                                   = True

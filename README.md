@@ -86,6 +86,16 @@ Use [M0], as follows:
 M0 Set the pressure to 29.92 inches of mercury
 ```
 
+# Using Unified Bed Leveling
+
+This build of Marlin enables [Unified Bed Leveling]. The bed leveling routine can be triggered by the user from the LCD menu. The mesh is then saved to the EEPROM for use in the next print. In the start GCODE for prints, the following commands should be used instead of `G29`:
+
+```
+G28 ; home all axes
+G29 L1 ; load leveling matrix slot 1
+G29 A ; ensure mesh is enabled
+```
+
 # License (from Marlin)
 
 Marlin is published under the [GPL license](/LICENSE) because we believe in open development. The GPL comes with both rights and obligations. Whether you use Marlin firmware as the driver for your open or closed-source product, you must keep Marlin open, and you must provide your compatible Marlin source code to end users upon request. The most straightforward way to comply with the Marlin license is to make a fork of Marlin on Github, perform your modifications, and direct users to your modified fork.
@@ -97,3 +107,4 @@ While we can't prevent the use of this code in products (3D printers, CNC, etc.)
 [this guide]: https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/
 [GitHub repo]: https://github.com/marcio-cp/cocoa-press-marlin
 [M1]:http://marlinfw.org/docs/gcode/M000-M001.html
+[Unified Bed Leveling]:https://marlinfw.org/docs/features/unified_bed_leveling.html

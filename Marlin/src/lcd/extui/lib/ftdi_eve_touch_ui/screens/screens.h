@@ -280,6 +280,7 @@ class StatusScreen : public BaseScreen, public CachedScreen<STATUS_SCREEN_CACHE,
       static bool  jog_xy;
       static bool  fine_motion;
 
+      static void draw_progress(draw_mode_t what);
       static void draw_temperature(draw_mode_t what);
       static void draw_syringe(draw_mode_t what);
       static void draw_arrows(draw_mode_t what);

@@ -44,7 +44,7 @@ void PreheatMenu::onRedraw(draw_mode_t what) {
     CommandProcessor cmd;
     cmd.cmd(COLOR_RGB(bg_text_enabled))
        .font(Theme::font_medium)
-       .text  ( BTN_POS(1,1),  BTN_SIZE(2,1), GET_TEXT_F(MSG_PREHEAT_1))
+       .text  ( BTN_POS(1,1),  BTN_SIZE(2,1), GET_TEXT_F(MSG_PREHEAT))
        .colors(normal_btn)
        .tag(2).button( BTN_POS(1,2),  BTN_SIZE(1,1), F("Dark Chocolate"))
        .tag(3).button( BTN_POS(2,2),  BTN_SIZE(1,1), F("Milk Chocolate"))

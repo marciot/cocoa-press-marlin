@@ -1238,15 +1238,15 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#define AUTO_BED_LEVELING_BILINEAR // <-- changed
-//#define AUTO_BED_LEVELING_UBL
+//#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_UBL // <-- changed
 //#define MESH_BED_LEVELING
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable
  * this option to have G28 restore the prior leveling state.
  */
-//#define RESTORE_LEVELING_AFTER_G28
+#define RESTORE_LEVELING_AFTER_G28 // <-- changed
 
 /**
  * Enable detailed logging of G28, G29, M48, etc.
@@ -1285,8 +1285,8 @@
 #if EITHER(AUTO_BED_LEVELING_LINEAR, AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 3
-  #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
+  #define GRID_MAX_POINTS_X 5 // <-- changed
+  #define GRID_MAX_POINTS_Y 5 // <-- changed
 
   // Probe along the Y axis, advancing X after each column
   //#define PROBE_Y_FIRST
@@ -1318,13 +1318,13 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
-  #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
+  #define GRID_MAX_POINTS_X 5 // <-- changed:  Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_Y 5 // <-- changed
 
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
   #define UBL_SAVE_ACTIVE_ON_M500   // Save the currently active mesh in the current slot on M500
 
-  //#define UBL_Z_RAISE_WHEN_OFF_MESH 2.5 // When the nozzle is off the mesh, this value is used
+  #define UBL_Z_RAISE_WHEN_OFF_MESH 5 // <-- changed:  When the nozzle is off the mesh, this value is used
                                           // as the Z-Height correction value.
 
 #elif ENABLED(MESH_BED_LEVELING)
@@ -1334,8 +1334,8 @@
   //===========================================================================
 
   #define MESH_INSET 10          // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 3    // Don't use more than 7 points per axis, implementation limited.
-  #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
+  #define GRID_MAX_POINTS_X 5 // <-- changed:  Don't use more than 7 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_Y 5 // <-- changed
 
   //#define MESH_G28_REST_ORIGIN // After homing all axes ('G28' or 'G28 XYZ') rest Z at Z_MIN_POS
 
@@ -2504,3 +2504,6 @@
 #define COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT "M104 S290 T0\nM104 S290 T1\nM104 S290 T2" // <-- changed
 #define DISABLE_DUE_SD_MMC // <-- changed
 #define ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE 1000 // <-- changed
+#define TOUCH_UI_FILAMENT_RUNOUT_WORKAROUNDS // <-- changed
+#define NO_TIME_AFTER_SD_PRINT // <-- changed
+#define NO_PAUSE_FOR_REHEAT // <-- changed

@@ -1128,10 +1128,10 @@
 //#define LCD_DECIMAL_SMALL_XY
 
 // The timeout (in ms) to return to the status screen from sub-menus
-#define LCD_TIMEOUT_TO_STATUS 600000 // <-- changed
+#define LCD_TIMEOUT_TO_STATUS 0 // <-- changed
 
 // Add an 'M73' G-code to set the current percentage
-//#define LCD_SET_PROGRESS_MANUALLY
+#define LCD_SET_PROGRESS_MANUALLY // <-- changed
 
 // Show the E position (filament used) during printing
 //#define LCD_SHOW_E_TOTAL

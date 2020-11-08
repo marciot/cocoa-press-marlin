@@ -100,13 +100,13 @@ bool LevelingMenu::onTouchEnd(uint8_t tag) {
     #ifndef BED_LEVELING_COMMANDS
       #define BED_LEVELING_COMMANDS "G29"
     #endif
-    #if HAS_MESH
+    #if ENABLED(AUTO_BED_LEVELING_UBL)
       BedMeshScreen::startMeshProbe();
     #else
       SpinnerDialogBox::enqueueAndWait_P(F(BED_LEVELING_COMMANDS));
     #endif
     break;
-    #if HAS_MESH
+    #if ENABLED(AUTO_BED_LEVELING_UBL)
     case 4: GOTO_SCREEN(BedMeshScreen); break;
     #endif
     #if ENABLED(BLTOUCH)

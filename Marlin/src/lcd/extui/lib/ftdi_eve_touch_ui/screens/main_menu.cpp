@@ -77,7 +77,7 @@ void MainMenu::onRedraw(draw_mode_t what) {
          )
        .tag(3).button( CLEAN_NOZZLE_POS, GET_TEXT_F(
          #if ENABLED(TOUCH_UI_COCOA_PRESS)
-            MSG_PREHEAT_1
+            MSG_PREHEAT
          #else
             MSG_CLEAN_NOZZLE
          #endif

@@ -164,8 +164,15 @@ namespace Language_en {
   #ifdef TOUCH_UI_COCOA_PRESS
     PROGMEM Language_Str MSG_ZONE_1                 = u8"Nozzle:";
     PROGMEM Language_Str MSG_ZONE_2                 = u8"Body:";
-    PROGMEM Language_Str MSG_ZONE_3                 = u8"Cap:";
+    PROGMEM Language_Str MSG_ZONE_3                 = u8"External:";
+    PROGMEM Language_Str MSG_CHOCOLATE              = u8"Chocolate";
+    PROGMEM Language_Str MSG_UNLOAD_CARTRIDGE       = u8"Unload Cartridge";
+    PROGMEM Language_Str MSG_LOAD_CHOCOLATE         = u8"Load Chocolate";
+    PROGMEM Language_Str MSG_PREHEAT_CHOCOLATE      = u8"Preheat Chocolate";
     PROGMEM Language_Str MSG_PREHEAT_FINISHED       = u8"Preheat finished";
-    PROGMEM Language_Str MSG_PREHEAT_1              = u8"Preheat 1";
+    PROGMEM Language_Str MSG_PREHEAT                = u8"Preheat";
+    PROGMEM Language_Str MSG_BUTTON_PAUSE           = u8"Pause";
+    PROGMEM Language_Str MSG_BUTTON_RESUME          = u8"Resume";
+    PROGMEM Language_Str MSG_ELAPSED_PRINT          = u8"Elapsed Print";
   #endif
 }; // namespace Language_en
