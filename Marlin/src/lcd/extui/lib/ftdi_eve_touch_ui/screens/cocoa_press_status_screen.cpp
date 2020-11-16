@@ -108,8 +108,12 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
     ui.bounds(POLY(h1_label), x, y, h, v);
     cmd.text(x, y, h, v, GET_TEXT_F(MSG_ZONE_2));
 
-    ui.bounds(POLY(h2_label), x, y, h, v);
-    cmd.text(x, y, h, v, GET_TEXT_F(MSG_ZONE_3));
+    #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
+      if(has_extra_heater()) {
+        ui.bounds(POLY(h2_label), x, y, h, v);
+        cmd.text(x, y, h, v, GET_TEXT_F(MSG_ZONE_3));
+      }
+    #endif
 
     ui.bounds(POLY(h3_label), x, y, h, v);
     cmd.text(x, y, h, v, GET_TEXT_F(MSG_CHAMBER));
@@ -137,8 +141,12 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
 
     format_temp(str, getActualTemp_celsius(E2));
 
-    ui.bounds(POLY(h2_temp), x, y, h, v);
-    cmd.text(x, y, h, v, str);
+    #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
+      if(has_extra_heater()) {
+        ui.bounds(POLY(h2_temp), x, y, h, v);
+        cmd.text(x, y, h, v, str);
+      }
+    #endif
 
     format_temp(str, getActualTemp_celsius(CHAMBER));
 
@@ -148,7 +156,14 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
 }
 
 void StatusScreen::draw_syringe(draw_mode_t what) {
-  constexpr float fill_level = 1.0;
+  #if NUM_SERVOS < 2
+    // Note, this requires a new pin 108 to be added to to access ADC9
+    // "ArduinoAddons/arduino-1.8.5/packages/ultimachine/hardware/sam/1.6.9-b/variants/archim/variant.cpp"
+    const int val = analogRead(108);
+    const float fill_level = float(val) / 1024;
+  #else
+    constexpr float fill_level = 1.0f;
+  #endif
 
   CommandProcessor cmd;
   PolyUI ui(cmd, what);
@@ -182,7 +197,7 @@ void StatusScreen::draw_syringe(draw_mode_t what) {
 void StatusScreen::draw_buttons(draw_mode_t what) {
   int16_t x, y, h, v;
 
-  const bool can_print = isMediaInserted() && !isPrintingFromMedia();
+  const bool can_print        = isMediaInserted() && !isPrintingFromMedia();
   const bool sdOrHostPrinting = ExtUI::isPrinting();
   const bool sdOrHostPaused   = ExtUI::isPrintingPaused();
 
@@ -206,7 +221,7 @@ void StatusScreen::draw_buttons(draw_mode_t what) {
   cmd.tag(4).button(x, y, h, v, GET_TEXT_F(MSG_BUTTON_MENU));
 
   ui.bounds(POLY(pause_btn), x, y, h, v);
-  cmd.tag(sdOrHostPaused ? 5 : 6).enabled(sdOrHostPrinting).button(x, y, h, v, sdOrHostPaused ? GET_TEXT_F(MSG_BUTTON_RESUME) : GET_TEXT_F(MSG_BUTTON_PAUSE));
+  cmd.tag(sdOrHostPaused ? 6 : 5).enabled(sdOrHostPrinting).button(x, y, h, v, sdOrHostPaused ? GET_TEXT_F(MSG_BUTTON_RESUME) : GET_TEXT_F(MSG_BUTTON_PAUSE));
 
   ui.bounds(POLY(stop_btn), x, y, h, v);
   cmd.tag(7).enabled(sdOrHostPrinting).button(x, y, h, v, GET_TEXT_F(MSG_BUTTON_STOP));
@@ -261,7 +276,7 @@ bool StatusScreen::onTouchEnd(uint8_t tag) {
       #endif
       GOTO_SCREEN(StatusScreen);
       break;
-    case  8:
+    case  7:
       GOTO_SCREEN(ConfirmAbortPrintDialogBox);
       current_screen.forget();
       PUSH_SCREEN(StatusScreen);
@@ -276,7 +291,7 @@ bool StatusScreen::onTouchEnd(uint8_t tag) {
 }
 
 bool StatusScreen::onTouchHeld(uint8_t tag) {
-  if (tag == 7 && !ExtUI::isMoving()) {
+  if (tag == 8 && !ExtUI::isMoving()) {
     const feedRate_t feedrate = emin_speed + ((emax_speed - emin_speed) * sq(increment));
     const float increment = feedrate;
     MoveAxisScreen::setManualFeedrate(E0, feedrate);

@@ -55,3 +55,7 @@
   #include "../core/serial.h"
 
 #endif
+
+#if ENABLED(COCOA_PRESS_EXTRA_HEATER)
+  #include "../cocoa_press_extras.h"
+#endif

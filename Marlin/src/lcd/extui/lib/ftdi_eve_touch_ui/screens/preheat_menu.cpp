@@ -1,6 +1,6 @@
-/********************
- * preheat_menu.cpp *
- ********************/
+/********************************
+ * cocoa_press_preheat_menu.cpp *
+ ********************************/
 
 /****************************************************************************
  *   Written By Marcio Teixeira 2020 - Cocoa Press                          *
@@ -37,20 +37,24 @@ void PreheatMenu::onRedraw(draw_mode_t what) {
        .tag(0);
   }
 
-  #define GRID_ROWS 3
+  #define GRID_ROWS 4
   #define GRID_COLS 2
 
   if (what & FOREGROUND) {
     CommandProcessor cmd;
     cmd.cmd(COLOR_RGB(bg_text_enabled))
        .font(Theme::font_medium)
-       .text  ( BTN_POS(1,1),  BTN_SIZE(2,1), GET_TEXT_F(MSG_PREHEAT))
+       .text  ( BTN_POS(1,1),  BTN_SIZE(1,1), GET_TEXT_F(MSG_INTERNAL_HEATER))
+       .text  ( BTN_POS(2,1),  BTN_SIZE(1,1), GET_TEXT_F(MSG_EXTERNAL_HEATER))
        .colors(normal_btn)
        .tag(2).button( BTN_POS(1,2),  BTN_SIZE(1,1), F("Dark Chocolate"))
-       .tag(3).button( BTN_POS(2,2),  BTN_SIZE(1,1), F("Milk Chocolate"))
-       .tag(4).button( BTN_POS(1,3),  BTN_SIZE(1,1), F("White Chocolate"))
+       .tag(3).button( BTN_POS(1,3),  BTN_SIZE(1,1), F("Milk Chocolate"))
+       .tag(4).button( BTN_POS(1,4),  BTN_SIZE(1,1), F("White Chocolate"))
+       .tag(5).enabled(has_extra_heater()).button( BTN_POS(2,2),  BTN_SIZE(1,1), F("Dark Chocolate"))
+       .tag(6).enabled(has_extra_heater()).button( BTN_POS(2,3),  BTN_SIZE(1,1), F("Milk Chocolate"))
+       .tag(7).enabled(has_extra_heater()).button( BTN_POS(2,4),  BTN_SIZE(1,1), F("White Chocolate"))
        .colors(action_btn)
-       .tag(1) .button( BTN_POS(2,3), BTN_SIZE(1,1), GET_TEXT_F(MSG_BACK));
+       .tag(1) .button( BTN_POS(1,5), BTN_SIZE(2,1), GET_TEXT_F(MSG_BACK));
   }
 }
 
@@ -58,20 +62,38 @@ bool PreheatMenu::onTouchEnd(uint8_t tag) {
   switch (tag) {
     case 1: GOTO_PREVIOUS();                   break;
     case 2:
-      #ifdef COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_SCRIPT
-        injectCommands_P(PSTR(COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_SCRIPT));
+      #ifdef COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_INT_SCRIPT
+        injectCommands_P(PSTR(COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_INT_SCRIPT));
       #endif
       GOTO_SCREEN(PreheatTimerScreen);
       break;
     case 3:
-      #ifdef COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_SCRIPT
-        injectCommands_P(PSTR(COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_SCRIPT));
+      #ifdef COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_INT_SCRIPT
+        injectCommands_P(PSTR(COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_INT_SCRIPT));
       #endif
       GOTO_SCREEN(PreheatTimerScreen);
       break;
     case 4:
-      #ifdef COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT
-        injectCommands_P(PSTR(COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT));
+      #ifdef COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_INT_SCRIPT
+        injectCommands_P(PSTR(COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_INT_SCRIPT));
+      #endif
+      GOTO_SCREEN(PreheatTimerScreen);
+      break;
+    case 5:
+      #ifdef COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_EXT_SCRIPT
+        injectCommands_P(PSTR(COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_EXT_SCRIPT));
+      #endif
+      GOTO_SCREEN(PreheatTimerScreen);
+      break;
+    case 6:
+      #ifdef COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_EXT_SCRIPT
+        injectCommands_P(PSTR(COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_EXT_SCRIPT));
+      #endif
+      GOTO_SCREEN(PreheatTimerScreen);
+      break;
+    case 7:
+      #ifdef COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_EXT_SCRIPT
+        injectCommands_P(PSTR(COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_EXT_SCRIPT));
       #endif
       GOTO_SCREEN(PreheatTimerScreen);
       break;

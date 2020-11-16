@@ -62,8 +62,17 @@ On Archim 2.0:
 | Cooling Control        | PB3   | 103         | J20 Pin 7  |
 | FIL_RUNOUT_PIN         | PB15  | 66          | J20 Pin 15 |
 | FIL_RUNOUT2_PIN        | PB16  | 67          | J20 Pin 16 |
-| SERVO1_PIN             | PB13  | 21          | J20 Pin 19 |
+| Chocolate Level        | PB13  | 21          | J20 Pin 19 |
 | SERVO0_PIN (BLTouch)   | PB12  | 20          | J20 Pin 20 |
+
+# Using the chocolate fill sensor
+
+A linear potentiometer may be used to adjust the chocolate level graphics on the status screen. Do implement this feature, connect a linear potentiometer
+across pins 19, 23 and 24.
+
+| GND                    | J20 Pin 23 |
+| Chocolate Level        | J20 Pin 19 |
+| 3.3V                   | J20 Pin 24 |
 
 # Using the snapshot pin
 

@@ -313,6 +313,8 @@ extern const PinDescription g_APinDescription[]=
   { PIOC, PIO_PC27,           ID_PIOC, PIO_OUTPUT_0, PIO_DEFAULT, PIN_ATTR_DIGITAL,                  NO_ADC, NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // DIO PIN 106
   { PIOB, PIO_PB10B_A18,      ID_PIOB, PIO_PERIPH_B, PIO_DEFAULT, PIN_ATTR_DIGITAL,                  NO_ADC, NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // DIO PIN 107
 
+  { PIOB, PIO_PB18X1_AD11,    ID_PIOB, PIO_INPUT,    PIO_DEFAULT, PIN_ATTR_ANALOG,                   ADC9,   ADC9,   NOT_ON_PWM,  NOT_ON_TIMER }, // 108 - J20 Pin 19 on Archim -- Added fpr CocoaPress
+
   // END
   { NULL, 0, 0, PIO_NOT_A_PIN, PIO_DEFAULT, 0, NO_ADC, NO_ADC, NOT_ON_PWM, NOT_ON_TIMER }
 } ;

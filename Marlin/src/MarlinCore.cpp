@@ -946,6 +946,10 @@ inline void tmc_standby_setup() {
  */
 void setup() {
 
+  #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
+     check_extra_heater();
+  #endif
+
   tmc_standby_setup();  // TMC Low Power Standby pins must be set early or they're not usable
 
   #if ENABLED(MARLIN_DEV_MODE)

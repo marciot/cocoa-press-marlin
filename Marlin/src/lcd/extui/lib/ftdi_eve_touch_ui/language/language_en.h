@@ -174,5 +174,7 @@ namespace Language_en {
     PROGMEM Language_Str MSG_BUTTON_PAUSE           = u8"Pause";
     PROGMEM Language_Str MSG_BUTTON_RESUME          = u8"Resume";
     PROGMEM Language_Str MSG_ELAPSED_PRINT          = u8"Elapsed Print";
+    PROGMEM Language_Str MSG_INTERNAL_HEATER        = u8"Internal Heater";
+    PROGMEM Language_Str MSG_EXTERNAL_HEATER        = u8"External Heater";
   #endif
 }; // namespace Language_en

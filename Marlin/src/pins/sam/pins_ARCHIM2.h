@@ -53,7 +53,7 @@
 // Servos
 //
 #define SERVO0_PIN                            20  // D20 PB12 (Header J20 20)
-#define SERVO1_PIN                            21  // D21 PB13 (Header J20 19)
+#define SERVO1_PIN                            -1  // D21 PB13 (Header J20 19) <--- Changed for CocoaPress
 
 //
 // Limit Switches
