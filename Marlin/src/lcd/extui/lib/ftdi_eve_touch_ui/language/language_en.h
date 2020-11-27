@@ -162,9 +162,9 @@ namespace Language_en {
   #endif
 
   #ifdef TOUCH_UI_COCOA_PRESS
-    PROGMEM Language_Str MSG_ZONE_1                 = u8"Nozzle:";
-    PROGMEM Language_Str MSG_ZONE_2                 = u8"Body:";
-    PROGMEM Language_Str MSG_ZONE_3                 = u8"External:";
+    PROGMEM Language_Str MSG_BODY                   = u8"Body";
+    PROGMEM Language_Str MSG_INTERNAL               = u8"Internal";
+    PROGMEM Language_Str MSG_EXTERNAL               = u8"External";
     PROGMEM Language_Str MSG_CHOCOLATE              = u8"Chocolate";
     PROGMEM Language_Str MSG_UNLOAD_CARTRIDGE       = u8"Unload Cartridge";
     PROGMEM Language_Str MSG_LOAD_CHOCOLATE         = u8"Load Chocolate";
@@ -174,7 +174,5 @@ namespace Language_en {
     PROGMEM Language_Str MSG_BUTTON_PAUSE           = u8"Pause";
     PROGMEM Language_Str MSG_BUTTON_RESUME          = u8"Resume";
     PROGMEM Language_Str MSG_ELAPSED_PRINT          = u8"Elapsed Print";
-    PROGMEM Language_Str MSG_INTERNAL_HEATER        = u8"Internal Heater";
-    PROGMEM Language_Str MSG_EXTERNAL_HEATER        = u8"External Heater";
   #endif
 }; // namespace Language_en

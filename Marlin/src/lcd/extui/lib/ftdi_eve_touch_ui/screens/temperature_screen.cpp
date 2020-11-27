@@ -42,11 +42,12 @@ void TemperatureScreen::onRedraw(draw_mode_t what) {
   w.button(30, GET_TEXT_F(MSG_COOLDOWN));
   #ifndef NO_TOOLHEAD_HEATER_GCODE
     #ifdef TOUCH_UI_COCOA_PRESS
-      w.adjuster(   2, GET_TEXT_F(MSG_ZONE_1), getTargetTemp_celsius(E0));
-      w.adjuster(   4, GET_TEXT_F(MSG_ZONE_2), getTargetTemp_celsius(E1));
-      w.adjuster(   6, GET_TEXT_F(MSG_ZONE_3), getTargetTemp_celsius(E2));
+      w.adjuster(   2, GET_TEXT_F(MSG_NOZZLE), getTargetTemp_celsius(E0));
+      w.adjuster(   4, GET_TEXT_F(MSG_BODY), getTargetTemp_celsius(E1));
       #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
-        w.adjuster(   6, GET_TEXT_F(MSG_ZONE_3), getTargetTemp_celsius(E3), has_extra_heater());
+      if(has_extra_heater()) {
+         w.adjuster(   6, GET_TEXT_F(MSG_EXTERNAL), getTargetTemp_celsius(E2));
+      }
       #endif
     #elif HOTENDS == 1
       w.adjuster(   2, GET_TEXT_F(MSG_NOZZLE),   getTargetTemp_celsius(E0));

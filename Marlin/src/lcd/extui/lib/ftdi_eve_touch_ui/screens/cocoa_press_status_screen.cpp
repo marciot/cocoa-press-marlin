@@ -103,15 +103,15 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
     cmd.text(x, y, h, v, GET_TEXT_F(MSG_CHOCOLATE));
 
     ui.bounds(POLY(h0_label), x, y, h, v);
-    cmd.text(x, y, h, v, GET_TEXT_F(MSG_ZONE_1));
+    cmd.text(x, y, h, v, GET_TEXT_F(MSG_NOZZLE));
 
     ui.bounds(POLY(h1_label), x, y, h, v);
-    cmd.text(x, y, h, v, GET_TEXT_F(MSG_ZONE_2));
+    cmd.text(x, y, h, v, GET_TEXT_F(MSG_BODY));
 
     #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
       if(has_extra_heater()) {
         ui.bounds(POLY(h2_label), x, y, h, v);
-        cmd.text(x, y, h, v, GET_TEXT_F(MSG_ZONE_3));
+        cmd.text(x, y, h, v, GET_TEXT_F(MSG_EXTERNAL));
       }
     #endif
 
@@ -130,26 +130,22 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
     cmd.font(font_large);
 
     format_temp(str, getActualTemp_celsius(E0));
-
     ui.bounds(POLY(h0_temp), x, y, h, v);
     cmd.text(x, y, h, v, str);
 
     format_temp(str, getActualTemp_celsius(E1));
-
     ui.bounds(POLY(h1_temp), x, y, h, v);
     cmd.text(x, y, h, v, str);
 
-    format_temp(str, getActualTemp_celsius(E2));
-
     #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
       if(has_extra_heater()) {
+        format_temp(str, getActualTemp_celsius(E2));
         ui.bounds(POLY(h2_temp), x, y, h, v);
         cmd.text(x, y, h, v, str);
       }
     #endif
 
     format_temp(str, getActualTemp_celsius(CHAMBER));
-
     ui.bounds(POLY(h3_temp), x, y, h, v);
     cmd.text(x, y, h, v, str);
   }
