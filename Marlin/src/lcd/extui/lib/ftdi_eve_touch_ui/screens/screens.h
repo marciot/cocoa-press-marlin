@@ -350,11 +350,13 @@ class StatusScreen : public BaseScreen, public CachedScreen<STATUS_SCREEN_CACHE,
       static void draw_message(draw_mode_t);
       static void draw_time_remaining(draw_mode_t);
       static void draw_interaction_buttons(draw_mode_t);
+      static void draw_adjuster(draw_mode_t, uint8_t tag, progmem_str label, float value, int16_t x, int16_t y, int16_t w, int16_t h);
     public:
       static void onRedraw(draw_mode_t);
 
       static void onEntry();
       static void onIdle();
+      static bool onTouchHeld(uint8_t tag);
       static bool onTouchEnd(uint8_t tag);
   };
 #endif
