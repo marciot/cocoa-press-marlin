@@ -381,7 +381,8 @@ def make_config(PRINTER, TOOLHEAD):
     # EW - 1600 for IGUS Z changed from default of 4000
     # Z-axis leadscrew https://www.amazon.com/Witbot-Pillow-Bearing-Coupler-Printer/dp/B074Z4Q23M/ref=sr_1_4?ie=UTF8&qid=1549046242&sr=8-4&keywords=lead%20screw
 
-    MARLIN["DEFAULT_MAX_FEEDRATE"]                       = [300, 300, 100, 25] # EW - slowed X and Y by a factor of 10
+    MARLIN["DEFAULT_MAX_FEEDRATE"]                       = [300, 300, 100, 60] # EW - slowed X and Y by a factor of 10
+    MARLIN["MANUAL_FEEDRATE"]                            = [300, 300, 100, 60]
 
     # A 32-bit board can handle more segments
     MARLIN["MIN_STEPS_PER_SEGMENT"]                      = 1 if USE_ARCHIM2 else 6

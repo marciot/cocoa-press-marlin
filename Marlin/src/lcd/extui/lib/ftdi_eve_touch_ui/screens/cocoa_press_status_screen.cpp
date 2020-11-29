@@ -34,10 +34,6 @@
 #define POLY(A) PolyUI::poly_reader_t(A, sizeof(A)/sizeof(A[0]))
 
 const uint8_t shadow_depth = 5;
-const float   max_speed  = 1.00;
-const float   min_speed  = 0.02;
-const float   emax_speed = 2.00;
-const float   emin_speed = 0.70;
 
 using namespace FTDI;
 using namespace Theme;
@@ -60,18 +56,15 @@ void StatusScreen::draw_progress(draw_mode_t what) {
 
   int16_t x, y, h, v;
 
+  cmd.cmd(COLOR_RGB(accent_color_1));
+  cmd.font(font_medium);
+    
   if (what & BACKGROUND) {
-    cmd.cmd(COLOR_RGB(bg_text_enabled));
-    cmd.font(font_medium);
-
     ui.bounds(POLY(print_time_label), x, y, h, v);
     cmd.text(x, y, h, v, GET_TEXT_F(MSG_ELAPSED_PRINT));
   }
 
   if (what & FOREGROUND) {
-    cmd.cmd(COLOR_RGB(bg_text_enabled));
-    cmd.font(font_medium);
-
     const uint32_t elapsed = getProgress_seconds_elapsed();
     const uint8_t hrs = elapsed/3600;
     const uint8_t min = (elapsed/60)%60;
@@ -96,7 +89,7 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
   if (what & BACKGROUND) {
     cmd.cmd(COLOR_RGB(bg_color));
 
-    cmd.cmd(COLOR_RGB(bg_text_enabled));
+    cmd.cmd(COLOR_RGB(fluid_rgb));
     cmd.font(font_medium);
 
     ui.bounds(POLY(chocolate_label), x, y, h, v);
@@ -125,7 +118,7 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
 
   if (what & FOREGROUND) {
     char str[15];
-    cmd.cmd(COLOR_RGB(bg_text_enabled));
+    cmd.cmd(COLOR_RGB(fluid_rgb));
 
     cmd.font(font_large);
 
@@ -250,8 +243,8 @@ bool StatusScreen::onTouchStart(uint8_t) {
 
 bool StatusScreen::onTouchEnd(uint8_t tag) {
   switch (tag) {
-    case  1: GOTO_SCREEN(ChangeFilamentScreen); break;
-    case  2: GOTO_SCREEN(ChangeFilamentScreen); break;
+    case  1: GOTO_SCREEN(UnloadCartridgeScreen); break;
+    case  2: GOTO_SCREEN(LoadChocolateScreen); break;
     case  3: GOTO_SCREEN(PreheatMenu); break;
     case  4: GOTO_SCREEN(MainMenu); break;
     case  5:
@@ -288,13 +281,11 @@ bool StatusScreen::onTouchEnd(uint8_t tag) {
 
 bool StatusScreen::onTouchHeld(uint8_t tag) {
   if (tag == 8 && !ExtUI::isMoving()) {
-    const feedRate_t feedrate = emin_speed + ((emax_speed - emin_speed) * sq(increment));
-    const float increment = feedrate;
-    MoveAxisScreen::setManualFeedrate(E0, feedrate);
+    increment = 0.05;
+    MoveAxisScreen::setManualFeedrate(E0, increment);
     UI_INCREMENT(AxisPosition_mm, E0);
     current_screen.onRefresh();
   }
-  increment = min(1.0f, increment + 0.1f);
   return false;
 }
 

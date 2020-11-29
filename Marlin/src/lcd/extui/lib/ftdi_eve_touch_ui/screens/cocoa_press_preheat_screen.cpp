@@ -131,7 +131,7 @@ void PreheatTimerScreen::onRedraw(draw_mode_t what) {
 }
 
 bool PreheatTimerScreen::onTouchHeld(uint8_t tag) {
-  const float increment = 0.1;
+  const float increment = (tag == 5 || tag == 6) ? 1 : 0.1;
   switch (tag) {
     case 1: UI_DECREMENT(TargetTemp_celsius, E0); break;
     case 2: UI_INCREMENT(TargetTemp_celsius, E0); break;

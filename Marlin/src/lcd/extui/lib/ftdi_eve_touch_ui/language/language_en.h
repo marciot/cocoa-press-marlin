@@ -168,6 +168,8 @@ namespace Language_en {
     PROGMEM Language_Str MSG_CHOCOLATE              = u8"Chocolate";
     PROGMEM Language_Str MSG_UNLOAD_CARTRIDGE       = u8"Unload Cartridge";
     PROGMEM Language_Str MSG_LOAD_CHOCOLATE         = u8"Load Chocolate";
+    PROGMEM Language_Str MSG_CARTRIDGE_IN           = u8"Cartridge In";
+    PROGMEM Language_Str MSG_CARTRIDGE_OUT          = u8"Cartridge Out";
     PROGMEM Language_Str MSG_PREHEAT_CHOCOLATE      = u8"Preheat Chocolate";
     PROGMEM Language_Str MSG_PREHEAT_FINISHED       = u8"Preheat finished";
     PROGMEM Language_Str MSG_PREHEAT                = u8"Preheat";

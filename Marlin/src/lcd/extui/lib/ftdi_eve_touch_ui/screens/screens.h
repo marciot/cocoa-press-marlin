@@ -98,6 +98,8 @@ enum {
 #if ENABLED(TOUCH_UI_COCOA_PRESS)
   PREHEAT_MENU_CACHE,
   PREHEAT_TIMER_SCREEN_CACHE,
+  UNLOAD_CARTRIDGE_SCREEN_CACHE,
+  LOAD_CHOCOLATE_SCREEN_CACHE,
 #endif
 #if ENABLED(SDSUPPORT)
   FILES_SCREEN_CACHE,
@@ -358,6 +360,20 @@ class StatusScreen : public BaseScreen, public CachedScreen<STATUS_SCREEN_CACHE,
       static void onIdle();
       static bool onTouchHeld(uint8_t tag);
       static bool onTouchEnd(uint8_t tag);
+  };
+
+  class UnloadCartridgeScreen : public BaseScreen, public CachedScreen<UNLOAD_CARTRIDGE_SCREEN_CACHE> {
+    public:
+      static void onRedraw(draw_mode_t);
+      static bool onTouchEnd(uint8_t tag);
+      static bool onTouchHeld(uint8_t tag);
+  };
+
+  class LoadChocolateScreen : public BaseScreen, public CachedScreen<LOAD_CHOCOLATE_SCREEN_CACHE> {
+    public:
+      static void onRedraw(draw_mode_t);
+      static bool onTouchEnd(uint8_t tag);
+      static bool onTouchHeld(uint8_t tag);
   };
 #endif
 
