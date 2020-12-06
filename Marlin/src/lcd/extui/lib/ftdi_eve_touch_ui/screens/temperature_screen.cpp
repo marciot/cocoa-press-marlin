@@ -33,7 +33,7 @@ using namespace ExtUI;
 void TemperatureScreen::onRedraw(draw_mode_t what) {
   widgets_t w(what);
   #if TOUCH_UI_LCD_TEMP_SCALING == 10
-    w.precision(1, DEFAULT_LOWEST)
+    w.precision(1, DEFAULT_MIDRANGE)
   #else
     w.precision(0, getTargetTemp_celsius(E0) == 0 ? DEFAULT_HIGHEST : DEFAULT_MIDRANGE)
   #endif
