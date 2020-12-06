@@ -30,7 +30,7 @@
 bool extra_heater_installed;
 
 void check_extra_heater() {        
-  extra_heater_installed = analogRead(TEMP_2_PIN) < 1010;
+  extra_heater_installed = analogRead(TEMP_2_PIN) < 900;
 }
 
 bool has_extra_heater() {
