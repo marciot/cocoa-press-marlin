@@ -176,5 +176,7 @@ namespace Language_en {
     PROGMEM Language_Str MSG_BUTTON_PAUSE           = u8"Pause";
     PROGMEM Language_Str MSG_BUTTON_RESUME          = u8"Resume";
     PROGMEM Language_Str MSG_ELAPSED_PRINT          = u8"Elapsed Print";
+    PROGMEM Language_Str MSG_XYZ_MOVE               = u8"XYZ Move";
+    PROGMEM Language_Str MSG_E_MOVE                 = u8"Extrusion Move";
   #endif
 }; // namespace Language_en
