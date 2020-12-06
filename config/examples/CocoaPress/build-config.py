@@ -398,10 +398,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["TOUCH_UI_COCOA_THEME"]                       = True
     MARLIN["LCD_ALEPHOBJECTS_CLCD_UI"]                   = True
     MARLIN["TOUCH_UI_800x480"]                           = True
-    if USE_ARCHIM2:
-      MARLIN["AO_EXP2_PINMAP"]                           = True
-    else:
-      MARLIN["AO_EXP1_PINMAP"]                           = True
+    MARLIN["AO_EXP1_PINMAP"]                             = True
     MARLIN["TOUCH_UI_USE_UTF8"]                          = True
     MARLIN["TOUCH_UI_UTF8_COPYRIGHT"]                    = True
     MARLIN["TOUCH_UI_UTF8_SUPERSCRIPTS"]                 = True
