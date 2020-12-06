@@ -94,7 +94,7 @@ def make_config(PRINTER, TOOLHEAD):
 
     if PRINTER == "CocoaPress_Archim":
         USE_ARCHIM2                                      = True
-        MARLIN["SENSORLESS_HOMING"]                      = True
+        MARLIN["SENSORLESS_HOMING"]                      = False
         MARLIN["BLTOUCH"]                                = True
         MARLIN["FILAMENT_RUNOUT_SENSOR"]                 = True
         MARLIN["CUSTOM_MACHINE_NAME"]                    = C_STRING("Cocoa Press")
@@ -251,10 +251,10 @@ def make_config(PRINTER, TOOLHEAD):
 
     MARLIN["X_MIN_POS"]                                  = 0
     MARLIN["Y_MIN_POS"]                                  = 0
-    MARLIN["Z_MAX_POS"]                                  = 150
+    MARLIN["Z_MAX_POS"]                                  = 175
 
-    MARLIN["X_BED_SIZE"]                                 = 190
-    MARLIN["Y_BED_SIZE"]                                 = 90
+    MARLIN["X_BED_SIZE"]                                 = 215
+    MARLIN["Y_BED_SIZE"]                                 = 150
 
 ########################## AUTOLEVELING / BED PROBE ###########################
 
@@ -263,7 +263,7 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
         MARLIN["PROBING_MARGIN"]                         = 22
-        MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 35, -2.15]
+        MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 34, -2.15]
         MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]         = True # EW - enabled
         MARLIN["XY_PROBE_SPEED"]                         = 8000 # EW - 3000 to stop binding
         MARLIN["MESH_TEST_HOTEND_TEMP"]                  = 32 # EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.

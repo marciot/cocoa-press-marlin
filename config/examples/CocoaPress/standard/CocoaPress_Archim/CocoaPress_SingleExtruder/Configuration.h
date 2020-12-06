@@ -658,7 +658,7 @@
 #endif
 
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
-#define X_MIN_ENDSTOP_INVERTING true // <-- changed:  Set to true to invert the logic of the endstop.
+#define X_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING true // <-- changed:  Set to true to invert the logic of the endstop.
 #define Z_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
@@ -990,7 +990,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET {0, 35, -2.15} // <-- changed
+#define NOZZLE_TO_PROBE_OFFSET {0, 34, -2.15} // <-- changed
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1126,8 +1126,8 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 190 // <-- changed
-#define Y_BED_SIZE 90 // <-- changed
+#define X_BED_SIZE 215 // <-- changed
+#define Y_BED_SIZE 150 // <-- changed
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1135,7 +1135,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 150 // <-- changed
+#define Z_MAX_POS 175 // <-- changed
 
 /**
  * Software Endstops
