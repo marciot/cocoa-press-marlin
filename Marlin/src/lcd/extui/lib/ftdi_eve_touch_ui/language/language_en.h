@@ -29,12 +29,6 @@
   #define COPYRIGHT_SIGN    u8"(c)"
 #endif
 
-#if ENABLED(TOUCH_UI_UTF8_SUPERSCRIPTS)
-  #define SUPERSCRIPT_TWO   u8"²"
-#else
-  #define SUPERSCRIPT_TWO   u8"^2"
-#endif
-
 #if ENABLED(TOUCH_UI_UTF8_WESTERN_CHARSET)
   #define DEGREE_SIGN       u8"°"
 #else

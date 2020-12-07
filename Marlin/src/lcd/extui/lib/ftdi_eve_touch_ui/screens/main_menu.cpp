@@ -23,7 +23,7 @@
 
 #include "../config.h"
 
-#if ENABLED(TOUCH_UI_FTDI_EVE) && DISABLED(TOUCH_UI_LULZBOT_BIO)
+#if ENABLED(TOUCH_UI_FTDI_EVE) && !EITHER(TOUCH_UI_LULZBOT_BIO,TOUCH_UI_COCOA_PRESS)
 
 #include "screens.h"
 
@@ -71,12 +71,12 @@ void MainMenu::onRedraw(draw_mode_t what) {
        .font(Theme::font_medium)
        .tag(2).button( AUTO_HOME_POS,         GET_TEXT_F(MSG_AUTO_HOME))
        .enabled(ENABLED(NOZZLE_CLEAN_FEATURE))
-       .tag(3).button( CLEAN_NOZZLE_POS,     GET_TEXT_F(TERN(TOUCH_UI_COCOA_PRESS, MSG_PREHEAT_1, MSG_CLEAN_NOZZLE)))
+       .tag(3).button( CLEAN_NOZZLE_POS,     GET_TEXT_F(MSG_CLEAN_NOZZLE))
        .tag(4).button( MOVE_AXIS_POS,        GET_TEXT_F(MSG_MOVE_AXIS))
        .tag(5).button( DISABLE_STEPPERS_POS, GET_TEXT_F(MSG_DISABLE_STEPPERS))
        .tag(6).button( TEMPERATURE_POS,      GET_TEXT_F(MSG_TEMPERATURE))
        .enabled(IF_DISABLED(TOUCH_UI_LULZBOT_BIO, 1))
-       .tag(7).button( FILAMENTCHANGE_POS,   GET_TEXT_F(TERN(TOUCH_UI_COCOA_PRESS, MSG_CASE_LIGHT, MSG_FILAMENTCHANGE))
+       .tag(7).button( FILAMENTCHANGE_POS,   GET_TEXT_F(MSG_FILAMENTCHANGE))
        .tag(8).button( ADVANCED_SETTINGS_POS, GET_TEXT_F(MSG_ADVANCED_SETTINGS))
        .enabled(TERN_(HAS_LEVELING, 1))
        .tag(9).button( LEVELING_POS, GET_TEXT_F(MSG_LEVELING))
