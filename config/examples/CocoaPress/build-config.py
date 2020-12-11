@@ -80,10 +80,13 @@ def make_config(PRINTER, TOOLHEAD):
     USE_TOUCH_UI                                         = True
 
     MARLIN["SDSUPPORT"]                                  = True
-    MARLIN["BLTOUCH"]                                    = False
+    MARLIN["BLTOUCH"]                                    = True
 
     MARLIN["LIN_ADVANCE"]                                = True
     MARLIN["LIN_ADVANCE_K"]                              = 0.0
+
+    MARLIN["MARLIN_DEV_MODE"]                            = False
+    MARLIN["USE_WATCHDOG"]                               = True
 
 ######################## PRINTER MODEL CHARACTERISTICS ########################
 
@@ -95,7 +98,7 @@ def make_config(PRINTER, TOOLHEAD):
     if PRINTER == "CocoaPress_Archim":
         USE_ARCHIM2                                      = True
         MARLIN["SENSORLESS_HOMING"]                      = False
-        MARLIN["BLTOUCH"]                                = True
+        MARLIN["BLTOUCH"]                                = False
         MARLIN["FILAMENT_RUNOUT_SENSOR"]                 = True
         MARLIN["CUSTOM_MACHINE_NAME"]                    = C_STRING("Cocoa Press")
 
@@ -196,7 +199,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["HEATER_3_MAXTEMP"]                           = 500
     MARLIN["HEATER_4_MAXTEMP"]                           = 500
     MARLIN["HEATER_5_MAXTEMP"]                           = 500
-    MARLIN["CHAMBER_MAXTEMP"]                            = 500
+    MARLIN["CHAMBER_MAXTEMP"]                            = 999
 
     MARLIN["HEATER_0_MINTEMP"]                           = -10
     MARLIN["HEATER_1_MINTEMP"]                           = -10
@@ -427,7 +430,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["JOY_Y_LIMITS"]                               = False
     MARLIN["JOY_Z_LIMITS"]                               = False
 
-    if USE_ARCHIM2:
+    if USE_ARCHIM2 and not MARLIN["AO_EXP1_PINMAP"]:
       MARLIN["ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE"]     = 1000
 
     MARLIN["SHOW_CUSTOM_BOOTSCREEN"]                     = True
