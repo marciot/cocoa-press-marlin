@@ -49,7 +49,7 @@
 #define HEATER_5_MINTEMP -10
 #define HEATER_CHAMBER_INVERTING true
 #define HOLD_MULTIPLIER 0.5
-#define HOMING_FEEDRATE_Z 300
+#define HOMING_FEEDRATE_MM_M {3000, 3000, 300}
 #define HOTENDS 3
 #define INVERT_E0_DIR false
 #define INVERT_E1_DIR false

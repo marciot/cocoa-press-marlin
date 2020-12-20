@@ -165,7 +165,8 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["Z_HOME_DIR"]                                 = -1
 
     MARLIN["Z_SAFE_HOMING"]                              = True # EW - Enabled to zero z in the middle of the bed
-    MARLIN["HOMING_FEEDRATE_Z"]                          = 5*60 # EW - changed from 4 to 6
+    MARLIN["HOMING_FEEDRATE_MM_M"]                       = [(50*60), (50*60), (5*60)] # EW - changed Z from 4 to 6
+
 
 ################################ COCOA PRESS TOOLHEADS ###############################
 
