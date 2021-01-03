@@ -21,9 +21,7 @@ from __future__ import print_function
 import argparse, re, sys, os
 
 PRINTER_CHOICES = [
-    "CocoaPress_Einsy",
-    "CocoaPress_Archim",
-    "CocoaPress_TouchDemo"
+    "CocoaPress_Archim"
 ]
 
 TOOLHEAD_CHOICES = [
@@ -74,8 +72,6 @@ def make_config(PRINTER, TOOLHEAD):
 
 ################################## DEFAULTS ###################################
 
-    USE_EINSY_RETRO                                      = False
-    USE_ARCHIM2                                          = False
     USE_AUTOLEVELING                                     = True
     USE_TOUCH_UI                                         = True
 
@@ -85,34 +81,18 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["LIN_ADVANCE"]                                = True
     MARLIN["LIN_ADVANCE_K"]                              = 0.0
 
-    MARLIN["MARLIN_DEV_MODE"]                            = False
+    MARLIN["MARLIN_DEV_MODE"]                            = True
     MARLIN["USE_WATCHDOG"]                               = True
 
 ######################## PRINTER MODEL CHARACTERISTICS ########################
-
-    if PRINTER == "CocoaPress_Einsy":
-        USE_EINSY_RETRO                                  = True
-        MARLIN["SDSUPPORT"]                              = True
-        MARLIN["CUSTOM_MACHINE_NAME"]                    = C_STRING("Cocoa Press")
-
-    if PRINTER == "CocoaPress_Archim":
-        USE_ARCHIM2                                      = True
-        MARLIN["SENSORLESS_HOMING"]                      = False
-        MARLIN["BLTOUCH"]                                = False
-        MARLIN["FILAMENT_RUNOUT_SENSOR"]                 = True
-        MARLIN["CUSTOM_MACHINE_NAME"]                    = C_STRING("Cocoa Press")
-
-    if PRINTER == "CocoaPress_TouchDemo":
-        USE_EINSY_RETRO                                  = True
-        MARLIN["CUSTOM_MACHINE_NAME"]                    = C_STRING("TouchDemo")
-
-############################ GENERAL CONFIGURATION ############################
 
     MARLIN["STRING_CONFIG_H_AUTHOR"]                     = C_STRING("(Cocoa Press Marlin)")
     MARLIN["EEPROM_SETTINGS"]                            = True # EW - Enabled
     MARLIN["PRINTCOUNTER"]                               = True # EW - Enabled
     MARLIN["CUSTOM_MACHINE_NAME"]                        = C_STRING("Cocoa Press")
     MARLIN["MACHINE_UUID"]                               = C_STRING("c51664e3-50b4-40fb-9bd0-63a8cd30df18")
+    MARLIN["SENSORLESS_HOMING"]                          = False
+    MARLIN["FILAMENT_RUNOUT_SENSOR"]                     = True
 
 ############################## CASE LIGHT SUPPORT ##############################
 
@@ -122,17 +102,12 @@ def make_config(PRINTER, TOOLHEAD):
 
     MARLIN["CONTROLLER_FAN_PIN"]                         = 'FAN1_PIN' # Digital pin 6
 
-    if USE_ARCHIM2:
-        MARLIN["MOTHERBOARD"]                            = 'BOARD_ARCHIM2'
-        MARLIN["SERIAL_PORT"]                            = -1
+    MARLIN["MOTHERBOARD"]                                = 'BOARD_ARCHIM2'
+    MARLIN["SERIAL_PORT"]                                = -1
 
-        # The host MMC bridge is impractically slow and should not be used
-        if ENABLED("SDSUPPORT") or ENABLED("USB_FLASH_DRIVE_SUPPORT"):
-            MARLIN["DISABLE_DUE_SD_MMC"]                 = True
-
-    elif USE_EINSY_RETRO:
-        MARLIN["MOTHERBOARD"]                            = 'BOARD_EINSY_RETRO'
-        MARLIN["SERIAL_PORT"]                            = 0
+    # The host MMC bridge is impractically slow and should not be used
+    if ENABLED("SDSUPPORT") or ENABLED("USB_FLASH_DRIVE_SUPPORT"):
+        MARLIN["DISABLE_DUE_SD_MMC"]                     = True
 
 ############################ ENDSTOP CONFIGURATION ############################
 
@@ -146,8 +121,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["USE_YMAX_PLUG"]                              = True
     MARLIN["USE_ZMAX_PLUG"]                              = False
 
-    MARLIN["Y_MIN_ENDSTOP_INVERTING"]                    = 'true'
-    MARLIN["Y_MAX_ENDSTOP_INVERTING"]                    = 'true'
+    MARLIN["Y_MAX_ENDSTOP_INVERTING"]                    = 'false'
 
     MARLIN["SD_ABORT_ON_ENDSTOP_HIT"]                    = ENABLED("SDSUPPORT")
 
@@ -172,7 +146,7 @@ def make_config(PRINTER, TOOLHEAD):
 
     if TOOLHEAD in ["CocoaPress_SingleExtruder"]:
         MARLIN["EXTRUDERS"]                              = 1
-        MARLIN["HOTENDS"]                                = 3 if USE_ARCHIM2 else 1
+        MARLIN["HOTENDS"]                                = 3
         MARLIN["E0_CURRENT"]                             = 960 # mA
         MARLIN["COCOA_PRESS_EXTRUDER"]                   = True
 
@@ -200,7 +174,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["HEATER_3_MAXTEMP"]                           = 500
     MARLIN["HEATER_4_MAXTEMP"]                           = 500
     MARLIN["HEATER_5_MAXTEMP"]                           = 500
-    MARLIN["CHAMBER_MAXTEMP"]                            = 999
+    MARLIN["CHAMBER_MAXTEMP"]                            = 500
 
     MARLIN["HEATER_0_MINTEMP"]                           = -10
     MARLIN["HEATER_1_MINTEMP"]                           = -10
@@ -231,25 +205,15 @@ def make_config(PRINTER, TOOLHEAD):
 
     # Set fan speed to 122Hz for compatibility with some fans.
 
-    if USE_ARCHIM2:
-        # On the Archim, it is necessary to use soft PWM to get the
-        # frequency down in the kilohertz
-        MARLIN["FAN_SOFT_PWM"]                           = True
-    else:
-        # By default, FAST_PWM_FAN_FREQUENCY sets PWM to ~31kHz,
-        # but we want to lower this to 122 Hz.
-        MARLIN["FAST_PWM_FAN"]                           = True
-        MARLIN["FAST_PWM_FAN_FREQUENCY"]                 = 122
+    # On the Archim, it is necessary to use soft PWM to get the
+    # frequency down in the kilohertz
+    MARLIN["FAN_SOFT_PWM"]                               = True
 
     MARLIN["FAN_KICKSTART_TIME"]                         = 100
     MARLIN["FAN_MIN_PWM"]                                = 70
     MARLIN["SOFT_PWM_SCALE"]                             = 4
 
     MARLIN["USE_CONTROLLER_FAN"]                         = True
-    if USE_EINSY_RETRO:
-        # The TMC drivers need a bit more cooling
-        MARLIN["CONTROLLERFAN_SPEED_ACTIVE"]             = 255
-        MARLIN["CONTROLLERFAN_SPEED_IDLE"]               = 120
 
 ############################### AXIS TRAVEL LIMITS ###############################
 
@@ -283,7 +247,7 @@ def make_config(PRINTER, TOOLHEAD):
 
 ############################# FILAMENT SETTINGS ############################
 
-    MARLIN["RETRACT_LENGTH"]                           = 0 # EW - changed retract to 0
+    MARLIN["RETRACT_LENGTH"]                             = 0 # EW - changed retract to 0
 
     if ENABLED("FILAMENT_RUNOUT_SENSOR"):
         MARLIN["NUM_RUNOUT_SENSORS"]                     = 1
@@ -293,21 +257,15 @@ def make_config(PRINTER, TOOLHEAD):
 
 ############################## MOTOR DRIVER TYPE ##############################
 
-    if USE_EINSY_RETRO or USE_ARCHIM2:
-        DRIVER_TYPE                                      = 'TMC2130'
-    else:
-        DRIVER_TYPE                                      = 'A4988'
+    DRIVER_TYPE                                          = 'TMC2130'
 
     # Workaround for E stepper not working on Archim 2.0
     #   https://github.com/MarlinFirmware/Marlin/issues/13040
-    if USE_EINSY_RETRO:
-        # On AVR, it is okay to use the default (0) for TRINAMICS
-        MARLIN["MINIMUM_STEPPER_PULSE"]                  = 0
-    else:
-        # For the Archim, setting this to the default (0) for TRINAMICS causes
-        # the E stepper not to advance when LIN_ADVANCE is enabled, so force
-        # the stepper pulse to 1 to match the other drivers.
-        MARLIN["MINIMUM_STEPPER_PULSE"]                  = 1
+
+    # For the Archim, setting this to the default (0) for TRINAMICS causes
+    # the E stepper not to advance when LIN_ADVANCE is enabled, so force
+    # the stepper pulse to 1 to match the other drivers.
+    MARLIN["MINIMUM_STEPPER_PULSE"]                  = 1
 
     MARLIN["X_DRIVER_TYPE"]                              =  DRIVER_TYPE
     MARLIN["Y_DRIVER_TYPE"]                              =  DRIVER_TYPE
@@ -318,29 +276,28 @@ def make_config(PRINTER, TOOLHEAD):
 
 ######################## TRINAMIC DRIVER CONFIGURATION ########################
 
-    if USE_EINSY_RETRO or USE_ARCHIM2:
-        RSENSE                                           = 0.12
+    RSENSE                                           = 0.12
 
-        MARLIN["TMC_DEBUG"]                              = True
-        MARLIN["MONITOR_DRIVER_STATUS"]                  = True
-        MARLIN["HOLD_MULTIPLIER"]                        = 0.5
+    MARLIN["TMC_DEBUG"]                              = True
+    MARLIN["MONITOR_DRIVER_STATUS"]                  = True
+    MARLIN["HOLD_MULTIPLIER"]                        = 0.5
 
-        MARLIN["X_RSENSE"]                               = RSENSE
-        MARLIN["Y_RSENSE"]                               = RSENSE
-        MARLIN["Z_RSENSE"]                               = RSENSE
-        MARLIN["E0_RSENSE"]                              = RSENSE
-        if MARLIN["EXTRUDERS"] > 1:
-            MARLIN["E1_RSENSE"]                          = RSENSE
+    MARLIN["X_RSENSE"]                               = RSENSE
+    MARLIN["Y_RSENSE"]                               = RSENSE
+    MARLIN["Z_RSENSE"]                               = RSENSE
+    MARLIN["E0_RSENSE"]                              = RSENSE
+    if MARLIN["EXTRUDERS"] > 1:
+        MARLIN["E1_RSENSE"]                          = RSENSE
 
-        MARLIN["TMC_USE_SW_SPI"]                         = USE_ARCHIM2
+    MARLIN["TMC_USE_SW_SPI"]                         = True
 
-        # If LIN_ADVANCE enabled, then disable STEALTHCHOP_E, because of the
-        # following bug:
-        #
-        # https://github.com/MarlinFirmware/Marlin/issues/17944
-        #
-        if ENABLED("LIN_ADVANCE"):
-            MARLIN["STEALTHCHOP_E"]                      = False
+    # If LIN_ADVANCE enabled, then disable STEALTHCHOP_E, because of the
+    # following bug:
+    #
+    # https://github.com/MarlinFirmware/Marlin/issues/17944
+    #
+    if ENABLED("LIN_ADVANCE"):
+        MARLIN["STEALTHCHOP_E"]                      = False
 
 ########################## TRINAMIC SENSORLESS HOMING ##########################
 
@@ -369,15 +326,9 @@ def make_config(PRINTER, TOOLHEAD):
     # These values specify the maximum current, but actual
     # currents may be lower when used with COOLCONF
 
-    if USE_EINSY_RETRO:
-        MARLIN["X_CURRENT"]                              = 920 # mA
-        MARLIN["Y_CURRENT"]                              = 920 # mA
-        MARLIN["Z_CURRENT"]                              = 960 # mA
-
-    elif USE_ARCHIM2:
-        MARLIN["X_CURRENT"]                              = 975 # mA
-        MARLIN["Y_CURRENT"]                              = 975 # mA
-        MARLIN["Z_CURRENT"]                              = 975 # mA
+    MARLIN["X_CURRENT"]                              = 975 # mA
+    MARLIN["Y_CURRENT"]                              = 975 # mA
+    MARLIN["Z_CURRENT"]                              = 975 # mA
 
 ################# ACCELERATION, FEEDRATES AND XYZ MOTOR STEPS #################
 
@@ -389,7 +340,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["MANUAL_FEEDRATE"]                            = [300, 300, 100, 60]
 
     # A 32-bit board can handle more segments
-    MARLIN["MIN_STEPS_PER_SEGMENT"]                      = 1 if USE_ARCHIM2 else 6
+    MARLIN["MIN_STEPS_PER_SEGMENT"]                      = 1
 
 ################################## LCD OPTIONS ##################################
 
@@ -409,7 +360,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["SCROLL_LONG_FILENAMES"]                      = True
     MARLIN["TOUCH_UI_DEVELOPER_MENU"]                    = True
     MARLIN["TOUCH_UI_DEBUG"]                             = False
-    
+
     MARLIN["TOUCH_UI_FTDI_EVE"]                          = True
     MARLIN["TOUCH_UI_USE_UTF8"]                          = True
     MARLIN["TOUCH_UI_UTF8_COPYRIGHT"]                    = True
@@ -431,7 +382,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["JOY_Y_LIMITS"]                               = False
     MARLIN["JOY_Z_LIMITS"]                               = False
 
-    if USE_ARCHIM2 and not MARLIN["AO_EXP1_PINMAP"]:
+    if not MARLIN["AO_EXP1_PINMAP"]:
       MARLIN["ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE"]     = 1000
 
     MARLIN["SHOW_CUSTOM_BOOTSCREEN"]                     = True

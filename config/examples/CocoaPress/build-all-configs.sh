@@ -44,5 +44,3 @@ else
 fi
 
 build_config standard CocoaPress_Archim                  CocoaPress_SingleExtruder
-build_config custom   CocoaPress_Einsy                   CocoaPress_SingleExtruder
-build_config custom   CocoaPress_TouchDemo               CocoaPress_SingleExtruder

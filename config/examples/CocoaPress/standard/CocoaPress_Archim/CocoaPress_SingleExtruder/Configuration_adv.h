@@ -139,7 +139,7 @@
 //
 #if TEMP_SENSOR_CHAMBER
   #define CHAMBER_MINTEMP             -10 // <-- changed
-  #define CHAMBER_MAXTEMP            999 // <-- changed
+  #define CHAMBER_MAXTEMP            500 // <-- changed
   #define TEMP_CHAMBER_HYSTERESIS     1   // (°C) Temperature proximity considered "close enough" to the target
   //#define CHAMBER_LIMIT_SWITCHING
   //#define HEATER_CHAMBER_PIN       44   // Chamber heater on/off pin
@@ -3678,4 +3678,4 @@
 //#define PINS_DEBUGGING
 
 // Enable Marlin dev mode which adds some special commands
-//#define MARLIN_DEV_MODE
+#define MARLIN_DEV_MODE // <-- changed
