@@ -1163,7 +1163,7 @@
 
 // The size of the print bed
 #define X_BED_SIZE 215 // <-- changed
-#define Y_BED_SIZE 150 // <-- changed
+#define Y_BED_SIZE 140 // <-- changed
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1828,16 +1828,6 @@
  * you must uncomment the following option or it won't work.
  */
 #define SDSUPPORT // <-- changed
-
-/**
- * SD CARD: SPI SPEED
- *
- * Enable one of the following items for a slower SPI transfer speed.
- * This may be required to resolve "volume init" errors.
- */
-#define SPI_SPEED SPI_SIXTEENTH_SPEED // <-- changed
-#define SPI_SPEED SPI_SIXTEENTH_SPEED // <-- changed
-#define SPI_SPEED SPI_SIXTEENTH_SPEED // <-- changed
 
 /**
  * SD CARD: ENABLE CRC

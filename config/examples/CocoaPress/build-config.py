@@ -222,7 +222,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["Z_MAX_POS"]                                  = 175
 
     MARLIN["X_BED_SIZE"]                                 = 215
-    MARLIN["Y_BED_SIZE"]                                 = 150
+    MARLIN["Y_BED_SIZE"]                                 = 140
 
 ########################## AUTOLEVELING / BED PROBE ###########################
 
@@ -345,10 +345,10 @@ def make_config(PRINTER, TOOLHEAD):
 ################################## LCD OPTIONS ##################################
 
     # Slow down SPI speed when using unshielded ribbon cables.
-    MARLIN["SPI_SPEED"]                                  = 'SPI_SIXTEENTH_SPEED'
+    MARLIN["SD_SPI_SPEED"]                               = 'SPI_SIXTEENTH_SPEED'
 
     MARLIN["LCD_TIMEOUT_TO_STATUS"]                      = 600000 # Ten Minutes
-    MARLIN["TOUCH_UI_FTDI_EVE"]                           = True
+    MARLIN["TOUCH_UI_FTDI_EVE"]                          = True
     MARLIN["TOUCH_UI_COCOA_PRESS"]                       = True
     MARLIN["TOUCH_UI_COCOA_THEME"]                       = True
     MARLIN["LCD_ALEPHOBJECTS_CLCD_UI"]                   = True
