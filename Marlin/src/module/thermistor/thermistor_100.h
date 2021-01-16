@@ -29,14 +29,15 @@
 
 // Custom Cocoa Press thermistor table, based on thermistor table 1
 //multiplied by 10 for 10th degree accuracy
-const temp_entry_t temptable_999[] PROGMEM = {
+const temp_entry_t temptable_100[] PROGMEM = {
+  {OV(1),    1300}, // Added by MLT
   {OV(76),   1000},
   {OV(101),   900},
   {OV(135),   800},
   {OV(182),   700},
   {OV(244),   600},
   {OV(325),   500},
-  {OV(372),    450},
+  {OV(372),   450},
   {OV(424),   400},
   {OV(435),   390},
   {OV(446),   380},
@@ -57,10 +58,11 @@ const temp_entry_t temptable_999[] PROGMEM = {
   {OV(713),     150},
   {OV(766),     100},
   {OV(858),     0},
-  {OV(925),     -100}
+  {OV(925),     -100},
+  {OV(1023),    -250} // Added by MLT
 };
 
-//const temp_entry_t temptable_999[] PROGMEM = {
+//const temp_entry_t temptable_100[] PROGMEM = {
 //  { OV(   1), DUMMY_THERMISTOR_999_VALUE },
 //  { OV(1023), DUMMY_THERMISTOR_999_VALUE }
 //};
