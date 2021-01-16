@@ -81,7 +81,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["LIN_ADVANCE"]                                = True
     MARLIN["LIN_ADVANCE_K"]                              = 0.0
 
-    MARLIN["MARLIN_DEV_MODE"]                            = True
+    MARLIN["MARLIN_DEV_MODE"]                            = False
     MARLIN["USE_WATCHDOG"]                               = True
 
 ######################## PRINTER MODEL CHARACTERISTICS ########################
@@ -131,7 +131,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["INVERT_X_DIR"]                               = 'false'
     MARLIN["INVERT_Y_DIR"]                               = 'false'
     MARLIN["INVERT_Z_DIR"]                               = 'false'
-    MARLIN["INVERT_E0_DIR"]                              = 'false'
+    MARLIN["INVERT_E0_DIR"]                              = 'true'
     MARLIN["INVERT_E1_DIR"]                              = 'false'
 
     MARLIN["X_HOME_DIR"]                                 = -1
@@ -158,12 +158,12 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["PREVENT_COLD_EXTRUSION"]                     = False # EW - Turning off so we can use solenoid even when chocolate is cold
     MARLIN["EXTRUDE_MINTEMP"]                            = 10 # EW - changed from 175 to 10
 
-    # 999 is the custom CocoaPress thermistor profile
-    MARLIN["TEMP_SENSOR_0"]                              = 999
+    # 100 is the custom CocoaPress thermistor profile
+    MARLIN["TEMP_SENSOR_0"]                              = 100
     if MARLIN["HOTENDS"] > 1:
-      MARLIN["TEMP_SENSOR_1"]                            = 999
-      MARLIN["TEMP_SENSOR_2"]                            = 999
-    MARLIN["TEMP_SENSOR_CHAMBER"]                        = 999
+      MARLIN["TEMP_SENSOR_1"]                            = 100
+      MARLIN["TEMP_SENSOR_2"]                            = 100
+    MARLIN["TEMP_SENSOR_CHAMBER"]                        = 100
 
     MARLIN["TOUCH_UI_LCD_TEMP_SCALING"]                  = 10 # Scale all UI temperatures by 10
 
@@ -336,8 +336,8 @@ def make_config(PRINTER, TOOLHEAD):
     # EW - 1600 for IGUS Z changed from default of 4000
     # Z-axis leadscrew https://www.amazon.com/Witbot-Pillow-Bearing-Coupler-Printer/dp/B074Z4Q23M/ref=sr_1_4?ie=UTF8&qid=1549046242&sr=8-4&keywords=lead%20screw
 
-    MARLIN["DEFAULT_MAX_FEEDRATE"]                       = [300, 300, 100, 60] # EW - slowed X and Y by a factor of 10
-    MARLIN["MANUAL_FEEDRATE"]                            = [300, 300, 100, 60]
+    MARLIN["DEFAULT_MAX_FEEDRATE"]                       = [(50*60), (50*60), (5*60), (20*60)]
+    MARLIN["MANUAL_FEEDRATE"]                            = [ (5*60),  (5*60), (2*60),  (1*60)]
 
     # A 32-bit board can handle more segments
     MARLIN["MIN_STEPS_PER_SEGMENT"]                      = 1
