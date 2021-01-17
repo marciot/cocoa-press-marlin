@@ -93,6 +93,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["MACHINE_UUID"]                               = C_STRING("c51664e3-50b4-40fb-9bd0-63a8cd30df18")
     MARLIN["SENSORLESS_HOMING"]                          = False
     MARLIN["FILAMENT_RUNOUT_SENSOR"]                     = True
+    MARLIN["COCOA_PRESS_CHOCOLATE_LEVEL_SENSOR"]         = True
 
 ############################## CASE LIGHT SUPPORT ##############################
 
@@ -187,6 +188,12 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["THERMAL_PROTECTION_HYSTERESIS"]              = 1 # EW - changed from 4 to 1
     MARLIN["HEATER_CHAMBER_INVERTING"]                   = 'true' # Activate cooler when temperature is above threshold
     MARLIN["THERMAL_PROTECTION_CHAMBER"]                 = False
+
+    # Cooler cycling options
+
+    MARLIN["COCOA_PRESS_CYCLE_COOLER"]                   = True
+    MARLIN["COOLER_ON_CYCLE_TIME"]                       = 15*60 # seconds
+    MARLIN["COOLER_OFF_CYCLE_TIME"]                      =  5*60 # seconds
 
     # Preheat options for chocolate
 

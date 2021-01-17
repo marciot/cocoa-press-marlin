@@ -145,11 +145,8 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
 }
 
 void StatusScreen::draw_syringe(draw_mode_t what) {
-  #if NUM_SERVOS < 2
-    // Note, this requires a new pin 108 to be added to to access ADC9
-    // "ArduinoAddons/arduino-1.8.5/packages/ultimachine/hardware/sam/1.6.9-b/variants/archim/variant.cpp"
-    const int val = analogRead(108);
-    const float fill_level = float(val) / 1024;
+  #if ENABLED(COCOA_PRESS_CHOCOLATE_LEVEL_SENSOR)
+    const float fill_level = get_chocolate_fill_level();
   #else
     constexpr float fill_level = 1.0f;
   #endif

@@ -2640,3 +2640,7 @@
 #define NO_PAUSE_FOR_REHEAT // <-- changed
 #define BED_LEVELING_COMMANDS "G28\nG29 P1\nG29 S1" // <-- changed
 #define COCOA_PRESS_EXTRA_HEATER // <-- changed
+#define COCOA_PRESS_CHOCOLATE_LEVEL_SENSOR // <-- changed
+#define COCOA_PRESS_CYCLE_COOLER // <-- changed
+#define COOLER_ON_CYCLE_TIME 900 // <-- changed
+#define COOLER_OFF_CYCLE_TIME 300 // <-- changed

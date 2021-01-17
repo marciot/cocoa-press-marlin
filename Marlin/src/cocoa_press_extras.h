@@ -28,3 +28,12 @@
   void check_extra_heater();
   bool has_extra_heater();
 #endif
+
+#if ENABLED(COCOA_PRESS_CHOCOLATE_LEVEL_SENSOR)
+  float get_chocolate_fill_level();
+#endif
+
+#if ENABLED(COCOA_PRESS_CYCLE_COOLER)
+  void cycle_cooler_init();
+  void cycle_cooler_idle();
+#endif

@@ -716,6 +716,10 @@ void idle(TERN_(ADVANCED_PAUSE_FEATURE, bool no_stepper_sleep/*=false*/)) {
     if (++idle_depth > 5) SERIAL_ECHOLNPAIR("idle() call depth: ", int(idle_depth));
   #endif
 
+  #if ENABLED(COCOA_PRESS_CYCLE_COOLER)
+     cycle_cooler_idle();
+  #endif
+  
   // Core Marlin activities
   manage_inactivity(TERN_(ADVANCED_PAUSE_FEATURE, no_stepper_sleep));
 
@@ -968,10 +972,6 @@ inline void tmc_standby_setup() {
  */
 void setup() {
 
-  #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
-     check_extra_heater();
-  #endif
-
   tmc_standby_setup();  // TMC Low Power Standby pins must be set early or they're not usable
 
   #if ENABLED(MARLIN_DEV_MODE)
@@ -1024,6 +1024,14 @@ void setup() {
   #endif
   #if HEATER_1_USES_MAX6675
     OUT_WRITE(MAX6675_SS2_PIN, HIGH); // Disable
+  #endif
+
+  #if ENABLED(COCOA_PRESS_CYCLE_COOLER)
+     SETUP_RUN(cycle_cooler_init());
+  #endif
+
+  #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
+     SETUP_RUN(check_extra_heater());
   #endif
 
   #if HAS_L64XX
