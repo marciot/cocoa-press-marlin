@@ -241,7 +241,7 @@ bool StatusScreen::onTouchStart(uint8_t) {
 bool StatusScreen::onTouchEnd(uint8_t tag) {
   switch (tag) {
     case  1: GOTO_SCREEN(UnloadCartridgeScreen); break;
-    case  2: GOTO_SCREEN(LoadChocolateScreen); break;
+    case  2: GOTO_SCREEN(LoadChocolate); break;
     case  3: GOTO_SCREEN(PreheatMenu); break;
     case  4: GOTO_SCREEN(MainMenu); break;
     case  5:

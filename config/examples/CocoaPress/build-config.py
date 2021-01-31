@@ -132,7 +132,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["INVERT_X_DIR"]                               = 'false'
     MARLIN["INVERT_Y_DIR"]                               = 'false'
     MARLIN["INVERT_Z_DIR"]                               = 'false'
-    MARLIN["INVERT_E0_DIR"]                              = 'true'
+    MARLIN["INVERT_E0_DIR"]                              = 'false'
     MARLIN["INVERT_E1_DIR"]                              = 'false'
 
     MARLIN["X_HOME_DIR"]                                 = -1
@@ -207,6 +207,8 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_EXT_SCRIPT"] = C_STRING("M104 S290 T3")
 
     MARLIN["COCOA_PRESS_EXTRA_HEATER"]                   = True
+    MARLIN["SD_ABORT_NO_COOLDOWN"]                       = True
+    MARLIN["EVENT_GCODE_SD_ABORT"]                       = C_STRING( "G0 X0 Y0")
 
 ########################## COOLING FAN CONFIGURATION ##########################
 

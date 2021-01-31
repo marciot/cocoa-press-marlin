@@ -119,7 +119,7 @@ SCREEN_TABLE {
     DECL_SCREEN(PreheatMenu),
     DECL_SCREEN(PreheatTimerScreen),
     DECL_SCREEN(UnloadCartridgeScreen),
-    DECL_SCREEN(LoadChocolateScreen),
+    DECL_SCREEN(LoadChocolate),
     DECL_SCREEN(MoveXYZScreen),
     DECL_SCREEN(MoveEScreen),
   #endif

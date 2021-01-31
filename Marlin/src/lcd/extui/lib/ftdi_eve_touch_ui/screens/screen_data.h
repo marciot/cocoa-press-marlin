@@ -81,6 +81,9 @@ union screen_data_t {
     struct {
       uint32_t start_ms;
     } PreheatTimer;
+    struct {
+      uint8_t repeat_tag;
+    } LoadChocolate;
   #endif
   #if ENABLED(BABYSTEPPING)
     struct {

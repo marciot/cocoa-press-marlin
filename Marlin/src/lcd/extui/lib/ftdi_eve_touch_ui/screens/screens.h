@@ -889,9 +889,12 @@ class MediaPlayerScreen : public BaseScreen, public UncachedScreen {
       static bool onTouchHeld(uint8_t tag);
   };
 
-  class LoadChocolateScreen : public BaseScreen, public CachedScreen<LOAD_CHOCOLATE_SCREEN_CACHE> {
+  class LoadChocolate : public BaseScreen, public CachedScreen<LOAD_CHOCOLATE_SCREEN_CACHE> {
     public:
+      static void onEntry();
+      static void onIdle();
       static void onRedraw(draw_mode_t);
+      static bool onTouchStart(uint8_t tag);
       static bool onTouchEnd(uint8_t tag);
       static bool onTouchHeld(uint8_t tag);
   };
