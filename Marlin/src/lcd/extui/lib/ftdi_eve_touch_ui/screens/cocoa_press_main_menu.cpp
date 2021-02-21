@@ -66,7 +66,7 @@ void MainMenu::onRedraw(draw_mode_t what) {
        .tag( 9).button(LEVELING_POS,          GET_TEXT_F(MSG_LEVELING))
        .tag(10).button(ABOUT_PRINTER_POS,     GET_TEXT_F(MSG_INFO_MENU))
        .colors(action_btn)
-       .tag(1).button(BACK_POS,              GET_TEXT_F(MSG_BACK));
+       .tag(1).button(BACK_POS,               GET_TEXT_F(MSG_BACK));
   }
 }
 

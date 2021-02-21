@@ -42,7 +42,7 @@ void PreheatMenu::onRedraw(draw_mode_t what) {
        .tag(0)
        .cmd(COLOR_RGB(bg_text_enabled))
        .font(Theme::font_medium)
-       .text  ( BTN_POS(1,1), w, h, GET_TEXT_F(MSG_INTERNAL));
+       .text( BTN_POS(1,1), w, h, GET_TEXT_F(MSG_SELECT_CHOCOLATE_TYPE));
     #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
       if (has_extra_heater()) {
         cmd.text( BTN_POS(2,1), w, h, GET_TEXT_F(MSG_EXTERNAL));

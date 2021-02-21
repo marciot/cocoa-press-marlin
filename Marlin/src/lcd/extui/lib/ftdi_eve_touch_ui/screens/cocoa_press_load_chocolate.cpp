@@ -27,6 +27,14 @@
 
 #ifdef FTDI_COCOA_LOAD_CHOCOLATE_SCREEN
 
+#include "../ftdi_eve_lib/extras/poly_ui.h"
+
+#include "cocoa_press_ui.h"
+
+#define POLY(A) PolyUI::poly_reader_t(A, sizeof(A)/sizeof(A[0]))
+
+const uint8_t shadow_depth = 5;
+
 using namespace ExtUI;
 using namespace FTDI;
 using namespace Theme;
@@ -42,50 +50,113 @@ using namespace Theme;
 #define RETRACT_BTN_POS       BTN_POS(2,6), BTN_SIZE(1,1)
 #define BACK_BTN_POS          BTN_POS(1,7), BTN_SIZE(2,1)
 
-void LoadChocolate::onEntry() {
-  screen_data.LoadChocolate.repeat_tag = 0;
-}
+constexpr static LoadChocolateData &mydata = screen_data.LoadChocolate;
 
-void LoadChocolate::onRedraw(draw_mode_t what) {
+void LoadChocolate::draw_syringe(draw_mode_t what) {
+  #if ENABLED(COCOA_PRESS_CHOCOLATE_LEVEL_SENSOR)
+    const float fill_level = get_chocolate_fill_level();
+  #else
+    constexpr float fill_level = 1.0f;
+  #endif
+
   CommandProcessor cmd;
+  PolyUI ui(cmd, what);
 
   if (what & BACKGROUND) {
-    cmd.cmd(CLEAR_COLOR_RGB(bg_color))
-       .cmd(CLEAR(true,true,true))
-       .cmd(COLOR_RGB(bg_text_enabled))
-       .tag(0)
-       .font(font_large)
-       .text(TITLE_POS, GET_TEXT_F(MSG_LOAD_CHOCOLATE));
-       draw_text_box(cmd, DESCRIPTION_POS, F(
-        "Drop your chocolate refill into the cartridge. "
-        "Press and hold the Cartridge Out button until "
-        "the plunger adapter is visible at the bottom of "
-        "the extruder. Securely attach a red plunger to "
-        "the plunger adapter and load the cartridge onto "
-        "the plunger. Press and hold Cartridge In button "
-        "until cartridge is fully loaded into the extruder, "
-        "and use the buttons to help follow the locking path "
-        "to lock"),
-        OPT_CENTERY, font_medium);
+    // Paint the shadow for the syringe
+    ui.color(shadow_rgb);
+    ui.shadow(POLY(syringe_outline), shadow_depth);
   }
 
   if (what & FOREGROUND) {
-    #define TOG_STYLE(A) colors(A ? action_btn : normal_btn)
-    const bool tog2 = screen_data.LoadChocolate.repeat_tag == 2;
-    const bool tog3 = screen_data.LoadChocolate.repeat_tag == 3;
+    int16_t x, y, h, v;
 
-    cmd.font(font_medium)
-       .tag(2).TOG_STYLE(tog3   ).button(CARTRIDGE_OUT_BTN_POS, GET_TEXT_F(MSG_CARTRIDGE_OUT))
-       .tag(3).TOG_STYLE(tog2   ).button(CARTRIDGE_IN_BTN_POS,  GET_TEXT_F(MSG_CARTRIDGE_IN))
-       .tag(4)                   .button(EXTRUDE_BTN_POS,       GET_TEXT_F(MSG_LOAD_FILAMENT))
-       .tag(5).colors(normal_btn).button(RETRACT_BTN_POS,       GET_TEXT_F(MSG_UNLOAD_FILAMENT))
+    // Paint the syringe icon
+    ui.color(syringe_rgb);
+    ui.fill(POLY(syringe_outline));
 
-       .tag(1).colors(action_btn).button(BACK_BTN_POS,          GET_TEXT_F(MSG_BACK));
+    ui.color(fluid_rgb);
+    ui.bounds(POLY(syringe_fluid), x, y, h, v);
+    cmd.cmd(SAVE_CONTEXT());
+    cmd.cmd(SCISSOR_XY(x,y + v * (1.0 - fill_level)));
+    cmd.cmd(SCISSOR_SIZE(h,  v *        fill_level));
+    ui.fill(POLY(syringe_fluid), false);
+    cmd.cmd(RESTORE_CONTEXT());
+
+    ui.color(stroke_rgb);
+    ui.fill(POLY(syringe));
   }
 }
 
-bool LoadChocolate::onTouchStart(uint8_t tag) {
-    screen_data.LoadChocolate.repeat_tag = 0;
+void LoadChocolate::draw_buttons(draw_mode_t what) {
+  int16_t x, y, h, v;
+
+  CommandProcessor cmd;
+  PolyUI ui(cmd, what);
+
+  cmd.font(font_medium).colors(normal_btn);
+
+  ui.bounds(POLY(load_screen_unload_btn), x, y, h, v);
+  cmd.tag(2).button(x, y, h, v, GET_TEXT_F(MSG_FULL_UNLOAD));
+
+  ui.bounds(POLY(load_screen_load_btn), x, y, h, v);
+  cmd.tag(3).button(x, y, h, v, GET_TEXT_F(MSG_FULL_LOAD));
+
+  ui.bounds(POLY(load_screen_back_btn), x, y, h, v);
+  cmd.tag(1).colors(action_btn).button(x, y, h, v, GET_TEXT_F(MSG_BACK));
+}
+
+void LoadChocolate::draw_text(draw_mode_t what) {
+  if (what & BACKGROUND) {
+      int16_t x, y, h, v;
+
+      CommandProcessor cmd;
+      PolyUI ui(cmd, what);
+
+      cmd.font(font_medium).cmd(COLOR_RGB(bg_text_enabled));
+
+      ui.bounds(POLY(load_sreen_title), x, y, h, v);
+      cmd.tag(2).text(x, y, h, v, GET_TEXT_F(MSG_LOAD_UNLOAD));
+
+      ui.bounds(POLY(load_screen_increment), x, y, h, v);
+      cmd.tag(3).text(x, y, h, v, GET_TEXT_F(MSG_INCREMENT));
+  }
+}
+
+void LoadChocolate::draw_arrows(draw_mode_t what) {
+  CommandProcessor cmd;
+  PolyUI ui(cmd, what);
+
+  ui.button_fill  (fill_rgb);
+  ui.button_stroke(stroke_rgb, 28);
+  ui.button_shadow(shadow_rgb, shadow_depth);
+
+  constexpr uint8_t style = PolyUI::REGULAR;
+
+  ui.button(4, POLY(load_screen_extrude), style);
+  ui.button(5, POLY(load_screen_retract), style);
+}
+
+void LoadChocolate::onEntry() {
+  mydata.repeat_tag = 0;
+}
+
+void LoadChocolate::onRedraw(draw_mode_t what) {
+  if (what & BACKGROUND) {
+    CommandProcessor cmd;
+    cmd.cmd(CLEAR_COLOR_RGB(bg_color))
+       .cmd(CLEAR(true,true,true))
+       .tag(0);
+  }
+
+  draw_syringe(what);
+  draw_arrows(what);
+  draw_buttons(what);
+  draw_text(what);
+}
+
+bool LoadChocolate::onTouchStart(uint8_t) {
+    mydata.repeat_tag = 0;
     return true;
 }
 
@@ -93,37 +164,47 @@ bool LoadChocolate::onTouchEnd(uint8_t tag) {
   using namespace ExtUI;
   switch (tag) {
     case 2:
-      screen_data.LoadChocolate.repeat_tag = (screen_data.LoadChocolate.repeat_tag == 2) ? 0 : 2;
+      mydata.repeat_tag = (mydata.repeat_tag == 2) ? 0 : 2;
       break;
     case 3:
-      screen_data.LoadChocolate.repeat_tag = (screen_data.LoadChocolate.repeat_tag == 3) ? 0 : 3;
+      mydata.repeat_tag = (mydata.repeat_tag == 3) ? 0 : 3;
       break;
     case 1: GOTO_PREVIOUS(); break;
   }
   return true;
 }
 
+void LoadChocolate::setManualFeedrateAndIncrement(float feedrate_mm_s, float &increment_mm) {
+  // Compute increment so feedrate so that the tool lags the adjuster when it is
+  // being held down, this allows enough margin for the planner to
+  // connect segments and even out the motion.
+  ExtUI::setFeedrate_mm_s(feedrate_mm_s);
+  increment_mm = feedrate_mm_s / ((TOUCH_REPEATS_PER_SECOND) * 0.80f);
+}
+
 bool LoadChocolate::onTouchHeld(uint8_t tag) {
   if (ExtUI::isMoving()) return false; // Don't allow moves to accumulate
-  constexpr float increment = 0.25;
-  MoveAxisScreen::setManualFeedrate(E0, increment);
+  float increment;
+  setManualFeedrateAndIncrement(20, increment);
   #define UI_INCREMENT_AXIS(axis) UI_INCREMENT(AxisPosition_mm, axis);
   #define UI_DECREMENT_AXIS(axis) UI_DECREMENT(AxisPosition_mm, axis);
   switch (tag) {
-    case 2:
+    case 2: {
         if(get_chocolate_fill_level() < 0.1) {
-            screen_data.LoadChocolate.repeat_tag = 0;
+            mydata.repeat_tag = 0;
             return false;
         }
         UI_INCREMENT_AXIS(E0);
         break;
-    case 3:
+    }
+    case 3: {
         if(get_chocolate_fill_level() > 0.9) {
-            screen_data.LoadChocolate.repeat_tag = 0;
+            mydata.repeat_tag = 0;
             return false;
         }
         UI_DECREMENT_AXIS(E0);
         break;
+    }
     case 4:
         UI_INCREMENT_AXIS(E0);
         break;
@@ -139,7 +220,12 @@ bool LoadChocolate::onTouchHeld(uint8_t tag) {
 
 void LoadChocolate::onIdle() {
   reset_menu_timeout();
-  if (screen_data.LoadChocolate.repeat_tag) onTouchHeld(screen_data.LoadChocolate.repeat_tag);
+  if (mydata.repeat_tag) onTouchHeld(mydata.repeat_tag);
+  if (refresh_timer.elapsed(STATUS_UPDATE_INTERVAL)) {
+    if (!EventLoop::is_touch_held())
+      onRefresh();
+    refresh_timer.start();
+  }
   BaseScreen::onIdle();
 }
 #endif // FTDI_COCOA_LOAD_CHOCOLATE_SCREEN
