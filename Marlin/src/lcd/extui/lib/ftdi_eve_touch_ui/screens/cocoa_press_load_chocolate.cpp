@@ -50,9 +50,9 @@ using namespace Theme;
 #define RETRACT_BTN_POS       BTN_POS(2,6), BTN_SIZE(1,1)
 #define BACK_BTN_POS          BTN_POS(1,7), BTN_SIZE(2,1)
 
-constexpr static LoadChocolateData &mydata = screen_data.LoadChocolate;
+constexpr static LoadChocolateScreenData &mydata = screen_data.LoadChocolateScreen;
 
-void LoadChocolate::draw_syringe(draw_mode_t what) {
+void LoadChocolateScreen::draw_syringe(draw_mode_t what) {
   #if ENABLED(COCOA_PRESS_CHOCOLATE_LEVEL_SENSOR)
     const float fill_level = get_chocolate_fill_level();
   #else
@@ -88,7 +88,7 @@ void LoadChocolate::draw_syringe(draw_mode_t what) {
   }
 }
 
-void LoadChocolate::draw_buttons(draw_mode_t what) {
+void LoadChocolateScreen::draw_buttons(draw_mode_t what) {
   int16_t x, y, h, v;
 
   CommandProcessor cmd;
@@ -106,7 +106,7 @@ void LoadChocolate::draw_buttons(draw_mode_t what) {
   cmd.tag(1).colors(action_btn).button(x, y, h, v, GET_TEXT_F(MSG_BACK));
 }
 
-void LoadChocolate::draw_text(draw_mode_t what) {
+void LoadChocolateScreen::draw_text(draw_mode_t what) {
   if (what & BACKGROUND) {
       int16_t x, y, h, v;
 
@@ -123,7 +123,7 @@ void LoadChocolate::draw_text(draw_mode_t what) {
   }
 }
 
-void LoadChocolate::draw_arrows(draw_mode_t what) {
+void LoadChocolateScreen::draw_arrows(draw_mode_t what) {
   CommandProcessor cmd;
   PolyUI ui(cmd, what);
 
@@ -137,11 +137,11 @@ void LoadChocolate::draw_arrows(draw_mode_t what) {
   ui.button(5, POLY(load_screen_retract), style);
 }
 
-void LoadChocolate::onEntry() {
+void LoadChocolateScreen::onEntry() {
   mydata.repeat_tag = 0;
 }
 
-void LoadChocolate::onRedraw(draw_mode_t what) {
+void LoadChocolateScreen::onRedraw(draw_mode_t what) {
   if (what & BACKGROUND) {
     CommandProcessor cmd;
     cmd.cmd(CLEAR_COLOR_RGB(bg_color))
@@ -155,12 +155,12 @@ void LoadChocolate::onRedraw(draw_mode_t what) {
   draw_text(what);
 }
 
-bool LoadChocolate::onTouchStart(uint8_t) {
+bool LoadChocolateScreen::onTouchStart(uint8_t) {
     mydata.repeat_tag = 0;
     return true;
 }
 
-bool LoadChocolate::onTouchEnd(uint8_t tag) {
+bool LoadChocolateScreen::onTouchEnd(uint8_t tag) {
   using namespace ExtUI;
   switch (tag) {
     case 2:
@@ -174,7 +174,7 @@ bool LoadChocolate::onTouchEnd(uint8_t tag) {
   return true;
 }
 
-void LoadChocolate::setManualFeedrateAndIncrement(float feedrate_mm_s, float &increment_mm) {
+void LoadChocolateScreen::setManualFeedrateAndIncrement(float feedrate_mm_s, float &increment_mm) {
   // Compute increment so feedrate so that the tool lags the adjuster when it is
   // being held down, this allows enough margin for the planner to
   // connect segments and even out the motion.
@@ -182,7 +182,7 @@ void LoadChocolate::setManualFeedrateAndIncrement(float feedrate_mm_s, float &in
   increment_mm = feedrate_mm_s / ((TOUCH_REPEATS_PER_SECOND) * 0.80f);
 }
 
-bool LoadChocolate::onTouchHeld(uint8_t tag) {
+bool LoadChocolateScreen::onTouchHeld(uint8_t tag) {
   if (ExtUI::isMoving()) return false; // Don't allow moves to accumulate
   float increment;
   setManualFeedrateAndIncrement(20, increment);
@@ -218,7 +218,7 @@ bool LoadChocolate::onTouchHeld(uint8_t tag) {
   return false;
 }
 
-void LoadChocolate::onIdle() {
+void LoadChocolateScreen::onIdle() {
   reset_menu_timeout();
   if (mydata.repeat_tag) onTouchHeld(mydata.repeat_tag);
   if (refresh_timer.elapsed(STATUS_UPDATE_INTERVAL)) {

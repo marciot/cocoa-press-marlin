@@ -236,7 +236,7 @@ bool StatusScreen::onTouchStart(uint8_t) {
 bool StatusScreen::onTouchEnd(uint8_t tag) {
   switch (tag) {
     case  1: SpinnerDialogBox::enqueueAndWait_P(F("G0 X0 Y0")); break;
-    case  2: GOTO_SCREEN(LoadChocolate); break;
+    case  2: GOTO_SCREEN(LoadChocolateScreen); break;
     case  3: GOTO_SCREEN(PreheatMenu); break;
     case  4: GOTO_SCREEN(MainMenu); break;
     case  5:

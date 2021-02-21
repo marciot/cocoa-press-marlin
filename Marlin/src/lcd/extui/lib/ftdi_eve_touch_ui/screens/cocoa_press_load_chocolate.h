@@ -24,13 +24,13 @@
 #pragma once
 
 #define FTDI_COCOA_LOAD_CHOCOLATE_SCREEN
-#define FTDI_COCOA_LOAD_CHOCOLATE_SCREEN_CLASS LoadChocolate
+#define FTDI_COCOA_LOAD_CHOCOLATE_SCREEN_CLASS LoadChocolateScreen
 
-struct LoadChocolateData {
+struct LoadChocolateScreenData {
     uint8_t repeat_tag;
 };
 
-class LoadChocolate : public BaseScreen, public CachedScreen<LOAD_CHOCOLATE_SCREEN_CACHE> {
+class LoadChocolateScreen : public BaseScreen, public CachedScreen<LOAD_CHOCOLATE_SCREEN_CACHE> {
   private:
     static void setManualFeedrateAndIncrement(float feedrate_mm_s, float &increment);
     static void draw_syringe(draw_mode_t what);
