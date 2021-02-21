@@ -39,17 +39,6 @@ using namespace ExtUI;
 using namespace FTDI;
 using namespace Theme;
 
-#define GRID_COLS 2
-#define GRID_ROWS 7
-
-#define TITLE_POS             BTN_POS(1,1), BTN_SIZE(2,1)
-#define DESCRIPTION_POS       BTN_POS(1,2), BTN_SIZE(2,3)
-#define CARTRIDGE_OUT_BTN_POS BTN_POS(1,5), BTN_SIZE(1,1)
-#define CARTRIDGE_IN_BTN_POS  BTN_POS(2,5), BTN_SIZE(1,1)
-#define EXTRUDE_BTN_POS       BTN_POS(1,6), BTN_SIZE(1,1)
-#define RETRACT_BTN_POS       BTN_POS(2,6), BTN_SIZE(1,1)
-#define BACK_BTN_POS          BTN_POS(1,7), BTN_SIZE(2,1)
-
 constexpr static LoadChocolateScreenData &mydata = screen_data.LoadChocolateScreen;
 
 void LoadChocolateScreen::draw_syringe(draw_mode_t what) {
