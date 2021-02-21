@@ -56,6 +56,8 @@
 
 #endif
 
+#include "../core/multi_language.h"
+
 #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
   #include "../cocoa_press_extras.h"
 #endif

@@ -22,11 +22,10 @@
  ****************************************************************************/
 
 #include "../config.h"
-
-#if ENABLED(TOUCH_UI_FTDI_EVE) && ENABLED(TOUCH_UI_COCOA_PRESS)
-
 #include "screens.h"
 #include "screen_data.h"
+
+#ifdef FTDI_COCOA_LOAD_CHOCOLATE_SCREEN
 
 using namespace ExtUI;
 using namespace FTDI;
@@ -143,4 +142,4 @@ void LoadChocolate::onIdle() {
   if (screen_data.LoadChocolate.repeat_tag) onTouchHeld(screen_data.LoadChocolate.repeat_tag);
   BaseScreen::onIdle();
 }
-#endif // TOUCH_UI_FTDI_EVE
+#endif // FTDI_COCOA_LOAD_CHOCOLATE_SCREEN
