@@ -1000,7 +1000,7 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 22 // <-- changed
+#define PROBING_MARGIN 0 // <-- changed
 
 // X and Y axis travel speed (mm/min) between probes
 #define XY_PROBE_SPEED 8000 // <-- changed
@@ -1413,14 +1413,14 @@
 
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
-  #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET 0 // <-- changed:  Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 5 // <-- changed:  Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y 5 // <-- changed
 
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
   #define UBL_SAVE_ACTIVE_ON_M500   // Save the currently active mesh in the current slot on M500
 
-  #define UBL_Z_RAISE_WHEN_OFF_MESH 5 // <-- changed:  When the nozzle is off the mesh, this value is used
+  //#define UBL_Z_RAISE_WHEN_OFF_MESH 2.5 // When the nozzle is off the mesh, this value is used
                                           // as the Z-Height correction value.
 
 #elif ENABLED(MESH_BED_LEVELING)
@@ -1429,7 +1429,7 @@
   //=================================== Mesh ==================================
   //===========================================================================
 
-  #define MESH_INSET 10          // Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET 0 // <-- changed:  Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 5 // <-- changed:  Don't use more than 7 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y 5 // <-- changed
 

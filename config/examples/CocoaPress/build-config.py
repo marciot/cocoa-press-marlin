@@ -228,8 +228,6 @@ def make_config(PRINTER, TOOLHEAD):
     if USE_AUTOLEVELING:
       if MARLIN["BLTOUCH"]:
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
-        MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
-        MARLIN["PROBING_MARGIN"]                         = 22
         MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 34, -2.15]
         MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]         = True # EW - enabled
         MARLIN["XY_PROBE_SPEED"]                         = 8000 # EW - 3000 to stop binding
@@ -238,7 +236,8 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["RESTORE_LEVELING_AFTER_G28"]             = True
         MARLIN["GRID_MAX_POINTS_X"]                      = 5
         MARLIN["GRID_MAX_POINTS_Y"]                      = 5
-        MARLIN["UBL_Z_RAISE_WHEN_OFF_MESH"]              = 5
+        MARLIN["PROBING_MARGIN"]                         = 0
+        MARLIN["MESH_INSET"]                             = 0
         MARLIN["BED_LEVELING_COMMANDS"]                  = C_STRING("G28\nG29 P1\nG29 S1")
       else:
         MARLIN["FIX_MOUNTED_PROBE"]                      = True
