@@ -172,10 +172,10 @@
 //
 // Heaters / Fans
 //
-#define HEATER_0_PIN                           6  // D6 PC24 FET_PWM3
-#define HEATER_1_PIN                           7  // D7 PC23 FET_PWM4
-#define HEATER_2_PIN                           8  // D8 PC22 FET_PWM5
-#define HEATER_BED_PIN                         9  // D9 PC21 BED_PWM
+#define HEATER_0_PIN                           6  // D6 PC24 FET_PWM3 ("HTR1" header)
+#define HEATER_1_PIN                           7  // D7 PC23 FET_PWM4 ("HTR2" header)
+#define HEATER_2_PIN                           8  // D8 PC22 FET_PWM5 ("HTR3" header)
+//#define HEATER_BED_PIN                         9  // D9 PC21 BED_PWM - Changed for CocoaPress
 
 #if ENABLED(COCOA_PRESS_CYCLE_COOLER)
   #define HEATER_CHAMBER_PIN                  93  // D93 PB2 (Header J20 8)
@@ -184,9 +184,9 @@
   #define HEATER_CHAMBER_PIN                 103  // D103 PB3 J20 Pin 7 - Changed for CocoaPress
 #endif
 
-//#ifndef FAN_PIN
-//  #define FAN_PIN                            4  // D4 PC26 FET_PWM1  - Changed for CocoaPress
-//#endif
+#ifndef FAN_PIN
+  #define FAN_PIN                              4  // D4 PC26 FET_PWM1
+#endif
 #define FAN1_PIN                               5  // D5 PC25 FET_PWM2
 
 //
@@ -225,7 +225,7 @@
 // Case Light
 
 #ifndef CASE_LIGHT_PIN
-  #define CASE_LIGHT_PIN                       4    // D4 PC26 FET_PWM1 - Changed for CocoaPress
+  #define CASE_LIGHT_PIN                       9  // D9 PC21 BED_PWM ("HTBD" header) - Changed for CocoaPress
 #endif
 
 // 2MB SPI Flash

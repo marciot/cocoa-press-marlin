@@ -199,28 +199,18 @@ def make_config(PRINTER, TOOLHEAD):
 
     MARLIN["PREHEAT_1_LABEL"]                            = C_STRING("Cocoa")
     MARLIN["COCOA_PRESS_PREHEAT_SECONDS"]                = 30*60
-    MARLIN["COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_INT_SCRIPT"]  = C_STRING("M104 S335 T0\nM104 S335 T1\nM104 S335 T2")
-    MARLIN["COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_INT_SCRIPT"]  = C_STRING("M104 S327 T0\nM104 S327 T1\nM104 S327 T2")
-    MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_INT_SCRIPT"] = C_STRING("M104 S290 T0\nM104 S290 T1\nM104 S290 T2")
-    MARLIN["COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_EXT_SCRIPT"]  = C_STRING("M104 S335 T3")
-    MARLIN["COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_EXT_SCRIPT"]  = C_STRING("M104 S327 T3")
-    MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_EXT_SCRIPT"] = C_STRING("M104 S290 T3")
+    MARLIN["COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_INT_SCRIPT"]  = C_STRING("M104 S335 T0\nM104 S335 T1")
+    MARLIN["COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_INT_SCRIPT"]  = C_STRING("M104 S327 T0\nM104 S327 T1")
+    MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_INT_SCRIPT"] = C_STRING("M104 S290 T0\nM104 S290 T1")
+    MARLIN["COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_EXT_SCRIPT"]  = C_STRING("M104 S335 T2")
+    MARLIN["COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_EXT_SCRIPT"]  = C_STRING("M104 S327 T2")
+    MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_EXT_SCRIPT"] = C_STRING("M104 S290 T2")
 
     MARLIN["COCOA_PRESS_EXTRA_HEATER"]                   = True
     MARLIN["SD_ABORT_NO_COOLDOWN"]                       = True
     MARLIN["EVENT_GCODE_SD_ABORT"]                       = C_STRING( "G0 X0 Y0")
 
 ########################## COOLING FAN CONFIGURATION ##########################
-
-    # Set fan speed to 122Hz for compatibility with some fans.
-
-    # On the Archim, it is necessary to use soft PWM to get the
-    # frequency down in the kilohertz
-    MARLIN["FAN_SOFT_PWM"]                               = True
-
-    MARLIN["FAN_KICKSTART_TIME"]                         = 100
-    MARLIN["FAN_MIN_PWM"]                                = 70
-    MARLIN["SOFT_PWM_SCALE"]                             = 4
 
     MARLIN["USE_CONTROLLER_FAN"]                         = True
 
@@ -346,7 +336,7 @@ def make_config(PRINTER, TOOLHEAD):
     # Z-axis leadscrew https://www.amazon.com/Witbot-Pillow-Bearing-Coupler-Printer/dp/B074Z4Q23M/ref=sr_1_4?ie=UTF8&qid=1549046242&sr=8-4&keywords=lead%20screw
 
     MARLIN["DEFAULT_MAX_FEEDRATE"]                       = [(50*60), (50*60), (5*60), (20*60)]
-    MARLIN["MANUAL_FEEDRATE"]                            = [ (5*60),  (5*60), (2*60),  (1*60)]
+    MARLIN["MANUAL_FEEDRATE"]                            = [(50*60), (50*60), (5*60), (20*60)]
 
     # A 32-bit board can handle more segments
     MARLIN["MIN_STEPS_PER_SEGMENT"]                      = 1

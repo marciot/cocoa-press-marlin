@@ -57,8 +57,11 @@ On Archim 2.0:
 
 | Feature                | Port  | Arduino Pin | Archim Pin |
 |------------------------|-------|-------------|------------|
+| Nozzle Heater          | PC24  | 6           | HTR1       |
+| Body Heater            | PC23  | 7           | HTR2       |
+| Extra Heater           | PC22  | 8           | HTR3       |
+| Case Light Control     | PC21  | 9           | HTBD       |
 | Snapshot Control       | PB5   | 94          | J20 Pin 5  |
-| Case Light Control     | PC26  | 4           | FAN_1      |
 | Cooling Control        | PB3   | 103         | J20 Pin 7  |
 | FIL_RUNOUT_PIN         | PB15  | 66          | J20 Pin 15 |
 | FIL_RUNOUT2_PIN        | PB16  | 67          | J20 Pin 16 |
