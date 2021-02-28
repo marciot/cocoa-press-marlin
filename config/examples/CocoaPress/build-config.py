@@ -230,7 +230,6 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
         MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 34, -2.15]
         MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]         = True # EW - enabled
-        MARLIN["XY_PROBE_SPEED"]                         = 8000 # EW - 3000 to stop binding
         MARLIN["MESH_TEST_HOTEND_TEMP"]                  = 32 # EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.
         MARLIN["AUTO_BED_LEVELING_UBL"]                  = True
         MARLIN["RESTORE_LEVELING_AFTER_G28"]             = True
