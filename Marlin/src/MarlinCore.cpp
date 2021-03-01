@@ -954,7 +954,6 @@ void setup() {
     OUT_WRITE(MAX6675_SS2_PIN, HIGH); // Disable
   #endif
 
-<<<<<<< HEAD
   #if ENABLED(COCOA_PRESS_CYCLE_COOLER)
      SETUP_RUN(cycle_cooler_init());
   #endif
@@ -963,12 +962,6 @@ void setup() {
      SETUP_RUN(check_extra_heater());
   #endif
 
-  #if HAS_L64XX
-    SETUP_RUN(L64xxManager.init());  // Set up SPI, init drivers
-  #endif
-
-=======
->>>>>>> upstream/bugfix-2.0.x
   #if ENABLED(DUET_SMART_EFFECTOR) && PIN_EXISTS(SMART_EFFECTOR_MOD)
     OUT_WRITE(SMART_EFFECTOR_MOD_PIN, LOW);   // Put Smart Effector into NORMAL mode
   #endif
