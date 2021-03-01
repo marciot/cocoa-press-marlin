@@ -142,8 +142,12 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["Z_SAFE_HOMING"]                              = True # EW - Enabled to zero z in the middle of the bed
     MARLIN["HOMING_FEEDRATE_MM_M"]                       = [(50*60), (50*60), (5*60)] # EW - changed Z from 4 to 6
 
+############################# NOZZLE PARK FEATURE #############################
 
-################################ COCOA PRESS TOOLHEADS ###############################
+    MARLIN["NOZZLE_PARK_FEATURE"]                        = True
+    MARLIN["NOZZLE_PARK_POINT"]                          = [0, 0, 20]
+
+############################ COCOA PRESS TOOLHEADS ############################
 
     if TOOLHEAD in ["CocoaPress_SingleExtruder"]:
         MARLIN["EXTRUDERS"]                              = 1
