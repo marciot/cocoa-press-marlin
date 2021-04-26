@@ -51,13 +51,13 @@ void GcodeSuite::M303() {
       thermalManager.pid_debug_flag ^= true;
       SERIAL_ECHO_START();
       SERIAL_ECHOPGM("PID Debug ");
-      serialprintln_onoff(pid_debug_flag);
+      serialprintln_onoff(thermalManager.pid_debug_flag);
       return;
     }
   #endif
 
   const heater_id_t hid = (heater_id_t)parser.intval('E');
-  int16_t default_temp;
+  celsius_t default_temp;
   switch (hid) {
     #if ENABLED(PIDTEMP)
       case 0 ... HOTENDS - 1: default_temp = PREHEAT_1_TEMP_HOTEND; break;
@@ -74,7 +74,7 @@ void GcodeSuite::M303() {
       return;
   }
 
-  const int16_t temp = parser.celsiusval('S', default_temp);
+  const celsius_t temp = parser.celsiusval('S', default_temp);
   const int c = parser.intval('C', 5);
   const bool u = parser.boolval('U');
 
