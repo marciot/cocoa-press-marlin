@@ -33,7 +33,7 @@ using namespace FTDI;
 using namespace ExtUI;
 using namespace Theme;
 
-#define GRID_ROWS 6
+#define GRID_ROWS 5
 #define GRID_COLS 3
 #define BED_MESH_TITLE_POS BTN_POS(1,1), BTN_SIZE(3,1)
 #define PROBE_BED_POS      BTN_POS(1,2), BTN_SIZE(1,1)
@@ -59,15 +59,15 @@ void LevelingMenu::onRedraw(draw_mode_t what) {
        .text(BED_MESH_TITLE_POS, GET_TEXT_F(MSG_BED_LEVELING))
        .text(BLTOUCH_TITLE_POS, GET_TEXT_F(MSG_BLTOUCH))
        .font(font_medium).colors(normal_btn)
-       .tag(3).button(PROBE_BED_POS, GET_TEXT_F(MSG_PROBE_BED))
+       .tag(2).button(PROBE_BED_POS, GET_TEXT_F(MSG_PROBE_BED))
        .enabled(ENABLED(HAS_MESH))
-       .tag(4).button(SHOW_MESH_POS, GET_TEXT_F(MSG_SHOW_MESH))
+       .tag(3).button(SHOW_MESH_POS, GET_TEXT_F(MSG_SHOW_MESH))
        .enabled(ENABLED(HAS_MESH))
-       .tag(5).button(EDIT_MESH_POS, GET_TEXT_F(MSG_EDIT_MESH))
+       .tag(4).button(EDIT_MESH_POS, GET_TEXT_F(MSG_EDIT_MESH))
        #undef  GRID_COLS
        #define GRID_COLS 2
-       .tag(7).button(BLTOUCH_RESET_POS, GET_TEXT_F(MSG_BLTOUCH_RESET))
-       .tag(8).button(BLTOUCH_TEST_POS,  GET_TEXT_F(MSG_BLTOUCH_SELFTEST))
+       .tag(5).button(BLTOUCH_RESET_POS, GET_TEXT_F(MSG_BLTOUCH_RESET))
+       .tag(6).button(BLTOUCH_TEST_POS,  GET_TEXT_F(MSG_BLTOUCH_SELFTEST))
        #undef  GRID_COLS
        #define GRID_COLS 3
        .colors(action_btn)
@@ -78,11 +78,11 @@ void LevelingMenu::onRedraw(draw_mode_t what) {
 bool LevelingMenu::onTouchEnd(uint8_t tag) {
   switch (tag) {
     case 1: GOTO_PREVIOUS(); break;
-    case 3: BedMeshViewScreen::doProbe(); break;
-    case 4: BedMeshViewScreen::show(); break;
-    case 5: BedMeshEditScreen::show(); break;
-    case 7: injectCommands_P(PSTR("M280 P0 S60")); break;
-    case 8: SpinnerDialogBox::enqueueAndWait_P(F("M280 P0 S90\nG4 P100\nM280 P0 S120")); break;
+    case 2: BedMeshViewScreen::doProbe(); break;
+    case 3: BedMeshViewScreen::show(); break;
+    case 4: BedMeshEditScreen::show(); break;
+    case 5: injectCommands_P(PSTR("M280 P0 S60")); break;
+    case 6: SpinnerDialogBox::enqueueAndWait_P(F("M280 P0 S90\nG4 P100\nM280 P0 S120")); break;
     default: return false;
   }
   return true;

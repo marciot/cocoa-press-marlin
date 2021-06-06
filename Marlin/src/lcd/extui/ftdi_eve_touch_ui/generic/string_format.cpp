@@ -35,11 +35,11 @@
  */
 void format_temp(char *str, const_celsius_float_t t1) {
   #ifdef TOUCH_UI_LCD_TEMP_PRECISION
-    sprintf_P(str, PSTR("%3d" S_FMT), ROUND(t1), GET_TEXT(MSG_UNITS_C));
-  #else
     char num1[7];
     dtostrf(t1, 4 + TOUCH_UI_LCD_TEMP_PRECISION, TOUCH_UI_LCD_TEMP_PRECISION, num1);
-    sprintf_P(str, PSTR("%s" S_FMT), ROUND(t1), GET_TEXT(MSG_UNITS_C));
+    sprintf_P(str, PSTR("%s" S_FMT), num1, GET_TEXT(MSG_UNITS_C));
+  #else
+    sprintf_P(str, PSTR("%3d" S_FMT), ROUND(t1), GET_TEXT(MSG_UNITS_C));
   #endif
 }
 
