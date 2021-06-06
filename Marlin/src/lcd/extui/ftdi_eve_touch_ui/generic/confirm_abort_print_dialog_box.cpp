@@ -25,7 +25,7 @@
 
 #ifdef FTDI_CONFIRM_ABORT_PRINT_DIALOG_BOX
 
-#include "../../../../../feature/host_actions.h"
+#include "../../../../feature/host_actions.h"
 
 using namespace ExtUI;
 

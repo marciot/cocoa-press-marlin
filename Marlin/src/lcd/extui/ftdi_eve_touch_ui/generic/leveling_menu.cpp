@@ -26,7 +26,7 @@
 #ifdef FTDI_LEVELING_MENU
 
 #if BOTH(HAS_BED_PROBE,BLTOUCH)
-  #include "../../../../../feature/bltouch.h"
+  #include "../../../../feature/bltouch.h"
 #endif
 
 using namespace FTDI;

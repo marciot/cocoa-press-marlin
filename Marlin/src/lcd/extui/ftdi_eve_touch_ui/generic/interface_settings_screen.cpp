@@ -28,10 +28,10 @@
 
 #include "../archim2-flash/flash_storage.h"
 
-#include "../../../../../module/settings.h"
+#include "../../../../module/settings.h"
 
 #if ENABLED(LULZBOT_PRINTCOUNTER)
-  #include "../../../../../module/printcounter.h"
+  #include "../../../../module/printcounter.h"
 #endif
 
 bool restoreEEPROM();
@@ -258,7 +258,7 @@ void InterfaceSettingsScreen::loadSettings(const char *buff) {
 }
 
 #ifdef ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE
-  #include "../../../../../HAL/shared/eeprom_api.h"
+  #include "../../../../HAL/shared/eeprom_api.h"
 
   bool restoreEEPROM() {
     uint8_t data[ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE];

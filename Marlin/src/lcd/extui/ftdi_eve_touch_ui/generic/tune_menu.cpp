@@ -25,7 +25,7 @@
 
 #ifdef FTDI_TUNE_MENU
 
-#include "../../../../../feature/host_actions.h"
+#include "../../../../feature/host_actions.h"
 
 using namespace FTDI;
 using namespace Theme;
