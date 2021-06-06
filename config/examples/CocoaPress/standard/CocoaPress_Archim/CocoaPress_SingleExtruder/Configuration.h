@@ -1054,14 +1054,14 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET {0, 34, -2.15} // <-- changed
+#define NOZZLE_TO_PROBE_OFFSET {0, 34, -1.25} // <-- changed
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
 #define PROBING_MARGIN 0 // <-- changed
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE (133*60)
+#define XY_PROBE_FEEDRATE 3000 // <-- changed
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_FEEDRATE_FAST (4*60)
@@ -1437,7 +1437,7 @@
   /**
    * Enable the G26 Mesh Validation Pattern tool.
    */
-  #define G26_MESH_VALIDATION // <-- changed
+  //#define G26_MESH_VALIDATION
   #if ENABLED(G26_MESH_VALIDATION)
     #define MESH_TEST_NOZZLE_SIZE    0.4  // (mm) Diameter of primary nozzle.
     #define MESH_TEST_LAYER_HEIGHT   0.2  // (mm) Default layer height for G26.
@@ -2754,6 +2754,7 @@
 #define TOUCH_UI_COCOA_PRESS // <-- changed
 #define TOUCH_UI_COCOA_THEME // <-- changed
 #define TOUCH_UI_LCD_TEMP_SCALING 10 // <-- changed
+#define TOUCH_UI_LCD_TEMP_PRECISION 1 // <-- changed
 #define COCOA_PRESS_PREHEAT_SECONDS 1800 // <-- changed
 #define COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_INT_SCRIPT "M104 S324 T0\nM104 S323 T1\nM141 S160" // <-- changed
 #define COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_INT_SCRIPT "M104 S329 T0\nM104 S328 T1\nM141 S160" // <-- changed
@@ -2766,9 +2767,9 @@
 #define TOUCH_UI_FILAMENT_RUNOUT_WORKAROUNDS // <-- changed
 #define NO_TIME_AFTER_SD_PRINT // <-- changed
 #define NO_PAUSE_FOR_REHEAT // <-- changed
-#define BED_LEVELING_COMMANDS "G28\nG29 P1\nG29 S1\nG29 P3" // <-- changed
+#define BED_LEVELING_COMMANDS "G28\nG29 P1\nG29 P3\nG29 S1" // <-- changed
 #define COCOA_PRESS_EXTRA_HEATER // <-- changed
 #define COCOA_PRESS_CHOCOLATE_LEVEL_SENSOR // <-- changed
 #define COCOA_PRESS_CYCLE_COOLER // <-- changed
-#define COOLER_ON_CYCLE_TIME 900 // <-- changed
-#define COOLER_OFF_CYCLE_TIME 300 // <-- changed
+#define COOLER_ON_CYCLE_TIME 240 // <-- changed
+#define COOLER_OFF_CYCLE_TIME 60 // <-- changed

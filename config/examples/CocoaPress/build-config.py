@@ -171,6 +171,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["TEMP_SENSOR_CHAMBER"]                        = 100
 
     MARLIN["TOUCH_UI_LCD_TEMP_SCALING"]                  = 10 # Scale all UI temperatures by 10
+    MARLIN["TOUCH_UI_LCD_TEMP_PRECISION"]                = 1  # Use one decimal point for temperatures
 
     # These values are scaled by 10
     MARLIN["HEATER_0_MAXTEMP"]                           = 500
@@ -196,8 +197,8 @@ def make_config(PRINTER, TOOLHEAD):
     # Cooler cycling options
 
     MARLIN["COCOA_PRESS_CYCLE_COOLER"]                   = True
-    MARLIN["COOLER_ON_CYCLE_TIME"]                       = 15*60 # seconds
-    MARLIN["COOLER_OFF_CYCLE_TIME"]                      =  5*60 # seconds
+    MARLIN["COOLER_ON_CYCLE_TIME"]                       = 4*60 # seconds
+    MARLIN["COOLER_OFF_CYCLE_TIME"]                      = 1*60 # seconds
 
     # Preheat options for chocolate
 
@@ -232,7 +233,7 @@ def make_config(PRINTER, TOOLHEAD):
     if USE_AUTOLEVELING:
       if MARLIN["BLTOUCH"]:
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
-        MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 34, -2.15]
+        MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 34, -1.25]
         MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]         = True # EW - enabled
         MARLIN["MESH_TEST_HOTEND_TEMP"]                  = 32 # EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.
         MARLIN["AUTO_BED_LEVELING_UBL"]                  = True
@@ -241,8 +242,8 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["GRID_MAX_POINTS_Y"]                      = 5
         MARLIN["PROBING_MARGIN"]                         = 0
         MARLIN["MESH_INSET"]                             = 0
-        MARLIN["BED_LEVELING_COMMANDS"]                  = C_STRING("G28\nG29 P1\nG29 S1\nG29 P3")
-        MARLIN["G26_MESH_VALIDATION"]                    = True
+        MARLIN["BED_LEVELING_COMMANDS"]                  = C_STRING("G28\nG29 P1\nG29 P3\nG29 S1")
+        MARLIN["G26_MESH_VALIDATION"]                    = False
       else:
         MARLIN["FIX_MOUNTED_PROBE"]                      = True
 
@@ -340,6 +341,7 @@ def make_config(PRINTER, TOOLHEAD):
 
     MARLIN["DEFAULT_MAX_FEEDRATE"]                       = [(50*60), (50*60), (5*60), (20*60)]
     MARLIN["MANUAL_FEEDRATE"]                            = [(50*60), (50*60), (5*60), (20*60)]
+    MARLIN["XY_PROBE_FEEDRATE"]                          = (50*60)
 
     # A 32-bit board can handle more segments
     MARLIN["MIN_STEPS_PER_SEGMENT"]                      = 1
