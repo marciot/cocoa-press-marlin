@@ -70,6 +70,7 @@
 
 #if ENABLED(COCOA_PRESS_CYCLE_COOLER)
   static uint32_t cycle_start_time;
+  static bool cooler_cycling = false;
 
   constexpr uint32_t on_cycle_end_ms  = (COOLER_ON_CYCLE_TIME                        ) * 1000;
   constexpr uint32_t off_cycle_end_ms = (COOLER_ON_CYCLE_TIME + COOLER_OFF_CYCLE_TIME) * 1000;
@@ -79,13 +80,22 @@
     cycle_start_time = millis() - off_cycle_end_ms;
   }
 
+  bool cycle_cooler_enabled() {
+    return cooler_cycling;
+  }
+
+  void cycle_cooler_state(bool state) {
+    cooler_cycling = state;
+    if(!cooler_cycling) WRITE(HEATER_CHAMBER_CYCLE_PIN, false);
+  }
+
   void cycle_cooler_idle() {
     const uint32_t cycle_elapsed_ms = millis() - cycle_start_time;
     const bool on_cycle_done  = cycle_elapsed_ms > on_cycle_end_ms;
     const bool off_cycle_done = cycle_elapsed_ms > off_cycle_end_ms;
 
     bool cycle_cooler_state = READ(HEATER_CHAMBER_PIN);
-    if(cycle_cooler_state) {
+    if(cooler_cycling && cycle_cooler_state) {
       if(on_cycle_done)  cycle_cooler_state = false;
       if(off_cycle_done) cycle_start_time = millis();
     }

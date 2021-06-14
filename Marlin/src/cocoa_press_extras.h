@@ -34,6 +34,8 @@
 #endif
 
 #if ENABLED(COCOA_PRESS_CYCLE_COOLER)
+  bool cycle_cooler_enabled();
+  void cycle_cooler_state(bool state);
   void cycle_cooler_init();
   void cycle_cooler_idle();
 #endif
