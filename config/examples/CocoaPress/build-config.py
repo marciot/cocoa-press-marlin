@@ -125,6 +125,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["Y_MAX_ENDSTOP_INVERTING"]                    = 'false'
 
     MARLIN["SD_ABORT_ON_ENDSTOP_HIT"]                    = ENABLED("SDSUPPORT")
+    MARLIN["DIRECT_PIN_CONTROL"]                         = True
 
 ########################## HOMING & AXIS DIRECTIONS ###########################
 
@@ -339,9 +340,9 @@ def make_config(PRINTER, TOOLHEAD):
     # EW - 1600 for IGUS Z changed from default of 4000
     # Z-axis leadscrew https://www.amazon.com/Witbot-Pillow-Bearing-Coupler-Printer/dp/B074Z4Q23M/ref=sr_1_4?ie=UTF8&qid=1549046242&sr=8-4&keywords=lead%20screw
 
-    MARLIN["DEFAULT_MAX_FEEDRATE"]                       = [(50*60), (50*60), (5*60), (20*60)]
-    MARLIN["MANUAL_FEEDRATE"]                            = [(50*60), (50*60), (5*60), (20*60)]
-    MARLIN["XY_PROBE_FEEDRATE"]                          = (50*60)
+    MARLIN["DEFAULT_MAX_FEEDRATE"]                       = [(50*60), (50*60), (5*60), (20*60)] # mm/s
+    MARLIN["MANUAL_FEEDRATE"]                            = [50, 50, 5, 20]                     # mm/min
+    MARLIN["XY_PROBE_FEEDRATE"]                          = (50)                                # mm/min
 
     # A 32-bit board can handle more segments
     MARLIN["MIN_STEPS_PER_SEGMENT"]                      = 1
