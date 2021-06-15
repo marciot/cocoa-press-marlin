@@ -141,7 +141,7 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["Z_HOME_DIR"]                                 = -1
 
     MARLIN["Z_SAFE_HOMING"]                              = True # EW - Enabled to zero z in the middle of the bed
-    MARLIN["HOMING_FEEDRATE_MM_M"]                       = [(50*60), (50*60), (5*60)] # EW - changed Z from 4 to 6
+    MARLIN["HOMING_FEEDRATE_MM_M"]                       = [3000, 3000, 300] # EW - changed Z from 4 to 6
 
 ############################# NOZZLE PARK FEATURE #############################
 
@@ -340,9 +340,9 @@ def make_config(PRINTER, TOOLHEAD):
     # EW - 1600 for IGUS Z changed from default of 4000
     # Z-axis leadscrew https://www.amazon.com/Witbot-Pillow-Bearing-Coupler-Printer/dp/B074Z4Q23M/ref=sr_1_4?ie=UTF8&qid=1549046242&sr=8-4&keywords=lead%20screw
 
-    MARLIN["DEFAULT_MAX_FEEDRATE"]                       = [(50*60), (50*60), (5*60), (20*60)] # mm/s
-    MARLIN["MANUAL_FEEDRATE"]                            = [50, 50, 5, 20]                     # mm/min
-    MARLIN["XY_PROBE_FEEDRATE"]                          = (50)                                # mm/min
+    MARLIN["DEFAULT_MAX_FEEDRATE"]                       = [3000/60, 3000/60, 300/60, 1200/60] # mm/s
+    MARLIN["MANUAL_FEEDRATE"]                            = [3000, 3000, 300, 1200]             # mm/min
+    MARLIN["XY_PROBE_FEEDRATE"]                          = (3000)                              # mm/min
 
     # A 32-bit board can handle more segments
     MARLIN["MIN_STEPS_PER_SEGMENT"]                      = 1
