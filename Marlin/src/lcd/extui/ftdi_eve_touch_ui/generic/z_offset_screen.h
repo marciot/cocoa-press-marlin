@@ -34,6 +34,7 @@ class ZOffsetScreen : public BaseNumericAdjustmentScreen, public CachedScreen<ZO
   private:
     static void move(float mm, int16_t steps);
     static void runWizard();
+    static bool wizardRunning();
   public:
     static void onEntry();
     static void onExit();

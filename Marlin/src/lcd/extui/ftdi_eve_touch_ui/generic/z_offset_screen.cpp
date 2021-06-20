@@ -38,6 +38,8 @@ void ZOffsetScreen::onEntry() {
   mydata.z = SHEET_THICKNESS;
   mydata.softEndstopState = getSoftEndstopState();
   BaseNumericAdjustmentScreen::onEntry();
+  if(wizardRunning())
+    setSoftEndstopState(false);
 }
 
 void ZOffsetScreen::onExit() {
@@ -55,11 +57,7 @@ void ZOffsetScreen::onRedraw(draw_mode_t what) {
 }
 
 void ZOffsetScreen::move(float mm, int16_t steps) {
-  // We can't store state after the call to the AlertBox, so
-  // check whether the current position equal mydata.z in order
-  // to know whether the user started the wizard.
-  if (getAxisPosition_mm(Z) == mydata.z) {
-    // In the wizard
+  if (wizardRunning()) {
     mydata.z += mm;
     setAxisPosition_mm(mydata.z, Z);
   }
@@ -72,7 +70,6 @@ void ZOffsetScreen::move(float mm, int16_t steps) {
 }
 
 void ZOffsetScreen::runWizard() {
-  setSoftEndstopState(false);
   // Restore the default Z offset
   constexpr float offset[] = NOZZLE_TO_PROBE_OFFSET;
   setZOffset_mm(offset[Z_AXIS]);
@@ -90,6 +87,13 @@ void ZOffsetScreen::runWizard() {
   injectCommands(cmd);
   // Show instructions for user.
   AlertDialogBox::show(PSTR("After the printer finishes homing, adjust the Z Offset so that a sheet of paper can pass between the nozzle and bed with slight resistance."));
+}
+
+bool ZOffsetScreen::wizardRunning() {
+  // We can't store state after the call to the AlertBox, so
+  // check whether the current position equal mydata.z in order
+  // to know whether the user started the wizard.
+  return getAxisPosition_mm(Z) == mydata.z;
 }
 
 bool ZOffsetScreen::onTouchHeld(uint8_t tag) {
