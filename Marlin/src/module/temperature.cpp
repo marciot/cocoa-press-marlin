@@ -333,6 +333,9 @@ const char str_t_thermal_runaway[] PROGMEM = STR_T_THERMAL_RUNAWAY,
     if (fan >= FAN_COUNT) return;
 
     fan_speed[fan] = speed;
+    #if REDUNDANT_PART_COOLING_FAN
+      if (fan == 0) fan_speed[REDUNDANT_PART_COOLING_FAN] = speed;
+    #endif
 
     TERN_(REPORT_FAN_CHANGE, report_fan_speed(fan));
   }
@@ -2087,16 +2090,30 @@ void Temperature::init() {
   #endif
 
   #if HAS_MAX31865_TEMP
-    TERN_(TEMP_SENSOR_IS_MAX(0, MAX31865), max31865_0.begin(MAX31865_2WIRE)); // MAX31865_2WIRE, MAX31865_3WIRE, MAX31865_4WIRE
-    TERN_(TEMP_SENSOR_IS_MAX(1, MAX31865), max31865_1.begin(MAX31865_2WIRE));
+    #if TEMP_SENSOR_IS_MAX(0, MAX31865)
+      max31865_0.begin(MAX31865_2WIRE); // MAX31865_2WIRE, MAX31865_3WIRE, MAX31865_4WIRE
+    #endif
+    #if TEMP_SENSOR_IS_MAX(1, MAX31865)
+      max31865_1.begin(MAX31865_2WIRE);
+    #endif
   #endif
+
   #if HAS_MAX31855_TEMP
-    TERN_(TEMP_SENSOR_IS_MAX(0, MAX31855), max31855_0.begin());
-    TERN_(TEMP_SENSOR_IS_MAX(1, MAX31855), max31855_1.begin());
+    #if TEMP_SENSOR_IS_MAX(0, MAX31855)
+      max31855_0.begin(MAX31855);
+    #endif
+    #if TEMP_SENSOR_IS_MAX(1, MAX31855)
+      max31855_1.begin(MAX31855);
+    #endif
   #endif
+
   #if HAS_MAX6675_TEMP
-    TERN_(TEMP_SENSOR_IS_MAX(0, MAX6675), max6675_0.begin());
-    TERN_(TEMP_SENSOR_IS_MAX(1, MAX6675), max6675_1.begin());
+    #if TEMP_SENSOR_IS_MAX(0, MAX6675)
+      max6675_0.begin(MAX6675);
+    #endif
+    #if TEMP_SENSOR_IS_MAX(1, MAX6675)
+      max6675_1.begin(MAX6675);
+    #endif
   #endif
 
   #if MB(RUMBA)
@@ -3621,7 +3638,7 @@ void Temperature::isr() {
         #if G26_CLICK_CAN_CANCEL
           if (click_to_cancel && ui.use_click()) {
             wait_for_heatup = false;
-            ui.quick_feedback();
+            TERN_(HAS_LCD_MENU, ui.quick_feedback());
           }
         #endif
 
@@ -3755,7 +3772,7 @@ void Temperature::isr() {
         #if G26_CLICK_CAN_CANCEL
           if (click_to_cancel && ui.use_click()) {
             wait_for_heatup = false;
-            ui.quick_feedback();
+            TERN_(HAS_LCD_MENU, ui.quick_feedback());
           }
         #endif
 
