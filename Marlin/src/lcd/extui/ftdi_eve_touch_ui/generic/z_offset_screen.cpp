@@ -66,6 +66,8 @@ void ZOffsetScreen::move(float mm, int16_t steps) {
     // Otherwise doing a manual adjustment, possibly during a print.
     babystepAxis_steps(steps, Z);
   }
+  #else
+    UNUSED(steps);
   #endif
 }
 
