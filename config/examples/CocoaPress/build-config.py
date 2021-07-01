@@ -363,14 +363,13 @@ def make_config(PRINTER, TOOLHEAD):
     MARLIN["TOUCH_UI_UTF8_COPYRIGHT"]                    = True
     MARLIN["TOUCH_UI_UTF8_SUPERSCRIPTS"]                 = True
     MARLIN["SCROLL_LONG_FILENAMES"]                      = True
-    MARLIN["TOUCH_UI_DEVELOPER_MENU"]                    = True
     MARLIN["TOUCH_UI_DEBUG"]                             = False
+    MARLIN["TOUCH_UI_DEVELOPER_MENU"]                    = False
 
     MARLIN["TOUCH_UI_FTDI_EVE"]                          = True
     MARLIN["TOUCH_UI_USE_UTF8"]                          = True
     MARLIN["TOUCH_UI_UTF8_COPYRIGHT"]                    = True
     MARLIN["TOUCH_UI_UTF8_SUPERSCRIPTS"]                 = True
-    MARLIN["TOUCH_UI_DEVELOPER_MENU"]                    = True
     MARLIN["LCD_SET_PROGRESS_MANUALLY"]                  = True
     MARLIN["SCROLL_LONG_FILENAMES"]                      = True
     MARLIN["NO_PAUSE_FOR_REHEAT"]                        = True
